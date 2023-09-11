@@ -1,4 +1,4 @@
-[
+const data = [
 	{
 		body: "Fugit itaque ipsam perferendis sequi harum.",
 		category: "Unknown generator",
@@ -120,3 +120,47 @@
         authorName: "Sarah Davis"
 	}
 ]
+//you can also do this 
+// document.getElementById('app').innerHTML = `<h1>${data[0].title}</h1>`
+
+
+
+// const body = document.createElement('p')
+// body.innerHTML = data[i].body
+// document.getElementById('app').appendChild(body)
+
+// const avatar = document.createElement('img')
+// avatar.innerHTML = data[0].authorAvatar
+// document.getElementById('app').append(avatar)
+
+// const author = document.createElement('h2')
+// authorName.innerHTML = data[0].authorName
+// document.getElementById('app').append(author)
+
+function itemsCard(data) {
+
+
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].isDraft === false){
+
+                const div = document.createElement('div')
+                div.classList.add('card') 
+                
+                const title = document.createElement('h1')
+                title.innerHTML = data[i].title
+                div.appendChild(title)
+
+                const body = document.createElement('p')
+                body.innerHTML = data[i].body
+                div.appendChild(body)
+
+                document.getElementById('app').appendChild(div)
+            }
+
+        }  
+}
+
+itemsCard(data);
+
+
+
