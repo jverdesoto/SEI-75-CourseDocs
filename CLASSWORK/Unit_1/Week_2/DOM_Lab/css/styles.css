@@ -1,0 +1,42 @@
+:root {
+    font-size: 18px;
+}
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.card {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+#gallery-container {
+    display: grid;
+    grid-template: 1fr 1fr / 1fr 1fr 1fr;
+    width: 80%;
+    gap: 15px;
+}
+
+.card-image > img {
+    width: 200px;
+}
+
+.author-info {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.author-avatar > img {
+    border-radius: 50%;
+    width: 40px;
+}
