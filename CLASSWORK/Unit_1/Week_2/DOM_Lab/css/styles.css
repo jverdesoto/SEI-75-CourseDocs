@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+  }
+
+.app{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.title {
+    height: 15vh;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: wheat;
+    width: 50vw;
+    padding: 50px;
+    margin: 20px;
+}
+.card > .card-img {
+    width: 45vw;
+}
+
+.card > .author-pic{
+    width: 5vw;
+    border-radius: 50%;
+}
+
+.app > h1 {
+    align-self: center;
+}
