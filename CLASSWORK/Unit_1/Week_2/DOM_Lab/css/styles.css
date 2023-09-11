@@ -1,0 +1,27 @@
+h1 {
+    text-align: center;
+}
+
+body {
+    background-color: lightpink;
+
+}
+#app {
+    display: grid;
+    grid-template: 1fr 1fr / 1fr 1fr 1fr;
+    max-width: 100%;
+    
+}
+
+.book {
+    width: 500px;
+    margin: 20px;
+    padding: 10px;
+    background-color: white;
+    border-style: solid;
+    border-color: black;
+}
+
+img {
+    max-width: 100%;
+}
