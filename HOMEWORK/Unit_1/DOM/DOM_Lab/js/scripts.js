@@ -123,10 +123,6 @@ const data = [
     ]
 ]
 
-// const title = document.createElement('h1')
-// title.innerHTML = data [0].title
-// document.getElementById('app').appendChild(title)
-
 document.addEventListener('DOMContentLoaded', function () {
 
 const blogContainer = document.querySelector('.blog-container')

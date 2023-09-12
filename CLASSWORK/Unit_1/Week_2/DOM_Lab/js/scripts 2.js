@@ -6,7 +6,7 @@ const data = [
             cover: "https://picsum.photos/seed/2327/1920/1080",
             createdAt: "2015-05-18T20:48:08Z",
             id: 1,
-            isDraft: true,
+            isDraft: false,
             title: "dolorum",
             views: 223,
             authorAvatar: "https://i.pravatar.cc/200?img=1",
@@ -28,7 +28,7 @@ const data = [
             body: "Illo saepe consequuntur a libero deserunt a eos, perferendis sint, accusantium qui dolorum sed at.",
             category: "unknown generator",
             cover: "https://picsum.photos/seed/4326/1920/1080",
-            createdAt: "2016-06-12T00:16:07Z",
+            createdAt": "2016-06-12T00:16:07Z",
             id: 3,
             isDraft: false,
             title: "molestiae odio nisi",
@@ -87,7 +87,7 @@ const data = [
         {
             body: "Reprehenderit et, asperiores sed reprehenderit nisi, architecto a reprehenderit ipsa.",
             category: "unknown generator",
-            cover: "https://picsum.photos/seed/9417/1920/1080",
+            cover "https://picsum.photos/seed/9417/1920/1080",
             createdAt: "2012-01-16T01:37:42Z",
             id: 8,
             isDraft: false,
@@ -114,7 +114,7 @@ const data = [
             cover: "https://picsum.photos/seed/5668/1920/1080",
             createdAt: "2017-09-25T10:48:38Z",
             id: 10,
-            isDraft: true,
+            isDraft: false,
             title: "a vel laborum non a",
             views: 719,
             authorAvatar: "https://i.pravatar.cc/200?img=69",
@@ -123,56 +123,6 @@ const data = [
     ]
 ]
 
-// const title = document.createElement('h1')
-// title.innerHTML = data [0].title
-// document.getElementById('app').appendChild(title)
-
-document.addEventListener('DOMContentLoaded', function () {
-
-const blogContainer = document.querySelector('.blog-container')
-
-//loop through the data and create blog cards for non-draft posts
-data[0].forEach(blog => {
-   if (!blog.isDraft) {
-    const card = document.createElement('div');
-    card.classList.add('blog-card');
-
-//create cover image element
-const coverImage = document.createElement('img')
-coverImage.src = blog.cover
-coverImage.alt = blog.title
-card.appendChild(coverImage)
-
-//create title element
-const titleElement = document.createElement('h2')
-titleElement.innerText = blog.title
-card.appendChild(titleElement)
-
-// Create createdAt element
-const dateElement = document.createElement('p');
-dateElement.innerText = `Date: ${new Date(blog.createdAt).toLocaleDateString()}`;
-card.appendChild(dateElement);
-
-// Create content (body) element
-const contentElement = document.createElement('p')
-contentElement.innerText = blog.body
-card.appendChild(contentElement)
-
-// Create the author avatar image element
-const authorAvatar = document.createElement('img')
-authorAvatar.src = blog.authorAvatar
-authorAvatar.alt = `Author: ${blog.authorName}`
-card.appendChild(authorAvatar)
-
-// Create the author name element
-const authorNameElement = document.createElement('p')
-authorNameElement.innerText = `Author: ${blog.authorName}`;
-card.appendChild(authorNameElement)
-
-blogContainer.appendChild(card)
-   }
-   });
-});
-
-   //card output/display: image on top as cover, title,
-   //content, category, little avatar and author name
+const title = document.createElement('h1')
+title.innerHTML = data [0].title
+document.getElementById('app').appendChild(title)
