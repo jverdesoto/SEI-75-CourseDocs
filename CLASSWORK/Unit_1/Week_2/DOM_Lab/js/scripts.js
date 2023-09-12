@@ -145,14 +145,41 @@ function itemsCard(data) {
 
                 const div = document.createElement('div')
                 div.classList.add('card') 
+
+                const imageCover = document.createElement('img')
+                imageCover.src = data[i].cover
+                imageCover.classList.add('coverImg')
+                div.appendChild(imageCover)
                 
+                const divInfo = document.createElement('div')
+                divInfo.classList.add('divInfo') 
+                div.appendChild(divInfo)
+
                 const title = document.createElement('h1')
                 title.innerHTML = data[i].title
-                div.appendChild(title)
+                divInfo.appendChild(title)
+
+                const date = document.createElement('p')
+                date.innerHTML = data[i].createdAt
+                divInfo.appendChild(date)
 
                 const body = document.createElement('p')
                 body.innerHTML = data[i].body
-                div.appendChild(body)
+                divInfo.appendChild(body)
+
+                const divAuthor = document.createElement('div')
+                divAuthor.classList.add('divAuthor') 
+                div.appendChild(divAuthor)
+
+                const avatarImg = document.createElement('img')
+                avatarImg.src = data[i].authorAvatar
+                avatarImg.classList.add('avatar')
+                divAuthor.appendChild(avatarImg)
+
+                const authorName = document.createElement('p')
+                authorName.innerHTML = data[i].authorName
+                authorName.classList.add('authorName')
+                divAuthor.appendChild(authorName)
 
                 document.getElementById('app').appendChild(div)
             }
