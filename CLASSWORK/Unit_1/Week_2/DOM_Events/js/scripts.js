@@ -1,35 +1,19 @@
-// const data = [
-//   {
-//     name: 'Rick',
-//     location: '<strong>London</strong>'
-//   },
-//   {
-//     name: 'Andy',
-//     location: 'Quito'
-//   }
-// ]
+const emailForm = document.getElementById("emailForm");
+const userNameInput = document.getElementById("userName");
+const userEmailInput = document.getElementById("exampleInputEmail");
+const modalUsername = document.querySelector(".modalUsername");
+const modalEmail = document.querySelector(".modalEmail");
 
-// document.getElementById('primary').addEventListener('click', () => {
-//   document.getElementById('secondary').innerHTML = 'You betrayed me'
+emailForm.addEventListener("submit", function (e) {
+  e.preventDefault();
 
-//   const el = document.createElement('div')
-//   el.classList.add('card')
+  const userName = userNameInput.value;
+  const userEmail = userEmailInput.value;
 
-//   const cardBody = document.createElement('div')
-//   cardBody.classList.add('card-body')
+  modalUsername.textContent = `Name: ${userName}`;
+  modalEmail.textContent = `Email: ${userEmail}`;
 
-//   const cardTitle = document.createElement('h5')
-//   cardTitle.classList.add('card-title')
-//   cardTitle.innerHTML = data[0].name
+  const modal = new bootstrap.Modal(document.querySelector(".modal"));
+  modal.show();
+});
 
-//   const cardText = document.createElement('p')
-//   cardText.classList.add('card-text')
-//   cardText.innerHTML = data[0].location
-
-//   cardBody.appendChild(cardTitle)
-//   cardBody.appendChild(cardText)
-
-//   el.appendChild(cardBody)
-
-//   document.getElementById('here').appendChild(el)
-// })
