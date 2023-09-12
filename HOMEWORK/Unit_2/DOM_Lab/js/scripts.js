@@ -157,7 +157,7 @@ function dataGrabber() {
             card.appendChild(avatar);
 
             const author = document.createElement("p");
-			author.classList.add("author")
+			author.classList.add("author-name")
             author.innerHTML = data[i].authorName;
             card.appendChild(author);
 
