@@ -121,84 +121,68 @@ const data = [
   },
 ];
 
-// const title = document.createElement("h1");
-// title.innerHTML = data[0].title;
-// document.getElementById("app").appendChild(title);
+const createAndAppend = (
+  parentElement,
+  newElementType,
+  addedClass,
+  addedId
+) => {
+  const x = document.createElement(newElementType);
+
+  if (addedId) {
+    x.setAttribute("id", addedId);
+  }
+  if (addedClass) {
+    x.classList.add(addedClass);
+  }
+
+  parentElement.appendChild(x);
+  return x;
+};
 
 //add structure to html
 const app = document.getElementById("app");
-const section = document.createElement("section");
+const newSection = createAndAppend(app, "section", null, null);
 
-app.appendChild(section);
-const newSection = document.querySelector("section");
+const populatePageWith = (array) => {
+  for (const obj of array) {
+    if (!obj.isDraft) {
+      //add card to section
+      const addedCard = createAndAppend(newSection, "div", "card", null);
 
-for (const obj of data) {
-  if (!obj.isDraft) {
-    //add card to section
-    const card = document.createElement("div");
-    card.classList.add("card");
-    const addedCard = newSection.appendChild(card);
+      //add img to card
+      const img = createAndAppend(addedCard, "img", "cover-img", null);
+      img.src = obj.cover;
 
-    //add img to card
-    const img = document.createElement("img");
-    img.classList.add("cover-img");
-    img.src = obj.cover;
-    addedCard.appendChild(img);
+      //add title to card
+      const title = createAndAppend(addedCard, "h3", null, "title");
+      title.innerText = obj.title;
 
-    //add title to card
-    const title = document.createElement("h3");
-    title.setAttribute("id", "title");
-    title.innerText = obj.title;
-    addedCard.appendChild(title);
+      //add date to card
+      const date = createAndAppend(addedCard, "h4", null, "date");
+      date.innerText = "Date created: " + obj.createdAt;
 
-    //createAndAddText(addedCard, "title", "h3", null, "title", obj.title);
+      //add body to card
+      const body = createAndAppend(addedCard, "p", null, "body-text");
+      body.innerText = obj.body;
 
-    //add date to card
-    const date = document.createElement("h4");
-    date.setAttribute("id", "date");
-    date.innerText = "Date created: " + obj.createdAt;
-    addedCard.appendChild(date);
+      //add final div to card
+      const authorDetails = createAndAppend(
+        addedCard,
+        "div",
+        "avatar-author",
+        null
+      );
 
-    //add body to card
-    const body = document.createElement("p");
-    body.setAttribute("id", "body-text");
-    body.innerText = obj.body;
-    addedCard.appendChild(body);
+      //add avatar to author details div
+      const avatar = createAndAppend(authorDetails, "img", null, "avatar");
+      avatar.src = obj.authorAvatar;
 
-    //add final div to card
-    const authorDetails = document.createElement("div");
-    authorDetails.classList.add("avatar-author");
-    const addedAuthorDetails = addedCard.appendChild(authorDetails);
-
-    //add avatar to author details div
-    const avatar = document.createElement("img");
-    avatar.setAttribute("id", "avatar");
-    avatar.src = obj.authorAvatar;
-    addedAuthorDetails.appendChild(avatar);
-    //add avatar to author details div
-    const name = document.createElement("h3");
-    name.setAttribute("id", "name");
-    name.innerText = obj.authorName;
-    addedAuthorDetails.appendChild(name);
+      //add name to author details div
+      const name = createAndAppend(authorDetails, "h3", null, "name");
+      name.innerText = obj.authorName;
+    }
   }
-}
-
-const createAndAddText = (
-  parentElement,
-  newElementName,
-  newElementType,
-  addedClass,
-  addedId,
-  sourceData
-) => {
-  const newElementName = document.createElement(newElementType);
-  if (addedId) {
-    newElementName.setAttribute("id", addedId);
-  }
-  if (addedClass) {
-    newElementName.classList.add(addedClass);
-  }
-
-  newElementName.innerText = sourceData;
-  parentElement.appendChild(newElementName);
 };
+
+populatePageWith(data);
