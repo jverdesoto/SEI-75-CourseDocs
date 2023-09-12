@@ -145,37 +145,39 @@ app.appendChild(cardContainer)
 
 
 function cardCreation(array) {
-    for (let i = 0; i < array.length; i++) {
+//     for (let i = 0; i < array.length; i++) {
+
+const loopingThroughItems = array.forEach((item) => {
 
         //new card
         const card = document.createElement('article')
         card.classList.add('card')
-        card.setAttribute('id', array[i].id)
+        card.setAttribute('id', item.id)
         cardContainer.appendChild(card)
 
         //card image
         const cardImage = document.createElement('img')
-        cardImage.setAttribute('src', array[i].cover)
+        cardImage.setAttribute('src', item.cover)
         cardImage.classList.add('card-img')
         card.appendChild(cardImage)
 
 
         //card title
         const cardTitle = document.createElement('h2')
-        cardTitle.innerHTML = array[i].title
+        cardTitle.innerHTML = item.title
         cardTitle.classList.add('card-title')
         card.appendChild(cardTitle)
 
 
         //card date
         const cardDate = document.createElement('p')
-        cardDate.innerHTML = `Created on: ${array[i].createdAt}`
+        cardDate.innerHTML = `Created on: ${item.createdAt}`
         cardDate.classList.add('card-date')
         card.appendChild(cardDate)
 
         //card content
         const cardContent = document.createElement('p')
-        cardContent.innerHTML = array[i].body
+        cardContent.innerHTML = item.body
         cardContent.classList.add('card-content')
         card.appendChild(cardContent)
 
@@ -186,17 +188,16 @@ function cardCreation(array) {
 
         //card author pic
         const authorPic = document.createElement('img')
-        authorPic.setAttribute('src', array[i].authorAvatar)
+        authorPic.setAttribute('src', item.authorAvatar)
         authorPic.classList.add('author-pic')
         authorContainer.appendChild(authorPic)
 
         //card author name
         const authorName = document.createElement('p')
-        authorName.innerHTML = array[i].authorName
+        authorName.innerHTML = item.authorName
         authorName.classList.add('author-name')
         authorContainer.appendChild(authorName)
-
-    }
+});
 }
 
 cardCreation(data)
