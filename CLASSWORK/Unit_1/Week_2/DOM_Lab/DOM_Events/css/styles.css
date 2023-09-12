@@ -1,0 +1,17 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensures the content is vertically centered */
+    margin: 0; /* Remove default margin */
+    background-color: #f0f0f0; /* Optional background color */
+}
+
+.centered-div {
+    width: 300px;
+    height: 200px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: 20px;
+}

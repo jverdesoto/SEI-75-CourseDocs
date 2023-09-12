@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Events</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col d-flex justify-content-center align-items-center h-50">
+                <!-- <h1>Hello</h1> -->
+                <form>
+                    <div class="mb-3">
+                      <label for="exampleInputName" class="form-label">Name</label>
+                      <input type="text" class="form-control" id="exampleInputName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else...most of the time</div>
+                      </div>
+                    <button type="submit" class="btn btn-primary" id="myButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Submit</button>
+                  </form>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Your Details</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Please confirm the below details are correct:</p>
+                    <p>Name: <span id="modalName"></span></p>
+                    <p>Email: <span id="modalEmail"></span></p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- <div class="row">
+            <div class="col-6 d-flex justify-content-center">
+                <button id="primary" class="btn btn-primary">Click me!</button>
+            </div>
+            <div class="col-6 d-flex justify-content-center">
+                <button id="secondary" type="button" class="btn btn-secondary">No, click me!</button>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <div id="here">
+
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src='./js/script.js'></script>
+    <script></script>
+</body>
+</html>
