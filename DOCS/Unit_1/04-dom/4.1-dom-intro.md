@@ -61,7 +61,7 @@ Today we will use an actual project structure instead of working within Replit.
 	```html
 	...
 	<body>
-	  <h1 id="title" class="main-title">DOM Practice</h1>
+	  <h1 id=title class="main-title">DOM Practice</h1>
 	  
 	</body>
 	</html>
