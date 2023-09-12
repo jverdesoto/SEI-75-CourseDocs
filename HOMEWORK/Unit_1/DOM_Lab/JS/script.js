@@ -139,6 +139,7 @@ function loopData() {
     const titleEl = document.createElement('h1')
     const bodyEl = document.createElement('p')
     const dateEl = document.createElement('p')
+	const imageContainerEl = document.createElement('div')
     const avatarEl = document.createElement('img')
     const authorEl = document.createElement('footer')
 
@@ -147,7 +148,8 @@ function loopData() {
     titleEl.innerHTML = data[i].title
     bodyEl.innerHTML = data[i].body
     dateEl.innerHTML = data[i].createdAt
-    avatarEl.setAttribute('src', data[i].cover)
+    avatarEl.setAttribute('src', data[i].authorAvatar)
+	avatarEl.setAttribute('id','avatar')
     authorEl.innerHTML = data[i].authorName
 
     app.appendChild(card)
@@ -157,6 +159,9 @@ function loopData() {
     card.appendChild(dateEl)
     card.appendChild(avatarEl)
     card.appendChild(authorEl)
+	//card.appendChild(imageContainer)
+	//imageContainer.appendChild(avatarEL)
+	//imageContainer.appendChild(authorEL)
     }
 }
 
