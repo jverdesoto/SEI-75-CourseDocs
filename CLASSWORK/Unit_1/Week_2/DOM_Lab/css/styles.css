@@ -1,0 +1,60 @@
+#app {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+.card {
+  display: flex;
+  flex-direction: column;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  #img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  h1, p {
+    margin: 8px 0;
+  }
+  
+  footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+
+  }
+  
+  footer img {
+    border-radius: 50%;
+    margin-right: 8px;
+    height: 50px;
+  }
+
+img {
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.bottom {
+    display: flex;
+    align-items: flex-end;
+    text-align: right;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+  text-align: center;
+}
