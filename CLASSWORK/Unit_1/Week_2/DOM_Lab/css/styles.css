@@ -1,5 +1,6 @@
 h1 {
     text-align: center;
+    font-size: 50px;
 }
 
 body {
@@ -25,6 +26,11 @@ body {
     background-color: white;
     border-style: solid;
     border-color: black;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.book:hover {
+    transform: scale(1.1);
 }
 
 img {
