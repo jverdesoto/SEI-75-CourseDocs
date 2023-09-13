@@ -1,7 +1,7 @@
 // Object-oriented Javascript
 /*
     - OOP: Using OBJECTS to represent real world things.
-    - Objects hace own properties and functions (methids)
+    - Objects hace own properties and functions (methods)
     - Objects contain data and methods to represent info about what you're trying to model
     ex: 
     function Ship() {
@@ -45,3 +45,51 @@
     console.log(mystring.vlaueOf())
     - Nearly of all objects in JS are instances of Object which seats on top of the Protitype chain
 */
+
+class Person {
+    constructor (firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    sayHello() {
+        return `Hello, I am ${this.firstName} ${this.lastName}`;
+    }
+}
+
+// const firstPerson = new Person('Rick','Keenan')
+// console.log(firstPerson.sayHello())
+
+
+class Employee {
+    constructor (person,company, wage){
+        this.person = person
+        this.company = company
+        this.wage = wage
+        this.active = true
+    }
+    receiveRaise (wageIncrease) {
+        this.wage += wageIncrease;
+    }
+    terminate () {
+        this.active = false
+    }
+}
+
+
+class Manager {
+    constructor (employee, department) {
+        this.department = department;
+        this.employee = employee
+    }
+        giveRaise (raiseAmount){
+            Employee.receiveRaise(raiseAmount)
+    }
+}
+
+
+
+class Worker {
+    constructor (manager) {
+        this.Manager = manager;
+    }
+}
