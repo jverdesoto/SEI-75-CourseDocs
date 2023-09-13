@@ -1,7 +1,7 @@
 // Object-oriented Javascript
 /*
     - OOP: Using OBJECTS to represent real world things.
-    - Objects hace own properties and functions (methids)
+    - Objects have own properties and functions (methids)
     - Objects contain data and methods to represent info about what you're trying to model
     ex: 
     function Ship() {
@@ -45,3 +45,13 @@
     console.log(mystring.vlaueOf())
     - Nearly of all objects in JS are instances of Object which seats on top of the Protitype chain
 */
+
+const myString = 'hello'
+
+console.log(myString.charAt(0));
+console.log(myString.valueOf());
+
+
+const myObj = {}
+
+console.log(myObj);
