@@ -46,52 +46,108 @@
     - Nearly of all objects in JS are instances of Object which seats on top of the Protitype chain
 */
 
-const myString = 'hello'
+// const myString = 'hello'
 
-console.log(myString.charAt(0));
-console.log(myString.valueOf());
+// console.log(myString.charAt(0));
+// console.log(myString.valueOf());
 
 
-const myObj = {}
+// const myObj = {}
 
-console.log(myObj);
+// console.log(myObj);
 
-function Car(topSpeed, model, manufacturer, color) {
-    const obj = {}
-  obj.topSpeed = topSpeed
-  obj.model = model
-  obj.manufacturer = manifacturer
-  obj.color = color
-  return obj
-  }
+// function Car(topSpeed, model, manufacturer, color) {
+//     const obj = {}
+//   obj.topSpeed = topSpeed
+//   obj.model = model
+//   obj.manufacturer = manifacturer
+//   obj.color = color
+//   return obj
+//   }
   
   //instance of a car
-  const myCar() = new Car(200, 'M3', 'BMW', 'green')
-  const myCar2 = new Car(130, 'polo', 'VW', 'black')
-  console.log(myCar)
-  console.log(myCar.topSpeed)
-  console.log(myCar2.topSpeed)
+//   const myCar() = new Car(200, 'M3', 'BMW', 'green')
+//   const myCar2 = new Car(130, 'polo', 'VW', 'black')
+//   console.log(myCar)
+//   console.log(myCar.topSpeed)
+//   console.log(myCar2.topSpeed)
   
   //this will return it by defautl you dont need to create
-  function Car(topSpeed, model, manufacturer, color) {
-    this.topSpeed = topSpeed
-    this.model = model
-    this.manufacturer = manufacturer
-    this.color = color
-  }
+//   function Car(topSpeed, model, manufacturer, color) {
+//     this.topSpeed = topSpeed
+//     this.model = model
+//     this.manufacturer = manufacturer
+//     this.color = color
+//   }
   
-  class Car {
-    constructor(topSpeed, model, manufacturer, color){
-      this.topSpeed = topSpeed
-      this.model = model
-      this.manufacturer = manufacturer
-      this.color = color
-  }
-  whatColorAmI() {
-    console.log(`I am ${this.color}`)
-  }
-  }
-  myCar.whaColorAmI()
-  mycar2.whatColorAmI
+//   class Car {
+//     constructor(topSpeed, model, manufacturer, color){
+//       this.topSpeed = topSpeed
+//       this.model = model
+//       this.manufacturer = manufacturer
+//       this.color = color
+//   }
+//   whatColorAmI() {
+//     console.log(`I am ${this.color}`)
+//   }
+//   }
+//   myCar.whaColorAmI()
+//   mycar2.whatColorAmI
   
   //if you use class method you need to first declare the class then the instances
+
+  class People {
+    constructor(firstName, lastName) {
+        this.firstName = firstName
+        this.lastName = lastName
+    }
+    greet() {
+        console.log(`Hello ${this.firstName} ${this.lastName}!`)
+    }
+  }
+  const newPeople = new People('John', 'Smith')
+  newPeople.greet()
+
+
+  
+  class Employee {
+    constructor(firstName, lastName, company, wage){
+        this.firstName = firstName
+        this.lastName = lastName
+        this.company = company
+        this.wage = wage
+        this.active = true
+    }
+    raise(amount) {
+        this.wage += amount
+        console.log(`new wage: ${this.wage}`)
+    }
+  }
+const newEmployee = new Employee('John', 'Smith', 'Apple', 10000)
+newEmployee.raise(20000) = false
+
+class Manager {
+    constructor(firstName, lastName, company, wage, department) {
+        this.firstName = firstName
+        this.lastName = lastName
+        this.company = company
+        this.wage = wage
+        this.department = department
+        this.active = true
+    }
+}
+// class Employee extends People {
+//     constructor(firstName, lastName, company, wage){
+//         super(firstName, lastName)
+//         this.company = company
+//         this.wage = wage
+//         this.active = true
+//     }
+//     raise(amount) {
+//         this.wage += amount
+//         console.log(`new wage: ${this.wage}`)
+//     }
+//   }
+// const newEmployee = new Employee('John', 'Smith', 'Apple', 10000)
+// newEmployee.raise(20000)
+
