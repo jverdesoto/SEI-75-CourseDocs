@@ -1,0 +1,87 @@
+/* Reset default browser styles */
+body, h1 {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set a neutral background color for the page */
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the page title */
+h1 {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+/* Style the blog card container */
+.blog-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Style individual blog cards */
+.blog-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 20px;
+    width: 300px;
+    text-align: left; /* Align text content to the left */
+}
+
+/* Style blog card images */
+.blog-card img {
+    max-width: 100%; /* Limit the image width to the width of the card */
+    max-height: 200px;
+    height: auto; /* Maintain aspect ratio while resizing */
+    display: block; /* Remove any extra spacing around the image */
+    margin: 0 auto; /* Center the image horizontally within the card */
+}
+
+/* Style blog card title */
+.blog-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* Style blog card date */
+.blog-card p.date {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+/* Style blog card content */
+.blog-card p.content {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+/* Style blog card author name */
+.blog-card p.author {
+    font-size: 1rem;
+    color: #007BFF; /* Make author name a different color */
+}
+
+/* Style blog card author avatar */
+.blog-card img.author-avatar {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Apply border-radius directly to the img tag for rounded avatars */
+.blog-card img.author-avatar {
+    border-radius: 50%;
+    margin-top: 10px;
+}
+

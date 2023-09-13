@@ -1,20 +1,50 @@
-header {
-    background-image: url(https://picsum.photo/1920/300);
-    background-size: cover;
-    background-position: certer center;
+// header {
+//     background-image: url(https://picsum.photo/1920/300);
+//     background-size: cover;
+//     background-position: certer center;
+// }
+
+// div.container {
+//     display: flex;
+//     // grid-template-columns:repeat(4, 1fr);
+//     flex-wrap: wrap;
+//     gap: 15px;
+//     width: 75vw;
+//     margin: 0 auto;
+//     background-color: aqua;
+
+//     img {
+//         flex: 1;
+//         // flex-basis: 10%;
+//     }
+// }
+
+/* Reset some default browser styles */
+body, h1 {
+    margin: 0;
+    padding: 0;
 }
 
-div.container {
-    display: flex;
-    // grid-template-columns:repeat(4, 1fr);
-    flex-wrap: wrap;
-    gap: 15px;
-    width: 75vw;
-    margin: 0 auto;
-    background-color: aqua;
+/* Set a neutral background color for the page */
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+}
 
-    img {
-        flex: 1;
-        // flex-basis: 10%;
-    }
+/* Center the gallery container */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Adjust the gap between images as needed */
+    padding: 20px;
+}
+
+/* Style individual gallery images */
+.container img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+    border-radius: 10px; /* Add rounded corners to the images */
 }
