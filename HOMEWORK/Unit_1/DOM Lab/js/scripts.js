@@ -121,14 +121,14 @@ const data = [
 	}
 ] 
 
-const cardContainer = document.getElementById('card-container');
+const cardContainer = document.getElementById('card-container'); //create a variable for card container
 
-for (let i = 0; i < data.length; i++) {
-  const card = document.createElement('div');
-  card.classList.add('card');
+for (let i = 0; i < data.length; i++) { //create a loop to show all info
+  const card = document.createElement('div'); // create a div for all info inside const card
+  card.classList.add('card'); //add a class
 
-  const cardTitle = document.createElement('h2');
-  cardTitle.textContent = data[i].title;
+  const cardTitle = document.createElement('h2'); // new element with h2 class
+  cardTitle.textContent = data[i].title; // and data value info in it
 
   const cardBody = document.createElement('p');
   cardBody.textContent = data[i].body;
@@ -147,13 +147,12 @@ for (let i = 0; i < data.length; i++) {
   avatarImage.src = data[i].authorAvatar;
   avatarImage.classList.add('author-avatar'); // Add class for author avatar
 
-  card.appendChild(cardTitle);
-  card.appendChild(cardCategory);
+  card.appendChild(cardTitle); // Place Title in the card
+  card.appendChild(cardCategory); // Place category in the card
   card.appendChild(name); // Place the name under the avatar
   card.appendChild(avatarImage); // Place the avatar image in the card
+  card.appendChild(cardBody); // Place body in the card
+  card.appendChild(cardImage); // Place cover in the card
 
-  card.appendChild(cardBody);
-  card.appendChild(cardImage);
-
-  cardContainer.appendChild(card);
+  cardContainer.appendChild(card); // Place every card inside card container
 }

@@ -56,9 +56,7 @@ function handledrop(e) {
     // Switch player turn
     turn *= -1; //turn = turn * -1;
     // Check for winner
-    winner = getWinner() {
-
-    }
+    winner = getWinner() 
     
 
 
