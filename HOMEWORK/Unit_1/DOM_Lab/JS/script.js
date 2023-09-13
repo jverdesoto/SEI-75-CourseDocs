@@ -137,11 +137,14 @@ function loopData() {
 
     const imgEl = document.createElement('img')
     const titleEl = document.createElement('h1')
+	titleEl.classList.add('title')
     const bodyEl = document.createElement('p')
+	bodyEl.classList.add('body')
     const dateEl = document.createElement('p')
 	const imageContainerEl = document.createElement('div')
     const avatarEl = document.createElement('img')
     const authorEl = document.createElement('footer')
+	const divEl = document.createElement('div')
 
     imgEl.setAttribute('src', data[i].cover)
 	imgEl.setAttribute('id','img')
@@ -157,11 +160,9 @@ function loopData() {
     card.appendChild(titleEl)
     card.appendChild(bodyEl)
     card.appendChild(dateEl)
-    card.appendChild(avatarEl)
-    card.appendChild(authorEl)
-	//card.appendChild(imageContainer)
-	//imageContainer.appendChild(avatarEL)
-	//imageContainer.appendChild(authorEL)
+	card.appendChild(divEl)
+	divEl.appendChild(avatarEl)
+	divEl.appendChild(authorEl)
     }
 }
 

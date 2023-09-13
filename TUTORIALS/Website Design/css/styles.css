@@ -1,0 +1,18 @@
+body{
+    margin: 20px;
+    font-family: 'Aclonica';font-size: 12px;;
+    background: #4387d5;
+}
+
+ul,li {
+    padding: 0;
+    list-style-type: none;
+    }
+
+    h1,h2,h3 {
+        color: #767f7e;
+    }
+    p{
+
+        color: #828b8a;
+    }

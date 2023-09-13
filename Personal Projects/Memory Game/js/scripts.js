@@ -27,5 +27,6 @@ const color = colorsPicklist[randomIndex] ;
 const tile = buildTile(color);
 
 colorsPicklist.splice(randomIndex, 1);
+document.body.appendChild(tile);
 
 }
