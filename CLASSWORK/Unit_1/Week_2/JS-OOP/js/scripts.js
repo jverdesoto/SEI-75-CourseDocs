@@ -109,33 +109,45 @@
   newPeople.greet()
 
 
-  
+
   class Employee {
-    constructor(firstName, lastName, company, wage){
-        this.firstName = firstName
-        this.lastName = lastName
+    constructor(newPeople, company, wage){
+        this.people = newPeople
         this.company = company
         this.wage = wage
         this.active = true
     }
-    raise(amount) {
+    receiveRaise(amount) {
         this.wage += amount
         console.log(`new wage: ${this.wage}`)
     }
+    terminate() {
+        this.active = false
+    }
   }
-const newEmployee = new Employee('John', 'Smith', 'Apple', 10000)
-newEmployee.raise(20000) = false
+const newEmployee = new Employee(newPeople, 'Apple', 25000)
+console.log()
+newEmployee.receiveRaise(25000)
 
-class Manager {
-    constructor(firstName, lastName, company, wage, department) {
-        this.firstName = firstName
-        this.lastName = lastName
-        this.company = company
-        this.wage = wage
+class Manager { 
+    constructor(newPeople, newEmployee, department) {
+        this.people = newPeople
+        this.company = newEmployee
+        this.wage = newEmployee
         this.department = department
         this.active = true
     }
+// giveRaise(amount) {
+//     receiveRaise(amount)
+// }
+
 }
+
+const newManager = new Manager(newEmployee, 25000,'CEO')
+// newManager.giveRaise(40000)
+console.log(newManager)
+
+
 // class Employee extends People {
 //     constructor(firstName, lastName, company, wage){
 //         super(firstName, lastName)
