@@ -1,14 +1,29 @@
+#app {
+   display: flex;
+   align-content: center;
+   flex-wrap: wrap;
+}
 .card{
     display: flex;
+    flex-direction: row;
     background-color: lightpink;
     color: white;
-
+    width: 200px;
+    margin: 15px;
+    padding: 10px;
+    border: 1px solid red;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
 }
 #img {
-    width: 100px ;
+    width: 200px;
     height: 100px;
 }
 #ava {
-    width: 100px ;
+    display: flex;
+    width: 200px;
     height: 100px;
+    
+
 }
