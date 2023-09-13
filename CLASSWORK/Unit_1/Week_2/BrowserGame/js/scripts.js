@@ -19,6 +19,7 @@ const markerEls = [...document.querySelectorAll('#markers > div')];
 
 /*----- event listeners -----*/
 document.getElementById('markers').addEventListener('click', handleDrop);
+playAgainBtn.addEventListener('click', init);
 
 /*----- functions -----*/
 init();
@@ -32,12 +33,62 @@ function init(){
         [0, 0, 0, 0, 0, 0], //column 3
         [0, 0, 0, 0, 0, 0], //column 4
         [0, 0, 0, 0, 0, 0], //column 5
-        [1, 1, 1, 1, 1, 1] //column 6
+        [0, 0, 0, 0, 0, 0] //column 6
     ];
     
     playerTurn = 1;
     winner = null;
     render();
+}
+
+function getWinner(colIdx, rowIdx){
+    return checkVerticalWin(colIdx, rowIdx) 
+    || checkHorizontallWin(colIdx, rowIdx) 
+    || checkDiagonalWinNESW(colIdx, rowIdx)
+    || checkDiagonalWinNESE(colIdx, rowIdx);
+}
+
+function checkHorizontallWin(colIdx, rowIdx){
+    return countAdjacent(colIdx, rowIdx, 0, -1) === 3 ? board[colIdx][rowIdx] : null;
+}
+
+function checkVerticalWin(colIdx, rowIdx){
+    const adjCountLeft = countAdjacent(colIdx, rowIdx, -1,0);
+    const adjCountRight = countAdjacent(colIdx, rowIdx, 1,0);
+
+    return (adjCountLeft + adjCountRight) >= 3 ? board[colIdx][rowIdx] : null;
+}
+
+function checkDiagonalWinNESW(colIdx, rowIdx){
+    const adjCountNE = countAdjacent(colIdx, rowIdx, 1,1);
+    const adjCountSW = countAdjacent(colIdx, rowIdx, -1,-1);
+
+    return (adjCountNE + adjCountSW) >= 3 ? board[colIdx][rowIdx] : null;
+}
+
+function checkDiagonalWinNESE(colIdx, rowIdx){
+    const adjCountNE = countAdjacent(colIdx, rowIdx, -1,1);
+    const adjCountSW = countAdjacent(colIdx, rowIdx, 1,-1);
+
+    return (adjCountNE + adjCountSW) >= 3 ? board[colIdx][rowIdx] : null;
+}
+
+function countAdjacent(colIdx, rowIdx, colOffset, rowOffset){
+    const player = board[colIdx][rowIdx];
+    let count = 0;
+    // Initialize new coordinates
+    colIdx += colOffset;
+    rowIdx += rowOffset;
+    while(board[colIdx] !== undefined && 
+        board[colIdx][rowIdx] !== undefined && 
+        board[colIdx][rowIdx] === player){
+        // Ensure colIdex is within bounds of the board array
+        count++;
+        colIdx += colOffset;
+        rowIdx += rowOffset;
+    }
+    console.log(player);
+    return count;
 }
 
 function render(){
@@ -53,11 +104,9 @@ function renderBoard(){
     board.forEach(function(colArr, colIdx) {
         colArr.forEach(function(cellVal, rowIdx){
             const cellId = `c${colIdx}r${rowIdx}`;
-            console.log(`Cell Id = ${cellId}`);
+            //console.log(`Cell Id = ${cellId}`);
             const cellEl = document.getElementById(cellId);
             cellEl.style.backgroundColor = COLORS[cellVal];
-            // cellEl.style.backgroundColor = "white";
-            // console.log(colArr, rowIdx, cellVale);
         });
     });
 }
@@ -85,6 +134,17 @@ function renderControls(){
 }
 
 function handleDrop(evt){
-    console.log(evt.target);
+    const colIdx = markerEls.indexOf(evt.target);
+    //Guards... 
+    if(colIdx === -1) return;
+    const colArr = board[colIdx];
+    const rowIdx = colArr.indexOf(0);
+    // update the board state with the cur player value (ture).
+    colArr[rowIdx] = playerTurn;
+    // switch player turn
+    playerTurn *= -1;
+    //check for winner
+    winner = getWinner(colIdx, rowIdx);
 
+    render();
 }
