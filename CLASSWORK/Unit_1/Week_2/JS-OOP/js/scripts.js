@@ -96,7 +96,23 @@
   
   //if you use class method you need to first declare the class then the instances
 
-  class People {
+// class Employee extends People {
+//     constructor(firstName, lastName, company, wage){
+//         super(firstName, lastName)
+//         this.company = company
+//         this.wage = wage
+//         this.active = true
+//     }
+//     raise(amount) {
+//         this.wage += amount
+//         console.log(`new wage: ${this.wage}`)
+//     }
+//   }
+// const newEmployee = new Employee('John', 'Smith', 'Apple', 10000)
+// newEmployee.raise(20000)
+
+
+class People {
     constructor(firstName, lastName) {
         this.firstName = firstName
         this.lastName = lastName
@@ -104,13 +120,17 @@
     greet() {
         console.log(`Hello ${this.firstName} ${this.lastName}!`)
     }
-  }
-  const newPeople = new People('John', 'Smith')
-  newPeople.greet()
+}
 
+const newPeople = new People('John', 'Smith')
+newPeople.greet()
 
+// function receiveRaise(amount) {
+//     this.wage += amount
+//     console.log(`new wage: ${this.wage}`)
+// }
 
-  class Employee {
+class Employee {
     constructor(newPeople, company, wage){
         this.people = newPeople
         this.company = company
@@ -126,7 +146,7 @@
     }
   }
 const newEmployee = new Employee(newPeople, 'Apple', 25000)
-console.log()
+console.log(newEmployee)
 newEmployee.receiveRaise(25000)
 
 class Manager { 
@@ -137,29 +157,15 @@ class Manager {
         this.department = department
         this.active = true
     }
-// giveRaise(amount) {
-//     receiveRaise(amount)
-// }
-
+giveRaise(amount) {
+    // receiveRaise(amount)
+    // newManager.receiveRaise(amount)
 }
+} 
 
 const newManager = new Manager(newEmployee, 25000,'CEO')
-// newManager.giveRaise(40000)
+newManager.giveRaise(40000)
 console.log(newManager)
 
 
-// class Employee extends People {
-//     constructor(firstName, lastName, company, wage){
-//         super(firstName, lastName)
-//         this.company = company
-//         this.wage = wage
-//         this.active = true
-//     }
-//     raise(amount) {
-//         this.wage += amount
-//         console.log(`new wage: ${this.wage}`)
-//     }
-//   }
-// const newEmployee = new Employee('John', 'Smith', 'Apple', 10000)
-// newEmployee.raise(20000)
 
