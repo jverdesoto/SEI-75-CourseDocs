@@ -1,7 +1,7 @@
 // Object-oriented Javascript
 /*
     - OOP: Using OBJECTS to represent real world things.
-    - Objects hace own properties and functions (methids)
+    - Objects hace own properties and functions (methods)
     - Objects contain data and methods to represent info about what you're trying to model
     ex: 
     function Ship() {
@@ -45,3 +45,120 @@
     console.log(mystring.vlaueOf())
     - Nearly of all objects in JS are instances of Object which seats on top of the Protitype chain
 */
+
+
+// function Car(topSpeed, model, manufacturer, color) {
+//     const obj = {
+//     }
+//     obj.topSpeed = topSpeed
+//     obj.model = model
+//     obj.manufacturer =manufacturer
+//     obj.color = color
+//     return obj
+// }
+
+// function Car(topSpeed, model, manufacturer, color) {
+//     this.model = model
+//     this.manufacturer =manufacturer
+//     this.topSpeed = topSpeed
+//     this.color = color
+// }
+
+// class Car {
+//     constructor(topSpeed, model, manufacturer, color){
+//     this.topSpeed = topSpeed
+//     this.model = model
+//     this.manufacturer = manufacturer
+//    this.color = color
+//  }
+//         whatColorAmI() {
+//         console.log(`I am ${this.color}`);
+//     }
+// }
+
+
+
+//     const myCar = new Car(200, 'M3', 'BMW', 'green')
+//     const myCar2 = new Car(130, 'Polo', 'VW', 'black')
+
+//     console.log(myCar.color)
+//     console.log(myCar2.color)
+    
+//     myCar.whatColorAmI()
+//     myCar2.whatColorAmI()
+
+// class Person {
+//     constructor(firstName, lastName) {
+//         this.firstName = firstName;
+//         this.lastName = lastName;
+//     }
+//     sayHello() {
+//         alert(this.firstName)
+//     }
+// }
+// const myPerson = new Person('Aisha', 'Ayinde')
+// myPerson.sayHello()
+
+// Parent class
+class Person{ 
+
+constructor(firstName, lastName){
+    this.firstName = firstName
+    this.lastName = lastName
+
+}
+
+    sayHello(){
+        console.log("Hello")
+    }
+
+}
+
+let person1 = new Person("Aisha", "Ayinde")
+let person2 = new Person("Ryan", "Reynolds")
+
+console.log(person1.lastName)
+
+// sub class of person
+class Employee extends Person {
+    constructor(firstName, lastName, company, wage, active) {
+        super(firstName, lastName)
+        this.company = company
+        this.wage = wage
+        this.active = true
+        
+    }
+
+// recieveRaise() {
+//     console.log('Your wage is now ' + this.wage )
+// }
+// terminate() {}
+}
+ 
+
+// sub class of employee
+class Manager extends Employee {
+    constructor(firstName, lastName, company, wage, active, department) {
+        super(company, wage, active)
+        this.department = department
+    }
+
+// giveRaise(recieveRaise()) //calls on employee object
+
+}
+
+class Worker extends Employee {
+    constructor(firstName, lastName, company, wage, active, manager) {
+        super(company, wage, active)
+        this.manager = manager
+    }
+    // workHours()
+
+}
+
+let employee = new Employee('Aisha', 'Ayinde', 'google', '£80,000', 'active')
+let manager = new Manager()
+let worker = new Worker()
+
+console.log(employee.wage)
+console.log(employee.firstName)

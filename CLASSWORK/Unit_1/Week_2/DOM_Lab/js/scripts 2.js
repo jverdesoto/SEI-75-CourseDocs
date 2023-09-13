@@ -28,7 +28,7 @@ const data = [
             body: "Illo saepe consequuntur a libero deserunt a eos, perferendis sint, accusantium qui dolorum sed at.",
             category: "unknown generator",
             cover: "https://picsum.photos/seed/4326/1920/1080",
-            createdAt": "2016-06-12T00:16:07Z",
+            createdAt: "2016-06-12T00:16:07Z",
             id: 3,
             isDraft: false,
             title: "molestiae odio nisi",
@@ -87,7 +87,7 @@ const data = [
         {
             body: "Reprehenderit et, asperiores sed reprehenderit nisi, architecto a reprehenderit ipsa.",
             category: "unknown generator",
-            cover "https://picsum.photos/seed/9417/1920/1080",
+            cover: "https://picsum.photos/seed/9417/1920/1080",
             createdAt: "2012-01-16T01:37:42Z",
             id: 8,
             isDraft: false,

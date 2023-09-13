@@ -54,7 +54,9 @@ const inputName = document.getElementById('inputName').value
 const inputEmail = document.getElementById('inputEmail').value
 
 
-document.getElementById('submitBtn').addEventListener('click',()=> {
+document.getElementById('submitBtn').addEventListener('click',(event) => {
+    event.preventDefault()
+    
     const modalEl = document.createElement('div')
 
 modalEl.classList.add('modal-header')
