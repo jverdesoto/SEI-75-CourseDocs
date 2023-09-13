@@ -55,3 +55,43 @@ console.log(myString.valueOf());
 const myObj = {}
 
 console.log(myObj);
+
+function Car(topSpeed, model, manufacturer, color) {
+    const obj = {}
+  obj.topSpeed = topSpeed
+  obj.model = model
+  obj.manufacturer = manifacturer
+  obj.color = color
+  return obj
+  }
+  
+  //instance of a car
+  const myCar() = new Car(200, 'M3', 'BMW', 'green')
+  const myCar2 = new Car(130, 'polo', 'VW', 'black')
+  console.log(myCar)
+  console.log(myCar.topSpeed)
+  console.log(myCar2.topSpeed)
+  
+  //this will return it by defautl you dont need to create
+  function Car(topSpeed, model, manufacturer, color) {
+    this.topSpeed = topSpeed
+    this.model = model
+    this.manufacturer = manufacturer
+    this.color = color
+  }
+  
+  class Car {
+    constructor(topSpeed, model, manufacturer, color){
+      this.topSpeed = topSpeed
+      this.model = model
+      this.manufacturer = manufacturer
+      this.color = color
+  }
+  whatColorAmI() {
+    console.log(`I am ${this.color}`)
+  }
+  }
+  myCar.whaColorAmI()
+  mycar2.whatColorAmI
+  
+  //if you use class method you need to first declare the class then the instances

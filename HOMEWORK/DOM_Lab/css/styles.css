@@ -1,0 +1,62 @@
+body {
+    margin: 30px;
+   background-color: #e9e6e4;
+   font-family: 'Inter', sans-serif;
+   border: 2px solid #454545;
+}   
+header {
+    display: flex;
+    justify-content:center;
+    text-align: right;
+}
+header h1 {
+    width: 400px;
+    border-bottom: 1px solid #454545;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 5px;
+    }
+#app {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content:  flex-start;
+    margin: 25px;
+    width: 400px;
+    height: max-content;
+    color: #454545;
+    box-shadow: 3px 3px 5px 6px #ccc;
+}
+.card h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: #454545;
+    color: #e9e6e4;
+    padding: 5px 10px;
+}
+.divInfo p:first-of-type {
+    font-style: italic;
+    font-weight: bold;
+    font-size: 10px;
+    color: #7A7A7A;
+}
+.coverImg {
+    width: 100%;
+    height: auto;
+}
+p {
+    padding: 0 10px;
+    line-height: 1;
+}
+.divAuthor {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    padding: 10px 10px;
+}
+.avatar {
+    width: 50px;
+    height: auto;
+}
