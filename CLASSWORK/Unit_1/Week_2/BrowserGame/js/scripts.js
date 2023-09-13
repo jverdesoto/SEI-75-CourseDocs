@@ -11,6 +11,9 @@ let winner; //null, 1 or -1; 'T' = tie
 
 //cached elements
 
+const messageEl = document.querySelector("h1");
+const playAgainBtn = document.querySelector("button");
+
 //event listeners
 
 //functions
@@ -51,6 +54,20 @@ function renderBoard() {
   });
 }
 
-function renderMessage() {}
+function renderMessage() {
+  if (winner === "T") {
+    messageEl.innerText = "It's a Tie!!!";
+  } else if (winner) {
+    messageEl.innerHTML = `<span style="color: ${COLORS[winner]}">${COLORS[
+      winner
+    ].toUpperCase()}</span> Wins!`;
+  } else {
+    messageEl.innerHTML = `<span style="color: ${COLORS[turn]}">${COLORS[
+      turn
+    ].toUpperCase()}</span>'s Turn`;
+  }
+}
 
-function renderControls() {}
+function renderControls() {
+  playAgainBtn.style.visibility = winner ? "visible" : "hidden";
+}

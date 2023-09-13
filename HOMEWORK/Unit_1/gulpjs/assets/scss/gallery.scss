@@ -1,0 +1,20 @@
+header {
+    background-image: url(https://picsum.photo/1920/300);
+    background-size: cover;
+    background-position: certer center;
+}
+
+div.container {
+    display: flex;
+    // grid-template-columns:repeat(4, 1fr);
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 75vw;
+    margin: 0 auto;
+    background-color: aqua;
+
+    img {
+        flex: 1;
+        // flex-basis: 10%;
+    }
+}
