@@ -4,10 +4,7 @@
     - Objects hace own properties and functions (methids)
     - Objects contain data and methods to represent info about what you're trying to model
     ex: 
-    function Ship() {
-        this.floats = true
-        this.material = "steel"
-    }
+    
 
     - Data is encapsulated, conained within the scope
     - In classic OOP, a class is defined, then when an instance of is created, all the properties are *copied* over from the constructor to the instance
@@ -45,3 +42,67 @@
     console.log(mystring.vlaueOf())
     - Nearly of all objects in JS are instances of Object which seats on top of the Protitype chain
 */
+
+// function Ship() {
+//     this.floats = true
+//     this.material = "steel"
+// }
+// const myShip = new Ship()
+
+// console.log(myShip.floats);
+// Define the BankAccount class
+
+// Class lab
+class bankAccount {
+    // Constructor to initialise properties
+    constructor(ownerName, balance) {
+      this.ownerName = ownerName; // Set the owner's name
+      this.balance = balance; // Set the initial balance
+      this.acctNum = Math.floor(Math.random() * 1000000); // Generate a random account number
+    }
+  
+    // deposit money into the account
+    deposit(amount) {
+      this.balance += amount; // add deposit to balance
+    }
+  
+    // withdraw money from account
+    withdraw(amount) {
+      if (this.balance >= amount) { // check sufficient funds
+        this.balance -= amount; // minus withdrawal amount
+      } else {
+        console.log('Insufficient funds'); // log a message if insufficient
+      }
+    }
+  }
+  
+  // checkingAccount class, derived from bankAccount
+  class checkingAccount extends bankAccount {
+    // initialise and enable overdraft
+    constructor(ownerName, balance, overdraftEnabled = false) {
+      super(ownerName, balance); // call constructor of the parent class
+      this.overdraftEnabled = overdraftEnabled; // set overdraft
+    }
+  
+    // override withdraw method/ do overdraft feature
+    withdraw(amount) {
+      if (this.balance >= amount || this.overdraftEnabled) { // check sufficient funds or overdraft enabled
+        this.balance -= amount; // - the withdrawal amount
+      } else {
+        console.log('Insufficient funds'); // log a message if insufficient
+      }
+    }
+  }
+  
+  // savingsAccount class, derived from bankAccount
+  class savingsAccount extends bankAccount {
+    constructor(ownerName, balance) {
+      super(ownerName, balance); // call the constructor of the parent class
+    }
+  
+    // override the withdraw and disallow withdrawals
+    withdraw(amount) {
+      console.log("You can't withdraw from a savings account :'("); 
+    }
+  }
+  
