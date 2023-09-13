@@ -10,7 +10,7 @@ const data = [
 		views: 223,
         authorAvatar: "https://i.pravatar.cc/100?img=1",
         authorName: "Emily Smith"
-	},
+	}, 
 	{
 		body: "Eos culpa et voluptatem.",
 		category: "unknown generator",
@@ -135,19 +135,25 @@ for (let i = 0; i < data.length; i++) {
   const cardBody = document.createElement('p');
   cardBody.textContent = data[i].body;
 
-  const cardCategory = document.createElement('h3');
-  cardCategory.classList.add('cat'); 
+  const cardCategory = document.createElement('h3'); 
   cardCategory.textContent = data[i].category;
+
+  const name = document.createElement('p');
+  name.textContent = data[i].authorName;
 
   const cardImage = document.createElement('img');
   cardImage.src = data[i].cover;
-  cardImage.alt = data[i].title;
+
+  const avatarImage = document.createElement('img');
+  avatarImage.src = data[i].authorAvatar;
 
   
   card.appendChild(cardTitle);
   card.appendChild(cardBody);
   card.appendChild(cardCategory);
   card.appendChild(cardImage);
+  card.appendChild(name);
+  card.appendChild(avatarImage);
 
  
   cardContainer.appendChild(card);
