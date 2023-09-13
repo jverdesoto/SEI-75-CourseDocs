@@ -1,0 +1,83 @@
+* {
+    font-family: 'Mada', sans-serif;
+}
+
+.h1 {
+    
+    background-color: blanchedalmond;
+    text-align: center;
+    z-index: 1;
+    padding: 20px; 
+    margin: 0;
+    width: auto;
+}
+
+#app {
+    display: flex;
+    flex-wrap: wrap;
+    
+    justify-content: space-around;
+    background-color: palegoldenrod;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.card {
+    
+    background-color: paleturquoise;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    height: 400px;
+    width: 200px;
+    margin: 20px;
+    border-radius: 20px;
+}
+
+.card {
+    transition: .3s
+    
+}
+
+.card:hover > :not(:hover){
+    opacity: .6;
+}
+
+.backing {
+    border-radius: 50%;
+    width: 60%;
+    height: 20%;
+    padding-top: 10px;
+
+}
+
+
+.title {
+    font-weight: bold;
+    font-size: 23px;
+}
+
+
+.body {
+    font-size: 15px;
+}
+
+.date {
+
+}
+
+.profile {
+    border-radius: 20px;
+    width: 40%;
+    height: 40% justify-content: center;
+    }
+
+.author {
+    margin-bottom: 20px;
+}
+
+
+footer {
+    padding-bottom: 10px;
+}

@@ -131,7 +131,9 @@ function loopData() {
     for (let i = 0; i < data.length; i++) {
     const card = document.createElement('div')
     card.classList.add('card')
+	
 
+// variables for the elements in Javascript
     const imgEl = document.createElement('img')
     const titleEl = document.createElement('h1')
     const bodyEl = document.createElement('p')
@@ -139,14 +141,23 @@ function loopData() {
     const avatarEl = document.createElement('img')
     const authorEl = document.createElement('footer')
 
+	// classes for images for individ manipulation
+	imgEl.classList.add('backing')
+	avatarEl.classList.add('profile')
+	bodyEl.classList.add('body')
+	dateEl.classList.add('date')
+	titleEl.classList.add('title')
+	authorEl.classList.add('author')
+
     imgEl.setAttribute('src', data[i].cover)
     imgEl.setAttribute('id','img')
     titleEl.innerHTML = data[i].title
     bodyEl.innerHTML = data[i].body
     dateEl.innerHTML = data[i].createdAt
-    avatarEl.setAttribute('src', data[i].cover)
+    avatarEl.setAttribute('src', data[i].authorAvatar)
     authorEl.innerHTML = data[i].authorName
 
+// linking these elemnts to my HTML code
     app.appendChild(card)
     card.appendChild(imgEl)
     card.appendChild(titleEl)
