@@ -121,6 +121,7 @@ const data = [
     }
 ]
 
+
 const app = document.getElementById('app')
 
 //header
@@ -144,6 +145,13 @@ cardContainer.classList.add('card-container-main')
 app.appendChild(cardContainer)
 
 
+//title
+const titleContainer = document.getElementById('app')
+const title = document.createElement('h1')
+title.innerHTML = 'Blog'
+titleContainer.appendChild(title)
+title.classList.add('title')
+
 function cardCreation(array) {
     for (let i = 0; i < array.length; i++) {
 
@@ -151,7 +159,10 @@ function cardCreation(array) {
         const card = document.createElement('article')
         card.classList.add('card')
         card.setAttribute('id', array[i].id)
+
         cardContainer.appendChild(card)
+
+        document.getElementById('app').appendChild(card)
 
         //card image
         const cardImage = document.createElement('img')
@@ -189,12 +200,14 @@ function cardCreation(array) {
         authorPic.setAttribute('src', array[i].authorAvatar)
         authorPic.classList.add('author-pic')
         authorContainer.appendChild(authorPic)
+        card.appendChild(authorPic)
 
         //card author name
         const authorName = document.createElement('p')
         authorName.innerHTML = array[i].authorName
         authorName.classList.add('author-name')
         authorContainer.appendChild(authorName)
+        card.appendChild(authorName)
 
     }
 }
