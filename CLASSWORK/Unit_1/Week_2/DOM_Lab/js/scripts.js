@@ -122,10 +122,8 @@ const data = [
 	}
 ]
 
-const title = document.createElement('h1')
 
 
-const app = document.getElementById('app')
 
 function loopData() {
     for (let i = 0; i < data.length; i++) {
@@ -134,21 +132,26 @@ function loopData() {
 	
 
 // variables for the elements in Javascript
+	const app = document.getElementById('app')
+	const bannerEl = document.createElement('h1')
     const imgEl = document.createElement('img')
-    const titleEl = document.createElement('h1')
+    const titleEl = document.createElement('h2')
     const bodyEl = document.createElement('p')
     const dateEl = document.createElement('p')
     const avatarEl = document.createElement('img')
     const authorEl = document.createElement('footer')
 
 	// classes for images for individ manipulation
+
 	imgEl.classList.add('backing')
 	avatarEl.classList.add('profile')
 	bodyEl.classList.add('body')
 	dateEl.classList.add('date')
 	titleEl.classList.add('title')
 	authorEl.classList.add('author')
+	bannerEl.classList.add('banner')
 
+	// feeding the data into the function
     imgEl.setAttribute('src', data[i].cover)
     imgEl.setAttribute('id','img')
     titleEl.innerHTML = data[i].title
