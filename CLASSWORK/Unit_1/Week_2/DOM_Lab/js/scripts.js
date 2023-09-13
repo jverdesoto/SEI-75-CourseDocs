@@ -121,6 +121,7 @@ const data = [
     }
 ]
 
+<<<<<<< HEAD
 
 const app = document.getElementById('app')
 
@@ -145,6 +146,8 @@ cardContainer.classList.add('card-container-main')
 app.appendChild(cardContainer)
 
 
+=======
+>>>>>>> 085cebf (classwork, DOM manipulation)
 //title
 const titleContainer = document.getElementById('app')
 const title = document.createElement('h1')
@@ -159,9 +162,12 @@ function cardCreation(array) {
         const card = document.createElement('article')
         card.classList.add('card')
         card.setAttribute('id', array[i].id)
+<<<<<<< HEAD
 
         cardContainer.appendChild(card)
 
+=======
+>>>>>>> 085cebf (classwork, DOM manipulation)
         document.getElementById('app').appendChild(card)
 
         //card image
@@ -190,23 +196,32 @@ function cardCreation(array) {
         cardContent.classList.add('card-content')
         card.appendChild(cardContent)
 
+<<<<<<< HEAD
         //div for author
         const authorContainer = document.createElement('div')
         authorContainer.classList.add('author-container')
         card.appendChild(authorContainer)
 
+=======
+>>>>>>> 085cebf (classwork, DOM manipulation)
         //card author pic
         const authorPic = document.createElement('img')
         authorPic.setAttribute('src', array[i].authorAvatar)
         authorPic.classList.add('author-pic')
+<<<<<<< HEAD
         authorContainer.appendChild(authorPic)
+=======
+>>>>>>> 085cebf (classwork, DOM manipulation)
         card.appendChild(authorPic)
 
         //card author name
         const authorName = document.createElement('p')
         authorName.innerHTML = array[i].authorName
         authorName.classList.add('author-name')
+<<<<<<< HEAD
         authorContainer.appendChild(authorName)
+=======
+>>>>>>> 085cebf (classwork, DOM manipulation)
         card.appendChild(authorName)
 
     }
