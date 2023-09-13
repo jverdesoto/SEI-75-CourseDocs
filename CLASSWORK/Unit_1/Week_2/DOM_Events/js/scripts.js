@@ -1,3 +1,6 @@
+
+
+
 /**
  * This function show a model that display error meesage,
  * or the correct message that will be displayed for the user
@@ -8,7 +11,8 @@ function displayMessage(message){
    const myMessage = document.getElementById('messagTextId');
    myMessage.innerText = message;
 
-   const modelView = new bootstrap.Model(document.getElementById('messageModelId'));
+//    alert("My Message : " + myMessage.innerText);
+   const modelView = new bootstrap.Modal(document.getElementById('messageModelId'));
    modelView.show();  
 }
 
