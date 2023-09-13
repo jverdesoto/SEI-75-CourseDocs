@@ -79,8 +79,8 @@ function renderControls(){
     playAgainBtn.style.visibility = winner ? 'visible': 'hidden';
     // remove the marker when the column is full, there is no place to play on it.
     markerEls.forEach(function(markerEl, colIdx){
-        const hideMarker = !board[colIdx].include(0) || winner;
-        markerEl.style.visibility =  hideMarker ? 'visible': 'hidden';
+        const hideMarker = !board[colIdx].includes(0) || winner;
+        markerEl.style.visibility =  !hideMarker ? 'visible': 'hidden';
     });
 }
 
