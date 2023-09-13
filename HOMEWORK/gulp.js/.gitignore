@@ -1,0 +1,21 @@
+# Dependencies
+/node.modules
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Production
+/build
+
+# nisc
+.DS_Store
+*.pen
+
+# local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env

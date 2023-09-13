@@ -1,0 +1,51 @@
+header {
+    background-image: url('https://picsum.photos/4000/2000');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: white;
+    height: 100px;
+}
+
+body{
+    background-color: pink;
+}
+
+/*.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    align-self: auto;
+
+    
+    grid-template-areas:  
+    'item-a item-b item-c item-d'
+    'item-e item-f item-g item-h'
+    'item-i item-j item-k item-l'
+    'item-m item-n item-o item-p'
+}*/
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 75%;;
+    margin: 0 auto;
+    
+}
+    img {
+        flex: 1;
+        flex-basis: 10%;
+}
+
+
+h2 {
+    display: block;
+    text-align: center;
+    color: white;
+}
+
+
+footer {
+    text-align: center;
+    color: white;
+}
