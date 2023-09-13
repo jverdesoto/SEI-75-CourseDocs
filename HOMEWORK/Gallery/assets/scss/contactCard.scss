@@ -1,0 +1,88 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Helvetica;
+    background-color: #125455;
+    display: flex;
+    justify-content: center;
+}
+
+//   .main {
+//     display: flex;
+//     justify-content: center;
+//     flex-direction: column;
+//   }
+
+.card {
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: flex-start;
+    background-color: white;
+    width: 250px;
+    height: 500px;
+}
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h1 {
+    font-size: 20px;
+    margin-top: 0;
+}
+img {
+    margin: 25px 50px;
+    border-radius: 50%;
+    border: 3px solid #5CC982;
+}
+
+.rating {
+    margin: 50px 0;
+}
+
+.rating div {
+    padding-bottom: 10px;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.grey {
+    color: lightgray;
+}
+.price {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.price p {
+    padding-bottom: 5px;
+}
+.icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+.phone {
+    background-color: #5CC982;
+    width: 50%;
+    padding: 25px;
+    text-align: center;
+    color: white;
+}
+.text {
+    background-color: #51B374;
+    width: 50%;
+    padding: 25px;
+    text-align: center;
+    color: white;
+}
