@@ -96,3 +96,7 @@ function renderControls() {
             markerEl.style.visibility = hideMarker ? 'hidden' : 'visible';
         });
 }
+
+function handleDrop(evt) {
+
+}
