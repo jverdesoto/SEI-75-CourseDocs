@@ -54,55 +54,54 @@
 
 // Class lab
 class bankAccount {
-    // Constructor to initialise properties
-    constructor(ownerName, balance) {
-      this.ownerName = ownerName; // Set the owner's name
-      this.balance = balance; // Set the initial balance
-      this.acctNum = Math.floor(Math.random() * 1000000); // Generate a random account number
-    }
-  
-    // deposit money into the account
-    deposit(amount) {
-      this.balance += amount; // add deposit to balance
-    }
-  
-    // withdraw money from account
-    withdraw(amount) {
-      if (this.balance >= amount) { // check sufficient funds
-        this.balance -= amount; // minus withdrawal amount
-      } else {
-        console.log('Insufficient funds'); // log a message if insufficient
-      }
+  // Constructor to initialise properties
+  constructor(ownerName, balance) {
+    this.ownerName = ownerName; // Set the owner's name
+    this.balance = balance; // Set the initial balance
+    this.acctNum = Math.floor(Math.random() * 1000000); // Generate a random account number
+  }
+
+  // deposit money into the account
+  deposit(amount) {
+    this.balance += amount; // add deposit to balance
+  }
+
+  // withdraw money from account
+  withdraw(amount) {
+    if (this.balance >= amount) { // check sufficient funds
+      this.balance -= amount; // minus withdrawal amount
+    } else {
+      console.log('Insufficient funds'); // log a message if insufficient
     }
   }
-  
-  // checkingAccount class, derived from bankAccount
-  class checkingAccount extends bankAccount {
-    // initialise and enable overdraft
-    constructor(ownerName, balance, overdraftEnabled = false) {
-      super(ownerName, balance); // call constructor of the parent class
-      this.overdraftEnabled = overdraftEnabled; // set overdraft
-    }
-  
-    // override withdraw method/ do overdraft feature
-    withdraw(amount) {
-      if (this.balance >= amount || this.overdraftEnabled) { // check sufficient funds or overdraft enabled
-        this.balance -= amount; // - the withdrawal amount
-      } else {
-        console.log('Insufficient funds'); // log a message if insufficient
-      }
+}
+
+// checkingAccount class, derived from bankAccount
+class checkingAccount extends bankAccount {
+  // initialise and enable overdraft
+  constructor(ownerName, balance, overdraftEnabled = false) {
+    super(ownerName, balance); // call constructor of the parent class
+    this.overdraftEnabled = overdraftEnabled; // set overdraft
+  }
+
+  // override withdraw method/ do overdraft feature
+  withdraw(amount) {
+    if (this.balance >= amount || this.overdraftEnabled) { // check sufficient funds or overdraft enabled
+      this.balance -= amount; // - the withdrawal amount
+    } else {
+      console.log('Insufficient funds'); // log a message if insufficient
     }
   }
-  
-  // savingsAccount class, derived from bankAccount
-  class savingsAccount extends bankAccount {
-    constructor(ownerName, balance) {
-      super(ownerName, balance); // call the constructor of the parent class
-    }
-  
-    // override the withdraw and disallow withdrawals
-    withdraw(amount) {
-      console.log("You can't withdraw from a savings account :'("); 
-    }
+}
+
+// savingsAccount class, derived from bankAccount
+class savingsAccount extends bankAccount {
+  constructor(ownerName, balance) {
+    super(ownerName, balance); // call the constructor of the parent class
   }
-  
+
+  // override the withdraw and disallow withdrawals
+  withdraw(amount) {
+    console.log("You can't withdraw from a savings account :'("); 
+  }
+}
