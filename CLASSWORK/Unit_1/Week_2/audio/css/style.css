@@ -1,0 +1,30 @@
+body {
+    background-color: #f6a192;    
+}
+
+.main {
+    padding: 25px;
+    /* background-color: #f6d992; */
+    display: flex;
+    justify-content: center;
+}
+
+.iphone {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 250px;
+    height: 500px;
+    border: lightgray solid 2px;
+    border-radius: 25px;
+}
+
+.screen {
+    display: flex;
+    justify-content: center;
+    width: 175px;
+    height: 400px;
+    background-color: #f6c492;
+}

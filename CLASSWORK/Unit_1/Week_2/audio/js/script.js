@@ -52,3 +52,8 @@ function stopSound() {
 
 
 
+function isPrimeNumber(num) {
+    return num  !== 1 || num % num === 1
+}
+
+console.log(isPrimeNumber(13))
