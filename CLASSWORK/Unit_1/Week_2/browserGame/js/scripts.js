@@ -13,10 +13,11 @@ let winner; // null, 1 or -1 -> winner or T -> for a Tie
 /*----- cached elements  -----*/
 const messageEl = document.querySelector('h1');
 const playAgainBtn = document.querySelector('button');
-const markerEls = document.querySelectorAll('#markers > div')
+const markerEls = [...document.querySelectorAll('#markers > div')];
 
 /*----- event listeners -----*/
-document.getElementById('markers').addEventListener('click', handleDrop)
+document.getElementById('markers').addEventListener('click', handleDrop);
+playAgainBtn.addEventListener('click', init)
 
 /*----- functions -----*/
 init();
@@ -37,6 +38,63 @@ function init() {
     turn = 1;
     winner = null;
     render();
+}
+
+// In response to user interaction, update all impacted state, then
+// call render();
+function handleDrop(evt) {
+    const colIdx = markerEls.indexOf(evt.target);
+    // Guards...
+    if(colIdx === -1 || winner) return;
+    // Shortcut to the column array
+    const colArr = board[colIdx];
+    // Find index of the first 0 in colArr
+    const rowIdx = colArr.indexOf(0);
+    // Update the board state with current player value (turn)
+    colArr[rowIdx] = turn;
+    // Switch player turn
+    turn *= -1;
+    // Check for winner 
+    winner = getWinner(colIdx, rowIdx);
+    render();
+}
+
+// Check for winner in board state and return null
+// if no winner, 1/ -1 if a player has won, or 'T' if tie
+function getWinner(colIdx, rowIdx) {
+    return checkVerticalWin(colIdx, rowIdx) ||
+    checkHorizontalWin(colIdx, rowIdx);
+}
+
+function checkHorizontalWin(colIdx, rowIdx){
+    const adjCountLeft = countAdjacent(colIdx, rowIdx, -1, 0);
+    const adjCountRight = countAdjacent(colIdx, rowIdx, 1, 0);
+    return (adjCountLeft + adjCountRight) >= 3 ? board[colIdx][rowIdx] : null;
+}
+
+function checkVerticalWin(colIdx, rowIdx){
+    return countAdjacent(colIdx, rowIdx, 0, -1 ) === 3 ? board[colIdx][rowIdx] : null;
+}
+
+function countAdjacent(colIdx, rowIdx, colOffset, rowOffset) {
+    // Shortcut variable to the player value
+    const player = board[colIdx][rowIdx];
+    // Track count of adjancent cells with same player value
+    let count = 0;
+    // Initialise new coordinates
+    colIdx += colOffset;
+    rowIdx += rowOffset;
+    while (
+        // Ensure colIdx is within bounds of the board array
+        board[colIdx] !== undefined &&
+        board[colIdx][rowIdx] !== undefined &&
+        board[colIdx][rowIdx] === player
+        ) {
+            count++;
+            colIdx += colOffset;
+            rowIdx += rowOffset;
+    }
+    return count;
 }
 
 // Visualise all state in the DOM
@@ -81,6 +139,3 @@ function renderControls() {
     })
 }
 
-function handleDrop(evt) {
-
-}

@@ -1,0 +1,109 @@
+body {
+    background-color: #0F5D5D;
+}
+// Top section of Contact Card
+.main {
+    width: 250px;
+    padding: auto auto;
+    background-color: white;
+    margin: 10% auto;
+}
+
+.profile-pic {
+    border-radius: 50%;
+    margin-left: 30%;
+    border: 3px solid #66D18B;
+}
+
+.active-status {
+    justify-content: left;
+    color: #CBCBCB;
+    font-size: 10px;
+    text-align: right;
+    padding: 10px;
+}
+
+.name{
+    text-align: center;
+    margin: 5px auto;
+    font-size: 16px;
+}
+
+// Middle section of contact card
+
+.rating-career {
+    background-color: #F3F3F3;
+}
+.stars{
+    padding: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 2px;   
+    font-size: 12px;
+    color: #F4D558;
+    padding: 10px 10px 5px;
+}
+
+.last-star{
+    color: #CCCCCC
+}
+
+.profession {
+    color: #8A8A8C;
+    font-size: 12px;
+    text-align: center;
+    padding: 0px 10px 10px;
+}
+
+// Mid to bottom section
+
+.charges{
+    margin: 0px auto 20px;
+}
+
+.free{
+    text-align: center;
+    margin: 20px auto 5px;
+    font-size: 14px;
+}
+
+.charges > p {
+    font-size: 14px;
+    text-align: center;
+    color: #8A8A8C
+}
+
+// Bottom section
+
+.contact {
+    display: flex;
+    flex-wrap: flex;
+}
+
+.phone {
+    background-color: #66D189;
+    width: 50%;
+    font-size: 24px;
+    text-align: center;
+    border-right: 0.5px solid #FFFFFF;
+    height: 50px;
+    padding: 10px;
+    color: #FFFFFF;
+}
+.message {
+    background-color: #66D189;
+    width: 50%;
+    font-size: 24px;
+    text-align: center;
+    height: 50px;
+    padding: 10px;
+    color: #FFFFFF;
+}
+
+.phone:hover {
+    background-color: #5ABD7C;
+}
+
+.message:hover {
+    background-color: #5ABD7C;
+}

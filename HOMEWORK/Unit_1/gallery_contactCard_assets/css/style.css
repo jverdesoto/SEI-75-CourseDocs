@@ -1,0 +1,137 @@
+:root{
+    font-family: Helvetica;
+    font-size: 18px;
+}
+
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* //GENERAL SETTINGS */
+
+*{
+    font-family: 'Lato', sans-serif;
+    color:#302939;
+}
+
+body {
+    background-color: #e99b9b;
+}
+
+/* //NAV BAR */
+.nav {
+    display: flex;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+}
+.btn {
+    margin: 7.5px;
+}
+button{
+/*//styling related settings */
+    border: 0;
+    border-radius: 24px;
+    width: 100px;
+    height: 30px;
+    background-color: #ffd8d8;
+    margin-bottom: 10px;
+    font-size: .75rem;
+/* transition for the hover */
+    transition: .3s;
+}
+
+/*//hover effects*/
+button:hover {
+    animation: pulse 0.4s;
+    animation-iteration-count: 1;
+    transition: .3s;
+
+}
+
+/*animation settings*/
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    70% {
+        transform: scale(.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/*HEADER*/
+
+.hero-section {
+    margin-bottom: 10px;
+}
+.header {
+    background-image: url(https://picsum.photos/1500/150);
+    background-size: cover;
+    width: 100%;
+    height: 150px;
+}
+
+.name{
+    display: flex;
+    justify-content: center;
+}
+/*SECOND TITLE*/
+a {
+    text-decoration: none;
+}
+.second-title {
+    padding: 20px 0px 20px 0px;
+    display: flex;
+    justify-content: center;
+}
+.title{
+    text-align: center;
+}
+
+/*GALLERY*/
+.gallery{
+    /* // box-sizing: border-box;
+    // align-items: center;
+    // padding-top: 20px;
+    // padding-left: 3em;
+    // display: grid;
+    // grid-template-columns: repeat(4, 1fr);
+    // grid-template-rows: repeat(4, 1fr);
+    // gap: 1.5em 0px; */
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 5em;
+    align-items: center;
+}
+
+.gallery:last-child{
+    display: flex;
+    flex-grow: 1;
+}
+
+.imgs {
+    padding: 5px 5px 5px 5px;
+}
+img {
+    border-radius: 5%;
+    transition: .3s;
+}
+
+img:hover {
+    animation: pulse 0.5s;
+    animation-iteration-count: 1;
+    transition: .3s;
+}
+/* //FOOTER  */
+
+.footer{
+    padding-bottom: 5px;
+    text-align: center;
+    font-size: .75rem;
+    background-color: #ffd8d8;
+}
