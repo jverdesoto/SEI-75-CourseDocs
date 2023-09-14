@@ -7,3 +7,5 @@ find "DOM_Lab" prject folder in "SEI-75-CourseDocs/HOMEWORK/Unit_1/Week_2" folde
 find "Gallery" homework prject folder in "SEI-75-CourseDocs/HOMEWORK/Unit_1/Week_2" folder.
 
 find "Object_Lab" prject folder in "SEI-75-CourseDocs/HOMEWORK/Unit_1/Week_2" folder.
+
+find "ContactCard" folder which we apply Flex Grid Css Lab  in "SEI-75-CourseDocs/HOMEWORK/Unit_1/Week_2" folder. + Bounce

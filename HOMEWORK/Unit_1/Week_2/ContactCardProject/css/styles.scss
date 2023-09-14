@@ -1,0 +1,126 @@
+*{
+    box-sizing: border-box;
+  }
+  
+  body{
+    margin: 0;
+    font-family: Helvetica;
+    background-color: #0f5f60;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .cardView{
+    background-color: white;
+    height: auto;
+    width: auto;
+  }
+  
+  #verticalCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* profile picture image view*/
+  #profileImageId{
+    border-radius: 50px;
+    border: 3px solid #66d189;  
+    margin:10px 40px;
+  }
+  
+  /* card details component view */
+  #verticalCard > div
+  {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    padding: 20px 0px;
+    margin:auto 30px;
+    text-align:center;
+  }
+  
+  /* ONLINE text align left in vertical view */
+  #verticalCard > div:first-child
+  {
+    align-self: end;
+    padding:10px;
+    margin:0px;
+    color: darkgray;
+  }
+  
+  /* rating component view */
+  #verticalCard > div:nth-child(3)
+  {
+    background-color: #f3f3f3;
+    padding:10px 0px;
+    margin:0px;
+    width:100%;
+    font-weight: lighter;
+  }
+  /* rating component image view */
+  #verticalCard > div:nth-child(3) > img:first-child{
+    margin:auto 60px;
+    padding: 10px;
+  }
+  
+/* Horizontal view */
+  #horizontalCard{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+/* ONLINE text align left in Horizontal view */
+#horizontalCard > div:first-child > div:nth-child(1)
+{
+  align-self: flex-start;
+  padding:10px;
+  margin:0px;
+  color: darkgray;
+}
+  
+#horizontalCard > div:nth-child(2){
+    padding: 10px;
+   background-color: lightgray;
+}
+
+  img,h4,h2,h5,p{
+    padding:0px;
+    margin:0px;
+  }
+
+  /* buttons layout component view */
+  #buttonsView{
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+  }
+  
+  /* buttons component common children attributes view*/
+  #buttonsView > i{
+    display: flex;
+    justify-content:center;
+    padding:15px;
+    color:white;
+  }
+  
+  /* phone button view*/
+  #phoenId{ 
+    background-color: #66d189;
+    width:50%;
+  }
+  
+  /* message button view*/
+  #messageId{
+    background-color: #5abd7c;
+    width:50%;
+  }
+  
