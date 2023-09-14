@@ -38,13 +38,13 @@ body {
     display: flex;
     justify-content: center;
 }
-.screenlayout {
+/* .screenlayout {
     margin: 0 auto;
     display: flex;
     justify-content: flex-end;
-}
+} */
 .homebtn {
-    /* margin: 0 auto; */
+    margin: 0 auto;
     border: lightgray solid 2px;
     border-radius: 50%;
     width: 25px;
