@@ -1,0 +1,72 @@
+:root {
+    font-size: 18px;
+}
+
+*,
+::before,
+::after {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+body {
+background: linear-gradient(270deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+}
+
+.playerbody {
+display:flex;
+flex-direction: column;
+justify-content: flex-end;
+align-items: center;
+backdrop-filter: blur(10px);
+background: rgba(255, 255, 255, 0.1);
+margin-left: 40%;
+margin-top: 20vw;
+height: 7.5vw;
+border: 1px solid white;
+border-radius: 30%;
+width: 25%;
+}
+
+.controls {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.buttons {
+  display: flex;
+  gap:10px;
+}
+
+.slider {
+  width: 12.5vw;
+}
+
+.form-range::-webkit-slider-thumb {
+  background-color: white;
+}
+.form-range::-webkit-slider-runnable-track {
+  background-color: rgba(255, 255, 255, 0.5); /* Example color: Orange */
+}
+
+.btn-primary {
+  background-color: transparent;
+  border-style: none;
+}
+
+.btn-primary:hover {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.5); 
+  border-style: none;
+}
+
+.btn-primary:focus-visible {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.5); 
+  border-style: none;
+}
+
+
+

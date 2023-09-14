@@ -123,6 +123,7 @@ class CheckingAccount extends BankAccount {
         const startingOverdraftLimit = this.overdraftLimit * -1
         // Neating the code
         const remainingFunds = this.balance - sum
+        // Declaring a variable for the remaining balance to get a neater code
         const remainingOverdraftLimit = startingOverdraftLimit - remainingFunds
         if(remainingFunds < 0 && remainingFunds > startingOverdraftLimit && this.overdraftEnabled === true) {
             return `Your balance is negative. Current balance: -$${remainingOverdraftLimit * -1} `
