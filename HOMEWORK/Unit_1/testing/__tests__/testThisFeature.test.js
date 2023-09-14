@@ -12,26 +12,26 @@
 
 const isPrime = require('../js/testThisFeature')
 
-test('Test if a number is prime', () => {
+test('Check that 4 is not prime', () => {
     expect(isPrime(4)).toBe(false)
 })
 
-test('Test if a number is prime', () => {
+test('Check that 0 is not prime', () => {
     expect(isPrime(0)).toBe(false)
 })
 
-test('Test if a number is prime', () => {
+test('Check that 1 is not prime', () => {
     expect(isPrime(1)).toBe(false)
 })
 
-test('Test if a number is prime', () => {
+test('Check that 61 is prime', () => {
     expect(isPrime(61)).toBe(true)
 })
 
-test('Test if a number is prime', () => {
+test('Check that 55 is not prime', () => {
     expect(isPrime(55)).toBe(false)
 })
 
-test('Test if a number is prime', () => {
+test('Check that 5 is prime', () => {
     expect(isPrime(5)).toBe(true)
 })

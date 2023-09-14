@@ -10,19 +10,12 @@
 // module.exports = isLongerThan5
 
 function isPrime(num) {
-    let numSqRt = Math.sqrt(num)
     let factorCount = 0
-    for (let i = 2; i <= numSqRt; i++) {
-        if (num % i === 0) { factorCount++ }
+    for (let i = 0; i <= num; i++) {
+        if (num % i === 0) factorCount++
+        if (factorCount > 2) break
     }
-    console.log(`${num} has ${factorCount} factors`);
-    return factorCount === 0
+    return factorCount === 2
 }
-
-isPrime(0)
-isPrime(1)
-isPrime(5)
-isPrime(61)
-isPrime(55)
 
 module.exports = isPrime
