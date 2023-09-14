@@ -29,12 +29,13 @@ function oddsAndEvens(array) {
 
 
 function beginsWithB(array) {
+  let newBArray = []
   for (let i = 0; i < array.length; i++) {
-    if (array[i].startsWith("B'")) {
-      return array[i]
+    if (array[i].startsWith('B')) {
+      newBArray.push(array[i])
+    }
   }
-}
-return null
+  return newBArray
 }
 
 
@@ -42,28 +43,40 @@ return null
 // ? eg: multiplyBy10([10, 3]) => [100, 30]; multiplyBy10([-2, 0, 10]) => [20, 0, 100];
 
 function multiplyBy10(array) {
-  let tenTimesArr = array.map((cheese) => cheese*10);
-  let onlyPositives = Math.abs(tenTimesArr);
+  let allTenTimesAndPositive = []
+  let tenTimesArr = array.map((cheese) => cheese * 10);
+  let onlyPositives = tenTimesArr.map((ham) => Math.abs(ham));
   return onlyPositives;
 }
 
 
-// ? write a function that takes a value and an array and returns the index of the given value in the array. If the value is not in the array it should return 'Not Found'.
+// ? write a function that takes a value and an array and returns the index of the given value in the array. 
+// ? If the value is not in the array it should return 'Not Found'.
 // ? eg: findIndex(1, [10, 3, 1]) => 2; findIndex('George', ['Mike', 'Rane', 'Alex']) => 'Not Found';
 
 function findIndex(val, array) {
-
+  let matchingValues = []
+  array.map(val)
+  
 }
 
 
 // ? write a function that checks whether ANY of the numbers in the array are can be divided by 5. It should return true or false.
 // ? eg: divisibleBy5([8, 12, 15]) => true; divisibleBy5([11, 9, 34]) => false;
-function divisibleBy5(array) {
 
+function divisibleBy5(array) {
+  const results = array.map((x) => {
+    if (x % 5 === 0) {
+    return true
+  } else {
+    return false
+  }
+})
 }
 
 // ? write a function that checks whether ALL of the numbers in the array are can be divided by 5. It should return true or false.
 // ? eg: divisibleBy10([10, 20, 30]) => true; divisibleBy10([10, 20, 99]) => false;
+
 function divisibleBy10(array) {
 
 }
