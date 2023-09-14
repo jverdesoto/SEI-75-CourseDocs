@@ -1,0 +1,28 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+#player {
+  height: 100px;
+  display: flex;
+  width: 400px;
+  border: 2px solid black;
+  border-radius: 2vmin;
+  align-items: center;
+}
+
+button {
+  margin: 0 3px;
+  position: relative;
+  height: 4vmin;
+  width: 4vmin;
+}
+
+#volume {
+  transform: rotate(-90deg);
+  width: 80px;
+}
