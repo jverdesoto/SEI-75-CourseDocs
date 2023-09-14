@@ -88,39 +88,57 @@
 // write my code there
 
 class BankAccount{
-    constructor(){
-        this.ownerName = '';
-        this.balance = 0;
-        this.acctNum = '';
+    constructor(ownerName,balance,acctNum){
+        this.ownerName = ownerName;
+        this.balance = balance;
+        this.acctNum = acctNum;
     }
-    withdraw(){};
+    withdraw(){
+        alert(`My name is ${this.ownerName} and my balance = ${this.balance}`);
+        return this.balance;
+    };
 }
+
+const bankAccount = new BankAccount('Heba Arafat',123,'7635426328372437');
+bankAccount.withdraw();
 
 class CheckingAccount extends BankAccount{
-    constructor(){
+    constructor(ownerName,balance,acctNum){
+        super(ownerName,balance,acctNum);
     }
-    withdraw(){};
 }
+
+const chickingAccount = new CheckingAccount('Noor Mohamed',55444,'7635426328372437');
+chickingAccount.withdraw();
 
 class SavingsAccount extends BankAccount{
-    constructor(){
-        // const bankaccount = new BankAccount();
+    constructor(ownerName,balance,acctNum){
+        super(ownerName,balance,acctNum);
     }
-    withdraw(){};
 }
 
+const savingsAccount = new SavingsAccount('Noor Mohamed',55444,'7635426328372437');
+chickingAccount.withdraw();
+
+
+/** Person O*/
 class Person {
     constructor(firstName, lastName){
         this.firstName = firstName;
         this.lastName = lastName;
     }
-    sayHello(){}
+    sayHello(){
+        alert(`Hello my name is ${this.firstName} ${this.lastName}`);
+        return `Hello my name is ${this.firstName} ${this.lastName}`;
+    }
 }
+
+const person = new Person('Heba','Arafat');
+person.sayHello();
 
 class Employee extends Person{
     constructor(firstName, lastName, company, wage,active){
-        this.firstName = firstName;
-        this.lastName = lastName;
+        super(firstName, lastName);
         this.company = company;
         this.wage = wage;
         this.active = active;
@@ -135,8 +153,15 @@ class Employee extends Person{
     }
 }
 
+const employee = new Employee('Ali','Kamal' , 'Google',100,true);
+employee.sayHello();
+
+employee.receiveRaise(3000);
+alert(`new wage = ${employee.wage}`);
+
 class Manager extends Employee{
-    constructor(){
+    constructor(firstName, lastName, company, wage, active){
+        super(firstName, lastName, company, wage, active);
         this.department = '';
     }
 
@@ -145,8 +170,21 @@ class Manager extends Employee{
     }
 }
 
+const manager = new Manager('Jeo','Max' , 'Facebook',10000,true,'development');
+manager.sayHello();
+
+manager.receiveRaise(34000);
+alert(`new wage = ${manager.wage}`);
+
 class Worker extends Employee{
-    constructor(){
-        this.manager = new Manager();
+    constructor(firstName, lastName, company, wage,active, manager){
+        super(firstName, lastName, company, wage,active);
+        this.manager = new Manager(manager.firstName, manager.lastName, manager.company, manager.wage, manager.active,manager.department);
     }
 }
+
+const worker = new Worker('Noor','Mohamed' , 'Booking',20000,true,new Manager('Jeo','Max' , 'Facebook',10000,true,'development'));
+worker.sayHello();
+alert(` ${worker.firstName} maganer is ${worker.manager.firstName} ${worker.manager.lastName}`)
+worker.receiveRaise(34000);
+alert(`new wage = ${worker.wage}`);
