@@ -1,0 +1,106 @@
+#app {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+img.avatarImg {
+    height: 100px;
+    width: 100px;
+}
+
+img.coverImg {
+    height: 250px;
+    width: auto;
+    order: -3;
+}
+
+#card0 {
+    background-color: bisque;
+    border: solid;
+    width: 400px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+#card1 {
+    background-color: bisque;
+    border: solid;
+    width: 400px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+#card2 {
+    background-color: bisque;
+    border: solid;
+    width: 400px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+#card3 {
+    background-color: bisque;
+    border: solid;
+    width: 400px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+#card4 {
+    background-color: bisque;
+    border: solid;
+    width: 400px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+#card5 {
+    background-color: bisque;
+    border: solid;
+    width: 400px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+#card6 {
+    background-color: bisque;
+    border: solid;
+    width: 400px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+#card7 {
+    background-color: bisque;
+    border: solid;
+    width: 400px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+#card8 {
+    background-color: bisque;
+    border: solid;
+    width: 400px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+#card9 {
+    background-color: bisque;
+    border: solid;
+    width: 400px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
