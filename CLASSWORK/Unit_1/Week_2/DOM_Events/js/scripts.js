@@ -18,7 +18,6 @@ function displayMessage(message){
    closeButton.addEventListener('click', function(evt)
    {
        console.log('triggered');
-    //    modelView..modal('hide');
    });
    
 //    function(){
