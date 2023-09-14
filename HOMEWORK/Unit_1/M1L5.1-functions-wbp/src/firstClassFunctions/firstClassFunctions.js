@@ -1,0 +1,120 @@
+
+/**
+ * On our digital storefront, we advertise products in three different places:
+ * the carousel, the main display grid, and the sidebar.
+ *
+ * In each of these places, we want to format the names of our products the same way
+ *
+ * To reformat the names, we use map() to apply a callback function to each
+ * element of the array, and return a new array with all the modified elements
+ *
+ * We use the same callback function on each of the three product displays,
+ * but using an anonymous function is causing the code to be very repetetive.
+ *
+ * Can you refactor this code to be less repetitive?
+ */
+const carouselProducts = ["t-shirt", "sweater", "polo"];
+const gridProducts = ["mug", "small_poster", "medium_poster", "large_poster"];
+const sidebarProducts = ["sweatpants", "shorts", "skirt", "baseball_cap"];
+
+const productsReformatted = (arr) => {
+  return arr.map((product) => {
+    // replace underscores with spaces
+    let spacedProduct = product.replace("_", " ");
+
+    //capitalize each word
+    productWords = spacedProduct.split(" ");
+    capitalizedProductWords = productWords.map(
+      (word) => word.charAt(0).toUpperCase() + word.substring(1)
+    );
+    capitalizedProduct = capitalizedProductWords.join(" ");
+    return capitalizedProduct;
+  });
+}
+
+function formatProducts(carousel, grid, sidebar) {
+  const returnArr = []
+
+  returnArr.push(productsReformatted(carousel), productsReformatted(grid), productsReformatted(sidebar))
+
+  return returnArr;
+}
+
+console.log(formatProducts(carouselProducts, gridProducts, sidebarProducts));
+
+module.exports = formatProducts;
+
+
+
+/*
+function formatProducts(productsArray, secondProductsArray, thirdProductsArray) {
+  //function to help capitalize words
+  function capitalizeWord(word){
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }
+//to make this i need to make a function outside of the main function, so that it assumes all arrays
+
+function reformattedProducts(productsArray.map((product) => {
+    //to replace underscores w/ spaces
+    const spacedProduct = product.replace("_", " ");
+    //to capitalize words
+    const productWords = spacedProduct.split(" ");
+    const capitalizedProductWords = productWords.map(capitalizeWord);
+    //to join the words back together
+    return capitalizedProductWords.join("");
+
+  });
+
+  return reformattedProducts;
+}
+ 
+module.exports = formatProducts;
+*/
+
+
+  /*const carouselProductsReformatted = carouselProducts.map((product) => {
+    // replace underscores with spaces
+    let spacedProduct = product.replace("_", " ");
+
+    //capitalize each word
+    productWords = spacedProduct.split(" ");
+    capitalizedProductWords = productWords.map(
+      (word) => word.charAt(0).toUpperCase() + word.substring(1)
+    );
+    capitalizedProduct = capitalizedProductWords.join(" ");
+    return capitalizedProduct;
+  });
+
+  const gridProductsReformatted = gridProducts.map((product) => {
+    // replace underscores with spaces
+    let spacedProduct = product.replace("_", " ");
+
+    //capitalize each word
+    productWords = spacedProduct.split(" ");
+    capitalizedProductWords = productWords.map(
+      (word) => word.charAt(0).toUpperCase() + word.substring(1)
+    );
+    capitalizedProduct = capitalizedProductWords.join(" ");
+    return capitalizedProduct;
+  });
+
+  const sidebarProductsReformatted = sidebarProducts.map((product) => {
+    // replace underscores with spaces
+    let spacedProduct = product.replace("_", " ");
+
+    //capitalize each word
+    productWords = spacedProduct.split(" ");
+    capitalizedProductWords = productWords.map(
+      (word) => word.charAt(0).toUpperCase() + word.substring(1)
+    );
+    capitalizedProduct = capitalizedProductWords.join(" ");
+    return capitalizedProduct;
+  });
+
+  return [
+    carouselProductsReformatted,
+    gridProductsReformatted,
+    sidebarProductsReformatted,
+  ];
+}
+*/
