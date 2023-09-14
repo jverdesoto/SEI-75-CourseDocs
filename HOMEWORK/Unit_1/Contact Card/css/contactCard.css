@@ -1,0 +1,100 @@
+/* vertical 250px
+ horizontal 500px*/
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Apply styles to the body */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Style the contact card container */
+  .contact-card {
+    background-color: #fff;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Style the "Online" label */
+  .contact-card p {
+    background-color: #2ecc71;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-top: -20px;
+  }
+  
+  /* Style the profile picture */
+  .profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 20px auto;
+  }
+  
+  /* Style the name */
+  .contact-card h1 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+  }
+  
+  /* Style the star icons */
+  .contact-card .fa-star {
+    color: #f1c40f;
+    font-size: 1.2rem;
+  }
+  
+  /* Style the job title */
+  .contact-card h2 {
+    font-size: 1.2rem;
+    margin-top: 5px;
+  }
+  
+  /* Style the detail section */
+  .contact-card .detail {
+    margin-top: 10px;
+  }
+  
+  .contact-card .detail p {
+    font-size: 0.9rem;
+  }
+  
+  /* Style the price section */
+  .contact-card .price {
+    margin-top: 10px;
+  }
+  
+  .contact-card .price p {
+    font-size: 0.9rem;
+  }
+  
+  /* Style the phone and chat icons */
+  .contact-card .fa-phone,
+  .contact-card .fa-comments {
+    font-size: 1.2rem;
+    margin-top: 20px;
+  }
+  
+  /* Adjust icon colors if needed */
+  .contact-card .fa-phone {
+    color: #3498db;
+  }
+  
+  .contact-card .fa-comments {
+    color: #27ae60;
+  }
+  
