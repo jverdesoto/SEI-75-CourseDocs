@@ -3,23 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/f6ac3090bf.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
     <title>Document</title>
 </head>
 <body>
     <div class="main">
-   <div class="iphone">
-    <!-- <div class="screen"></div> -->
-    <div class="d-flex flex-row mb-3 ">
+        <div class="iphone">
+            <div class="screen">
+                <div class="nowplaying"></div>
+                    <div class="player">
+                        <button id="stopBtn" type="button" class="btn btn-danger"><i class="fa-solid fa-stop"></i></button>
+                        <button id="playBtn" type="button" class="btn btn-success"><i class="fa-solid fa-music"></i></button>
+                        <button id="pauseBtn" type="button" class="btn btn-warning"><i class="fa-solid fa-pause"></i></button>
+                        <!-- <button  type="button" class="btn btn-info">tbc</button> -->
+                      
 
-        <div class="p-2"><button id="stopBtn" type="button" class="btn btn-danger">Stop</button></div>
+                    </div>
+        
+            </div>  
+            <div class="screenlayout"><div class="homebtn"></div>  </div>   
+              
+        </div>
+    </div>
+    
+    <!-- <div class="d-flex flex-row mb-3 ">
 
-        <div class="p-2"><button id="pauseBtn" type="button" class="btn btn-warning">Pause</button></div>
 
-        <div class="p-2"><button  type="button" class="btn btn-info">tbc</button></div>
+
       </div>
-      <div class="d-flex flex-row justify-content-center mb-1"><button id="playBtn" type="button" class="btn btn-success">Play</button></div>
+      <div class="d-flex flex-row justify-content-center mb-1"><button id="playBtn" type="button" class="btn btn-success">Play</button></div> -->
    </div>
 </div>
 
