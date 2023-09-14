@@ -203,12 +203,13 @@ class Employee {
         console.log(`${this.firstName} ${this.lastName}'s contract has been terminated. Their active status is ${this.active}`)
     }
     sayHelloAgain() {
-        console.log(`Hello ${person.firstName} ${person.lastName}!`)
+        console.log(`Hello ${this.person.firstName} ${this.person.lastName}!`)
     }
 }
 
 class Manager {
-    constructor(employee, department) {
+    constructor(person, employee, department) {
+        this.person = person
         this.employee = employee
         this.department = department
     }
@@ -218,26 +219,20 @@ class Manager {
 }
 
 class Worker {
-    constructor(employee, manager) {
+    constructor(person, employee, manager) {
+        this.person = person
         this.employee = employee
         this.manager = manager
     }
     whoDoYouReportTo() {
-        console.log(`${this.firstName} ${this.lastName} reports to ${this.manager.firstName} ${this.manager.lastName}.`);
+        console.log(`${this.person.firstName} ${this.person.lastName} reports to ${this.manager.person.firstName} ${this.manager.person.lastName}.`);
     }
 }
 
-const teddy = new Manager(
-    new Person('Teddy', 'Tasker'),
-    new Employee('Netflix', 30000),
-    "films"
-)
+const teddyPerson = new Person('Teddy', 'Tasker')
+const teddyEmployee = new Employee(teddyPerson, 'Netflix', 15000)
+const teddy = new Manager(teddyPerson, teddyEmployee, 'films')
 
-const kasper = new Worker(
-    new Person('Kasper', 'Howard'),
-    new Employee('Netflix', 2000),
-    teddy
-)
-kasper.person.sayHello()
-
-kasper.employee.sayHelloAgain()
+const kasperPerson = new Person('Kasper', 'Howard')
+const kasperEmployee = new Employee(kasperPerson, 'Netflix', 100000)
+const kasper = new Worker(kasperPerson, kasperEmployee, teddy)
