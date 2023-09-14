@@ -3,18 +3,18 @@
 /.pnp
 .pnp.js
 
-# Testing
+#Testing
 /coverage
 
-# Production
+#Production
 /build
 
 # misc
-.DS_Store
+/DS_Store
 *.pem
 
 # local env files
-.env.local
+.env local.
 .env.development.local
 .env.test.local
 .env.production.local

@@ -1,0 +1,121 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Helvetica;
+    width: 100vw;
+    height: 100vh;
+    background-color: #2b5e5f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-card-container {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    margin: 50px;
+
+    &>.profile-pic-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &>p {
+            align-self: flex-end;
+            color: #d4d4d4;
+            padding: 10px;
+            font-size: 13px;
+        }
+
+        &>h4 {
+            margin: 20px;
+        }
+    }
+
+    &>.ratings-container {
+        background-color: #f3f3f3;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        height: 70px;
+        padding: 15px;
+        // height: 1fr;
+
+        &>.stars {
+        
+
+            &>.fa-solid {
+                color: #eed66c;
+            }
+
+            &>.fa-regular {
+                color: #cdcdcd;
+            }
+        }
+
+        &>p {
+            padding: 5px;
+        }
+    }
+
+    &>.pricing-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+
+        &>p {
+            padding: 4px;
+        }
+    }
+
+    &>.comms-icons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 40px;
+        background-color: #82cf8f;
+
+        &>.phone-icon {
+            color: white;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &>.message-icon {
+            color: white;
+            width: 50%;
+            height: 100%;
+            background-color: #74bb82;
+            display: flex;
+            justify-content: center;
+            align-items: center
+        }
+    }
+}
+
+img.profile-pic {
+    border-radius: 50%;
+    border-style: solid;
+    border-color: #88c990;
+    border-width: 4px;
+    width: 150px;
+}
+
+.contact-card-horizontal{
+    background-color: #ffffff;
+    width: 500px;
+    margin: 50px;
+
+
+}

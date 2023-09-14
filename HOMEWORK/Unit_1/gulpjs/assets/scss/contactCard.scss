@@ -1,0 +1,228 @@
+* {
+    box-sizing: border-box;
+}
+
+//VERTICAL LAYOUT
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    width: 100vw;
+    // height: 100vh;
+    background-color: #2b5e5f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-card-container {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    margin: 50px;
+
+    &>.profile-pic-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &>p {
+            align-self: flex-end;
+            color: #d4d4d4;
+            padding: 10px;
+            font-size: 13px;
+        }
+
+        &>h4 {
+            margin: 20px;
+            color: rgb(36,35,42);
+        }
+    }
+
+    &>.ratings-container {
+        background-color: #f3f3f3;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        height: 70px;
+        padding: 15px;
+        // height: 1fr;
+
+        &>.stars {
+        
+
+            &>.fa-solid {
+                color: #eed66c;
+            }
+
+            &>.fa-regular {
+                color: #cdcdcd;
+            }
+        }
+
+        &>p {
+            padding: 5px;
+            color: rgb(35,37,45)
+        }
+    }
+
+    &>.pricing-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        color: rgb(35,37,45);
+
+        &>p {
+            padding: 4px;
+        }
+    }
+
+    &>.comms-icons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 40px;
+        background-color: #82cf8f;
+
+        &>.phone-icon {
+            color: white;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &>.message-icon {
+            color: white;
+            width: 50%;
+            height: 100%;
+            background-color: #74bb82;
+            display: flex;
+            justify-content: center;
+            align-items: center
+        }
+    }
+}
+
+img.profile-pic {
+    border-radius: 50%;
+    border-style: solid;
+    border-color: #88c990;
+    border-width: 4px;
+    width: 150px;
+}
+
+//HORIZONTAL LAYOUT
+.contact-card-horizontal{
+    background-color: #ffffff;
+    width: 500px;
+    height: 250px;
+    // margin: 30px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 200px 300px;
+    grid-template-rows: 200px 50px;
+    grid-template-areas: 
+    "profile content"
+    "comms price";
+}
+
+.grid-profile-pic {
+    grid-area: profile;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+        &>p {
+            align-self: flex-start;
+            color: #d4d4d4;
+            padding: 10px;
+            font-size: 13px;
+        }
+    }
+
+.grid-comms-icons {
+    grid-area: comms;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #82cf8f;
+
+    &>.phone-icon {
+        color: white;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &>.message-icon {
+        color: white;
+        width: 50%;
+        height: 100%;
+        background-color: #74bb82;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.grid-ratings-container {
+    grid-area: content;
+    background-color: #f3f3f3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 25px 30px;
+   
+        &>.stars {
+        margin: 10px 0 0 0;
+        font-size: 0.9rem;
+
+
+            &>.fa-solid {
+                color: #eed66c;
+            }
+
+            &>.fa-regular {
+                color: #cdcdcd;
+            }
+        }
+
+    &>h4 {
+        font-size: 1.2rem;
+        color: rgb(36,35,42);
+        }
+    &>.profession {
+        margin: 10px 0 0 0;
+        color: rgb(111,111,113)
+    }
+
+    &>.description {
+        margin: 10px 0 0 0;
+        font-size: 0.7rem;
+        color: rgb(161,161,161);
+        border-left: 2px solid rgb(116,187,119);
+        padding-left: 4px;
+    }
+}
+
+
+.grid-pricing-container {
+    grid-area: price;
+    background-color: #f3f3f3; 
+    font-size: 0.7rem;
+    padding-left: 30px;
+    padding-top: 10px;
+    color: rgb(35,37,45)
+    }
+
+

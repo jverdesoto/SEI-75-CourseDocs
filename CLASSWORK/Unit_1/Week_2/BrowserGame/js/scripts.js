@@ -46,6 +46,87 @@ function init(){
     render();
 }
 
+//user interaction, update all impacted state, then call render
+function handleDrop(event) {
+    const columnIndex = markerElements.indexOf(event.target)
+
+    //Guards
+    if (columnIndex === -1){
+        return //return the value, stop that function from running
+    }
+
+    //shortcut to the column array
+    const columnArr = board[columnIndex]
+    //find index of the first zero in that column array
+    const rowIndex = columnArr.indexOf(0)
+
+    //update the board with the current player value
+    board[columnIndex][rowIndex] = turn
+
+    //switch player turn
+    turn *= -1
+
+    //check for winner
+    winner = getWinner(columnIndex, rowIndex)
+    render()
+}
+
+//check for winner in board state
+//return null if no winner, 1 or -1 if a player has won, 'T' if tie
+function getWinner(columnIndex, rowIndex) {
+    return checkVerticalWin(columnIndex, rowIndex) ||
+        checkHorizontalWin(columnIndex, rowIndex) ||
+        checkDiagonalWinNESW(columnIndex, rowIndex) ||
+        checkDiagonalWinNWSE(columnIndex, rowIndex)
+}
+
+function checkVerticalWin(columnIndex, rowIndex){
+    return countAdjacent(columnIndex, rowIndex, 0, -1) === 3 ? board[columnIndex][rowIndex] : null
+}
+
+function checkHorizontalWin(columnIndex, rowIndex){
+    const adjCountLeft = countAdjacent(columnIndex, rowIndex, -1, 0)
+    const adjCountRight = countAdjacent(columnIndex, rowIndex, 1, 0)
+    return (adjCountLeft + adjCountRight) >= 3 ? board[columnIndex][rowIndex] : null
+}
+
+function checkDiagonalWinNESW(columnIndex, rowIndex){
+    const adjCountNE = countAdjacent(columnIndex, rowIndex, 1, 1)
+    const adjCountSW = countAdjacent(columnIndex, rowIndex, -1, -1)
+    return (adjCountNE + adjCountSW) >= 3 ? board[columnIndex][rowIndex] : null
+}
+
+function checkDiagonalWinNWSE(columnIndex, rowIndex){
+    const adjCountNW = countAdjacent(columnIndex, rowIndex, -1, 1)
+    const adjCountSE = countAdjacent(columnIndex, rowIndex, 1, -1)
+    return (adjCountNW + adjCountSE) >= 3 ? board[columnIndex][rowIndex] : null
+}
+
+function countAdjacent(columnIndex, rowIndex, columnOffset, rowOffset) {
+    //shortcut to player value
+    const player = board[columnIndex][rowIndex];
+    
+    //track count of adjacent cells with the same player value
+    let count = 0
+
+    //initialize new coordinates
+    columnIndex += columnOffset
+    rowIndex += rowOffset
+    
+    while (
+        //make sure we are looking at columnIndex that is within bounds of the board array
+        board[columnIndex] !== undefined && 
+        board[columnIndex][rowIndex] !== undefined &&
+        board[columnIndex][rowIndex] === player
+        ) {
+        count ++
+        columnIndex += columnOffset
+        rowIndex += rowOffset
+    }
+    return count
+}
+
+
 //visualize all state in the DOM
 function render() {
     renderBoard();
@@ -88,61 +169,5 @@ function renderControls(){
 }
 
 
-//user interaction, update all impacted state, then call render
-function handleDrop(event) {
-    const columnIndex = markerElements.indexOf(event.target)
 
-    //Guards
-    if (columnIndex === -1){
-        return //return the value, stop that function from running
-    }
 
-    //shortcut to the column array
-    const columnArr = board[columnIndex]
-    //find index of the first zero in that column array
-    const rowIndex = columnArr.indexOf(0)
-
-    //update the board with the current player value
-    board[columnIndex][rowIndex] = turn
-
-    //switch player turn
-    turn *= -1
-
-    //check for winner
-    winner = getWinner()
-    render()
-}
-
-//check for winner in board state
-//return null if no winner, 1 or -1 if a player has won, 'T' if tie
-function getWinner(columnIndex, rowIndex) {
-    return checkVerticalWin(columnIndex, rowIndex)
-}
-
-function checkVerticalWin(columnIndex, rowIndex){
-    return countAdjacent(columnIndex, rowIndex, 0, -1) === 3 ? board[columnIndex][rowIndex] : null
-}
-
-function countAdjacent(columnIndex, rowIndex, columnOffset, rowOffset) {
-    //what is the player value?
-    const player = board[columnIndex][rowIndex];
-    //track count of adjacent cells with the same player value
-    let count = 0
-
-    //initialize new coordinates
-    columnIndex += columnOffset
-    rowIndex += rowOffset
-    
-    while (
-        //make sure we are looking at columnIndex that is within bounds of the board array
-        board[columnIndex] !== undefined && 
-        board[columnIndex][rowIndex] !== undefined &&
-        board[columnIndex][rowIndex] === player
-        ) {
-        count ++
-        columnIndex += columnOffset
-        rowIndex += rowOffset
-    }
-    return count
-    
-}
