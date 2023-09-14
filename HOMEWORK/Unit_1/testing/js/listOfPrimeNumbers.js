@@ -1,3 +1,4 @@
+//Function copied from the first exercise
 function isPrime(num) {
     if (num <= 0) {
         return `Invalid input!`
@@ -14,10 +15,15 @@ function isPrime(num) {
 }
 
 function listOfPrimeNumbers(input) {
+    //Declaring an empty array that will contain the results
     const primesArr = [];
-    let i = 2
+    //Starting point of the while function
+    let i = 2;
 
-    while (primesArr < input) {
+    //A while loop that is meant to run until the length of our array
+    //is smaller than the desired input
+    while (primesArr.length < input) {
+        //If the function returns a true boolean, the primes array will be updated
         if (isPrime(i)) {
             primesArr.push(i)
         }
@@ -26,4 +32,5 @@ function listOfPrimeNumbers(input) {
     return primesArr
 }
 
+//Exporting the function for the testing
 module.exports = listOfPrimeNumbers;
