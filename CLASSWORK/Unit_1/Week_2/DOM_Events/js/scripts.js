@@ -11,8 +11,20 @@ function displayMessage(message){
    const myMessage = document.getElementById('messagTextId');
    myMessage.innerText = message;
 
-//    alert("My Message : " + myMessage.innerText);
+   
    const modelView = new bootstrap.Modal(document.getElementById('messageModelId'));
+   
+   const closeButton = document.querySelector('.close');
+   closeButton.addEventListener('click', function(evt)
+   {
+       console.log('triggered');
+    //    modelView..modal('hide');
+   });
+   
+//    function(){
+//      const model = new bootstrap.Modal(document.getElementById('messageModelId'));
+//    });
+   
    modelView.show();  
 }
 
