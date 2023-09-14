@@ -38,8 +38,12 @@ body {
     border-radius: 5%;
 }
 
-img#spand {   
-    grid-row: span 4;
+#spand {   
+    display: grid;
+    grid-row: spand 4;
+    margin-top: 20px;
+    border-radius: 5%;
+    
 }
 /* Style the footer with background image */
 .footer {
