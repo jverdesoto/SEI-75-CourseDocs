@@ -77,8 +77,13 @@ function handleDrop(evt) {
 function getWinner(colIdx, rowIdx){
     return checkVerticalWin(colIdx, rowIdx) ||
         checkHorizontalWin(colIdx, rowIdx) ||
-        checkDiagonalWinNESW(colIdx, rowIdx)
-
+        checkDiagonalWinNESW(colIdx, rowIdx) ||
+        checkDiagonalWinNWSE(colIdx, rowIdx);
+}
+function checkDiagonalWinNWSE(colIdx, rowIdx) {
+    const adjCountNW = countAdjacent(colIdx, rowIdx, -1, 1)
+    const adjCountSE = countAdjacent(colIdx, rowIdx, 1, -1)
+    return (adjCountNW + adjCountSE) >= 3 ? board[colIdx][rowIdx] : null;
 }
 function checkDiagonalWinNESW(colIdx, rowIdx) {
     const adjCountNE = countAdjacent(colIdx, rowIdx, 1, 1)
