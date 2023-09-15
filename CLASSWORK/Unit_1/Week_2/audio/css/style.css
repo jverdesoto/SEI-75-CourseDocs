@@ -20,33 +20,60 @@ body {
     border: lightgray solid 2px;
     border-radius: 25px;
 }
+.audio {
+    margin-bottom: 15px;
+}
+
+.earpiece {
+    margin: 10px auto;
+    width: 25%;
+    border: lightgray solid 2px;
+}
 
 .screen {
     margin: 0 auto;
     width: 80%;
     height: 75%;
-    background-color: #f6c492;
+    background-color: #f6d992;
 }
 .nowplaying {
     margin: 25px auto;
     height: 50%;
     width: 80%;
-    background-color:#f6d992;
+    background: linear-gradient(-45deg, #f6a192, #f6b092, #f6c492, #f6cf92);
+    animation: gradient 5s ease infinite;
     }
+ @keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+    }  
 .player {
+    margin-top: 50px;
+    margin-bottom: 20px;
     width: 100%;
     display: flex;
     justify-content: center;
 }
-/* .screenlayout {
+.slider {
     margin: 0 auto;
-    display: flex;
-    justify-content: flex-end;
-} */
+    width: 70%;
+
+}
+.homeButton {
+    margin-top: 10px
+}
 .homebtn {
     margin: 0 auto;
     border: lightgray solid 2px;
     border-radius: 50%;
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 35px;
 }
+

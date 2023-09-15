@@ -10,7 +10,7 @@
 // LUKE 2. the code below tests for primes
 function isPrimeNumber(num) {
 
-    if (num < 2) { num ===1
+    if (num < 2) { (num === 1)
         return false;
     }
     for (let i = 2; i <= Math.sqrt(num); i++) {
