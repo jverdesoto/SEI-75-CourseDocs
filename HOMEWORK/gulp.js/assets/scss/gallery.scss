@@ -12,13 +12,15 @@ header {
 
 body{
     background-color: pink;
-}
+} 
 
 .container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr, 1fr, 1fr, 1fr);
+    grid-template-rows: repeat(4, 1fr, 1fr, 1fr, 1fr);
+    gap: 20px;
     align-self: auto;
+    max-width: 1200px ;
 
     
     grid-template-areas:  
