@@ -24,7 +24,7 @@ background: rgba(255, 255, 255, 0.1);
 margin-left: 40%;
 margin-top: 20vw;
 height: 7.5vw;
-border: 1px solid white;
+border: 1px solid rgba(255, 255, 255, 0.1);
 border-radius: 30%;
 width: 25%;
 }
@@ -62,10 +62,12 @@ align-items: center;
   border-style: none;
 }
 
-.btn-primary:focus-visible {
+.btn-primary:active {
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.5); 
   border-style: none;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.5)
 }
 
 
