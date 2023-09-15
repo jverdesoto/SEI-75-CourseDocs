@@ -13,7 +13,10 @@ let winner; //null, 1 or -1; 'T' = tie
 
 const messageEl = document.querySelector("h1");
 const playAgainBtn = document.querySelector("button");
+<<<<<<< HEAD
 const markerEls = [...document.querySelectorAll("#markers > div")];
+=======
+>>>>>>> ed56e0f (resolved merge conflict)
 
 //event listeners
 
@@ -75,6 +78,7 @@ function renderMessage() {
 
 function renderControls() {
   playAgainBtn.style.visibility = winner ? "visible" : "hidden";
+<<<<<<< HEAD
   //Iterate over the marker elements to hide/show
   //according to the column being full (no 0's)
   markerEls.forEach(function (markerEl, colIdx) {
@@ -155,4 +159,6 @@ function handleDrop(e) {
   //check for winner
   winner = getWinner(colIdx, rowIdx);
   render();
+=======
+>>>>>>> ed56e0f (resolved merge conflict)
 }
