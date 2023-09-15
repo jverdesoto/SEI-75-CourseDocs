@@ -1,21 +1,20 @@
-// function isEven(num) {
-//     return num % 2 === 0
+// function isPrime(num) {
+//     let factorCount = 0
+//     for (let i = 0; i <= num; i++) {
+//         if (num % i === 0) factorCount++
+//         if (factorCount > 2) break
+//     }
+//     return factorCount === 2
 // }
-
-// function isLongerThan5(string) {
-//     return string.length > 5
-// }
-
-// module.exports = isEven 
-// module.exports = isLongerThan5
 
 function isPrime(num) {
     let factorCount = 0
-    for (let i = 0; i <= num; i++) {
+    let sqrtNum = Math.sqrt(num)
+    if (num === 0 || num === 1) return false
+    for (let i = 2; i <= sqrtNum; i++) {
         if (num % i === 0) factorCount++
-        if (factorCount > 2) break
     }
-    return factorCount === 2
+    return factorCount === 0
 }
 
 module.exports = isPrime
