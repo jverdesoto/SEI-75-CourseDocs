@@ -135,21 +135,27 @@ class Employee extends Person {
     receiveRaise(raiseAmount) {
         this.wage += raiseAmount;
         return `${this.firstName} ${this.lastName} recieved a raise: $${this.wage}`;
-        }
+    }
     terminate() {
         this.active = false;
-        }
+    }
 }
-class Manager extends Employee{
+class Manager extends Employee {
     constructor(firstName, lastName, company, wage, active, department) {
         super(firstName, lastName, company, wage, active)
         this.department = department
     }
-    giveRaise() {
-        
+    giveRaise(employee, raiseAmount) {
+        if (employee.active) {
+            return employee.receiveRaise(amount);
+        } else {
+            return `${employee.firstName} ${employee.lastName} is no longer active`;
+        }
     }
+
 }
-class Worker extends Employee{
+
+class Worker extends Employee {
     constructor(firstName, lastName, company, wage, active, manager) {
         super(firstName, lastName, company, wage, active)
         this.manager = manager
@@ -160,3 +166,6 @@ myPerson.saysHello()
 
 const myPerson2 = new Employee('Elliot', 'Lewis')
 myPerson2.saysHello()
+
+
+

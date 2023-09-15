@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 header {
     background-image: url('https://picsum.photos/4000/2000');
     background-size: cover;
@@ -11,7 +14,7 @@ body{
     background-color: pink;
 }
 
-/*.container {
+.container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
@@ -19,23 +22,23 @@ body{
 
     
     grid-template-areas:  
-    'item-a item-b item-c item-d'
-    'item-e item-f item-g item-h'
-    'item-i item-j item-k item-l'
-    'item-m item-n item-o item-p'
-}*/
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    width: 75%;;
-    margin: 0 auto;
+    'item-a, item-a, item-a, item-a'
+    'item-a, item-a, item-a, item-a'
+    'item-a, item-a, item-a, item-a'
+    'item-a, item-a, item-a, item-a'
+}
+// .container {
+//     display: flex;
+//     flex-wrap: wrap;
+//     gap: 15px;
+//     width: 75%;;
+//     margin: 0 auto;
     
-}
-    img {
-        flex: 1;
-        flex-basis: 10%;
-}
+// }
+//     img {
+//         flex: 1;
+//         flex-basis: 10%;
+// }
 
 
 h2 {

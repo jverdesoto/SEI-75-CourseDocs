@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+    background-image: url('https://imgur.com/a/B63upaI');
+}
+
+body {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+body >div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    width: 25vmin;
+    height: 15vmin;
+    border: 0.2vmin solid black;
+    padding-bottom: 2vmin;
+}
+
+.container {
+    background-image: url('https://imgur.com/a/B63upaI');
+}
+
+.card{
+    background-image: url('https://imgur.com/a/B63upaI');
+ }
