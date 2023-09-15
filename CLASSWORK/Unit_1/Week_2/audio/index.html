@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using Audio</title>
+    <!-- stylesheet from bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+    <main>
+
+        <div class="media-player-container">
+            <div class="controls-container">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary" id="play"><i
+                            class="fa-solid fa-play"></i></i></button>
+                    <button type="button" class="btn btn-primary" id="pause"><i class="fa-solid fa-pause"></i></button>
+                    <button type="button" class="btn btn-primary" id="stop"><i class="fa-solid fa-stop"></i></button>
+                </div>
+            </div>
+
+            <div class="volume-container">
+                <label for="customRange3" class="form-label"><i class="fa-solid fa-volume-low" id="volume-low"></i></label>
+                <label for="customRange3" class="form-label"><i class="fa-solid fa-volume-high" id="volume-high"></i></i></label>
+                <input type="range" class="form-range" min="0" max="10" step="1" id="customRange3">
+            </div>
+        </div>
+    </main>
+
+
+    <!-- script from bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <!-- script for font awesome -->
+    <script src="https://kit.fontawesome.com/dc5e4ff394.js" crossorigin="anonymous"></script>
+    <script src="./js/scripts.js"></script>
+</body>
+
+</html>
