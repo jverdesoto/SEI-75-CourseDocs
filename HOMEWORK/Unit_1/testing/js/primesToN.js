@@ -1,11 +1,4 @@
-function checkPrime(num) {
-  if (num <= 1) return false;
-  if (num === 2 || num === 3) return true;
-  for (let i = 2; i < num; i++) {
-    if (num % i === 0) return false;
-  }
-  return true;
-}
+const checkPrime = require("./checkPrime");
 
 function primesToN(num) {
   let array = [];
@@ -22,7 +15,5 @@ function primesToN(num) {
   }
   return array;
 }
-
-console.log(primesToN(7));
 
 module.exports = primesToN;
