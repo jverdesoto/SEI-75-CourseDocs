@@ -1,5 +1,5 @@
 function isPrimeFunction(number){
-    const isPrime = true;
+    let isPrime = true;
     if(number > 1)
     {
         // looping through 2 to number-1
