@@ -189,5 +189,24 @@ function itemsCard(data) {
 
 itemsCard(data);
 
+const temps = [23, 140, 212, 41];
 
+function farenheittocelcius(num) {
+    const substract = num - 32;
+    // console.log(substract)
+    const multiply = substract * 5;
+	// console.log(multiply)
+    const divide = multiply /9
+	// console.log(divide)
+    return divide
+}
 
+function convertTemps(array) {
+  const newTemperature = []
+  array.map(( function (eachArray) {
+      newTemperature.push(farenheittocelcius(eachArray))
+  }))
+
+}
+
+console.log(convertTemps(temps));

@@ -56,3 +56,4 @@ function hasWater(planet) {
 }
 
 console.log(hasWater('Earth'));
+

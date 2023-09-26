@@ -13,7 +13,7 @@ function double(arr) {
 
 function doublemap(arr) {
     const newArr =[]
-    // console.log(newArr)
+    console.log(newArr)
     arr.map(function (eachNum) {
         newArr.push(sum(eachNum))
         console.log(newArr)
