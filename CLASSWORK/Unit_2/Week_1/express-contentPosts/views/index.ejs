@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+  <p>Welcome to <%= title %>
+  </p>
+
+  <ul>
+    <% posts.forEach(function(post) { %>
+      <li>
+        <div class="post-header">
+          <!-- Thumbnail Image -->
+          <img src="<%= post.featuredImage %>" alt="<%= post.title %>" class="thumbnail">
+          <div class="post-info">
+            <h2>
+              <%= post.title %>
+            </h2>
+            <p>By: <%= post.author %>
+            </p>
+            <p>Date: <%= post.publishingDate %>
+            </p>
+          </div>
+        </div>
+        <%= post.content %>
+          <!-- Normal Sized Image -->
+          <img src="<%= post.featuredImage %>" alt="<%= post.title %>" class="normal">
+          <!-- Larger Sized Image -->
+          <a href="<%= post.featuredImage %>" target="_blank">
+            <img src="<%= post.featuredImage %>" alt="<%= post.title %>" class="clickable">
+          </a>
+          </p>
+      </li>
+      <% }) %>
+
+  </ul>
+</body>
+
+</html>

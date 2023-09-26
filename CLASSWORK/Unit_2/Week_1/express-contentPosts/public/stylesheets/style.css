@@ -1,0 +1,65 @@
+
+body, h1, ul, li, p {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+/* Style list of posts */
+ul {
+  list-style: none;
+}
+
+li {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+/* Style post header */
+.post-header {
+  display: flex;
+  align-items: center;
+}
+
+.post-info {
+  flex-grow: 1;
+}
+
+h2, p {
+  margin-bottom: 15px;
+}
+
+.thumbnail, .normal, .clickable {
+  margin-top: 10px;
+}
+
+/* Style of images */
+.thumbnail {
+  margin-right: 20px;
+  width: 100px;
+  height: 100px;
+}
+
+.normal, .clickable {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin: 10px 0;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+/* Add a hover effect to clickable images */
+.clickable:hover {
+  opacity: 0.7;
+}
