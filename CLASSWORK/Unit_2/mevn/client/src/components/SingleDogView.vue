@@ -21,19 +21,29 @@
 </template>
 
 <script>
-    const API_URL = "http://localhost:4000/dogs/2"
+    import { useRoute } from 'vue-router'
+    const API_URL = "http://localhost:4000/dogs"
 
     export default {
-        name: 'soloDogView',
+        name: 'SingleDogView',
         data: () => ({
             error: '',
             dog: {}
         }),
+        // When the page is loaded - run this (mounted)
         mounted() {
-            fetch(API_URL)
+            // useRoute() is a Vue method which gets data from other areas of the application
+            const route = useRoute()
+            // Fetch = JS method that will get a URL and respond with something
+            // Because it takes time to make the request and get the requested data
+            fetch(`${API_URL}/${route.params.id}`)
+            // Then makes the function synchronous - 
+            // it waits for the promise to be fulfilled (in this case fetch) before running the code
+            // Gets data and puts it into a JSON format
             .then(response => response.json())
+            // Waits until the data is in JSON, then store it in the object
             .then(result => {
-                this.dog = result[0]
+                this.dog = result
             })
         },
         methods: {}

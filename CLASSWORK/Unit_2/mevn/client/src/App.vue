@@ -1,15 +1,12 @@
 <template>
-  <SingleDogView />
+  <main>
+    <router-view :key="$route.path" />
+  </main>
 </template>
 
 <script>
-import SingleDogView from './components/SingleDogView.vue';
-
 export default {
-  name: 'App',
-  components: {
-    SingleDogView
-}
+  name: 'App'
 }
 </script>
 

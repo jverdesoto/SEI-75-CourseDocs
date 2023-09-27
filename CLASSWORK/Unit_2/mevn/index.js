@@ -27,6 +27,16 @@ app.get('/dogs', (req, res) => {
 })
 
 app.get('/dogs/:id', (req, res) => {
-    const dog = dogsExport.dogs.filter(dog => dog.id === parseInt(req.params.id))
+    const dog = dogsExport.dogs.find(dog => dog.id === parseInt(req.params.id))
     res.json(dog)
-  });
+  })
+
+app.get('/cat-facts', (req, res) => {
+    const API_URL = 'https://cat-fact.herokuapp.com/facts'
+    fetch(API_URL)
+    .then(response => response.json())
+    // Randomly select a fact
+    .then(allFacts => allFacts[Math.floor(Math.random() * allFacts.length)])
+    // Waits until the data is in JSON, then store it in the objec
+    .then(result => res.json(result))
+})

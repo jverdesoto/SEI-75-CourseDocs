@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "Mongo Express Vuejs and Node Environment",
   "main": "index.js",
+  "jest": {
+    "verbose": true
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Tim Stanton",
   "license": "ISC",
@@ -17,5 +20,8 @@
     "cors": "^2.8.5",
     "express": "^4.18.2"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
