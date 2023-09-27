@@ -4,7 +4,7 @@
   "description": "Mondo Express VueJs and Node Environment",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Sofia Truta",
   "license": "ISC",
@@ -14,5 +14,8 @@
     "cors": "^2.8.5",
     "express": "^4.18.2"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }

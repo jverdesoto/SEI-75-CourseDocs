@@ -1,6 +1,6 @@
 <template>
     <main>
-        <h2>Dog of the Week</h2>
+        <h2>Cute Doggo number {{ dog.id }}</h2>
         <h1>{{ dog.name }}</h1>
         <div class="container">
             <img :src="dog.img" alt="a dog" />
@@ -10,9 +10,11 @@
 </template>
 
 <script>
+
 //tell this view where it is going to get the info from 
-//(we are passing a json file to this port that has all the info)
-const API_URL = "http://localhost:4000/dogs/5"
+import { useRoute } from 'vue-router'
+
+const API_URL = "http://localhost:4000/dogs"
 
 //this view will export 
 export default {
@@ -23,7 +25,11 @@ export default {
     }),
 
     mounted() {
-        fetch(API_URL)
+        
+        const route = useRoute()// useRoute() is a Vue method which gets data from other areas of the application
+        
+        // console.warn(route.params.id)
+        fetch(`${API_URL}/${route.params.id}`)
             .then(response => response.json())
             .then(result => {
                 this.dog = result

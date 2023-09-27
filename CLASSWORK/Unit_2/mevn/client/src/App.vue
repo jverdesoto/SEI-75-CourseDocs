@@ -1,21 +1,15 @@
 <template>
-  <dogsView />
-  <singleDogView />
+  <main>
+    <router-view :key="$route.path" />
+  </main>
 </template>
 
 <script>
-//step 1 - import all the views that we want to use from the components folder
-import dogsView from './components/dogsView.vue'
-import singleDogView from "./components/singleDogView.vue";
 
-//this is what the root page is showing atm
 export default {
   name: 'App',
-  components: {
-    dogsView,
-    singleDogView
   }
-}
+
 </script>
 
 <style>

@@ -5,6 +5,7 @@
             <h3>{{ dog.name }}</h3>
             <img :src="dog.img" alt="a dog" />
             <p>Hi, I'm {{ dog.name }}, I am {{ dog.age }} years old and I'm a {{ dog.breed }}</p>
+            <p><router-link :to="'/dogs/' + dog.id" >View Dog</router-link></p>
         </div>
     </div>
 </template>

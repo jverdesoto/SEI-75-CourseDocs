@@ -37,8 +37,22 @@ app.get('/dogs/:id', (request, response) => {
     const id = parseInt(request.params.id)
 
     //find the dog with the id we are looking for 
-    const dog = dogs.find( dog => dog.id === (id-1))
+    const dog = dogs.find(dog => (dog.id === id))
 
     //set the response of this request as a JSON response
     response.json(dog)
 })
+
+app.get('/cat-facts', async (request, response) => {
+    const API_URL = "https://cat-fact.herokuapp.com/facts"
+
+    let catFacts = null
+    await fetch(API_URL)
+        .then(response => response.json())
+        .then(result => {
+            catFacts = result
+        })
+    response.json(catFacts)
+})
+
+
