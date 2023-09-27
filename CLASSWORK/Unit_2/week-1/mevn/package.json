@@ -1,0 +1,21 @@
+{
+  "name": "mevn",
+  "version": "1.0.0",
+  "description": "Mongo Express Vuejs and Node Environment",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Stelian Molocea",
+  "license": "ISC",
+  "dependencies": {
+    "@vue/cli": "^5.0.8",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "type": "module",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
