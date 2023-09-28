@@ -4,73 +4,71 @@ const dogs = [
       name: 'Bark Twain',
       age: 3,
       breed: 'German Shepherd',
-      img: ''
+      img: 'gS.jpg'
     },
     {
       id: 2,
       name: 'Woofgang Mozart',
       age: 2,
       breed: 'Beagle',
-      img: ''
+      img: 'beagle.jpg'
     },
     {
       id: 3,
       name: 'Chewbarka',
       age: 4,
       breed: 'Chow Chow',
-      img: ''
+      img: 'chow.jpg'
     },
     {
       id: 4,
       name: 'Ugly',
       age: 1,
       breed: 'Poodle',
-      img: ''
+      img: 'poodle.jpg'
     },
     {
       id: 5,
       name: 'Crispy',
       age: 5,
       breed: 'Golden Retriever',
-      img: ''
+      img: 'goldenR.jpg'
     },
     {
       id: 6,
       name: 'Big Weiner',
       age: 6,
       breed: 'Dachshund',
-      img: ''
+      img: 'weiner.jpg'
     },
     {
       id: 7,
       name: 'Sniffy Longdrool',
       age: 7,
       breed: 'Bloodhound',
-      img: ''
+      img: 'bloodhound.jpg'
     },
     {
       id: 8,
       name: 'Droolius Caesar',
       age: 8,
       breed: 'Mastiff',
-      img: ''
+      img: 'mastiff.jpg'
     },
     {
       id: 9,
       name: 'Fluffernutter',
       age: 9,
       breed: 'Shih Tzu',
-      img: ''
+      img: 'shihTzu.jpg'
     },
     {
       id: 10,
-      name: 'Cat',
+      name: 'AT-AT',
       age: 10,
-      breed: 'Corgi',
-      img: ''
+      breed: 'Whippet',
+      img: 'whippet.jpg'
     }
   ];
 
-  module.export = function getAll() {
-    return dogs;
-  }
+  export default dogs

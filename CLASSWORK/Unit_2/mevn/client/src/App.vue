@@ -1,16 +1,19 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component" :key="$route.fullPath" />
+      </transition>
+    </router-view>
+  </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
 
+
+
+<script>
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+  name: 'App'
 }
 </script>
 
@@ -23,4 +26,18 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to
+
+/* fade-leave-active in <2.1.8 */
+  {
+  opacity: 0;
+}
+
 </style>

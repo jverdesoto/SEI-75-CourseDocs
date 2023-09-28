@@ -4,7 +4,7 @@
   "description": "Mongo Express Vuejs and Node Environment",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "WeezleBeezle",
   "license": "ISC",
@@ -14,7 +14,11 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "node": "^20.6.0",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "vue-router": "^4.0.13"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
