@@ -1,4 +1,4 @@
-const fromPairs = require('../fromPairs')
+const fromPairs = require('../coding-challenges/fromPairs')
 
 test('Create object from pairs', () => {
     expect(fromPairs([ ['a', 1], ['b', 2], ['c', 3] ])).toEqual({ a: 1, b: 2, c: 3 })

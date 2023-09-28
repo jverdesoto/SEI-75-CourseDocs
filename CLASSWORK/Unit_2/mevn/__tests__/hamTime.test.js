@@ -1,4 +1,4 @@
-const hammingDistance = require('../hamTime')
+const hammingDistance = require('../coding-challenges/hamTime')
 
 test('Test hamming distance', () => {
     expect(hammingDistance('abc', 'abc')).toBe(0)

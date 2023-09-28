@@ -1,4 +1,4 @@
-const isPalindrome = require('../isPalindrome')
+const isPalindrome = require('../coding-challenges/isPalindrome')
 
 const testingStrings = [
     'kayak',

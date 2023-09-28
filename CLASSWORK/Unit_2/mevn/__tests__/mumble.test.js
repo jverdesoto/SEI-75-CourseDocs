@@ -1,4 +1,4 @@
-const mumble = require('../mumble')
+const mumble = require('../coding-challenges/mumble')
 
 test('Mumble function', () => {
     expect(mumble('X')).toEqual('X')
