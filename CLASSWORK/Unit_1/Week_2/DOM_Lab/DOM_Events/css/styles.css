@@ -1,0 +1,29 @@
+div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+} 
+
+body {
+    background-color: aqua;
+}
+
+img {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+
+/* .coverImg {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+} */
+
+/* #main {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+} */
