@@ -10,6 +10,11 @@ const routes = [
     {
         name: 'Home',
         path: '/',
+        component: CatButton
+    },
+    {
+        name: 'Dogs View',
+        path: '/dogs-view',
         component: DogsView
     },
     {

@@ -35,8 +35,6 @@ app.get('/cat-facts', (req, res) => {
     const API_URL = 'https://cat-fact.herokuapp.com/facts'
     fetch(API_URL)
     .then(response => response.json())
-    // Randomly select a fact
     .then(allFacts => allFacts[Math.floor(Math.random() * allFacts.length)])
-    // Waits until the data is in JSON, then store it in the objec
     .then(result => res.json(result))
 })
