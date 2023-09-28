@@ -18,7 +18,6 @@ function isPalindrome (string) {
     } return false
 }
 
-console.log(isPalindrome('Never odd or even'));
 
 module.exports = { isPalindrome }
 

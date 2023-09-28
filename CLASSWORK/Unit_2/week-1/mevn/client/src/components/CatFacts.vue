@@ -1,7 +1,7 @@
 <template>
     <div>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" @click="getRandomCatFact">
  PRESS HERE FOR YOUR DAILY CAT FACT!
 </button>
 
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-const API_URL = 'https://cat-fact.herokuapp.com/facts'
+const API_URL = 'http://localhost:4000/cat-facts'
 
 export default {
         name: 'CatFacts',
@@ -36,16 +36,20 @@ export default {
         }),
 
         mounted() {
+
+        },
+        methods: {
+          getRandomCatFact(){
             fetch(`${API_URL}`)
             .then(response => response.json()
             )
             .then(result => {
-                const randomPick = Math.floor(Math.random() * result.length)
-                this.cat = result[randomPick]
+              const randomPick = Math.floor(Math.random() * result.length)
+              this.cat = result[randomPick]
                 // console.log(result)
             })
-        },
-        methods: {}
-    }
+          }
+        }
+      }
 
 </script>

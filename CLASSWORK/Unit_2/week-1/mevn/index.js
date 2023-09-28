@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import dogs from './data/dogs.js'
+import fetch from 'node-fetch'
+
 
 const app = express()
 //*APP SETTINGS
@@ -20,6 +22,15 @@ app.listen(port, () => {
     console.log(`listenting on port: ${port}`);
 })
 
+app.get('/cat-facts', (req, res) => {
+    fetch('https://cat-fact.herokuapp.com/facts')
+    .then(response => response.json()
+    )
+    .then(result => {
+        // const randomPick = Math.floor(Math.random() * result.length)
+        res.json(result)
+    })
+})
 app.get('/dogs', (req, res) =>{
     res.json(dogs)
 })

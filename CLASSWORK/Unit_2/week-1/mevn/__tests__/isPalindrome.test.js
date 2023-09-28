@@ -25,6 +25,8 @@ const testingStrings = [
     'A man, a plan, a canal, Panama'
 ]
 
-test('Test if a string is a palndrome', () => {
-    expect(isPalindrome(testingStrings[15])).toBe(true)
+testingStrings.forEach((testScenario, index) => {
+    test(`Testing the scenario number ${index + 1}: `, () => {
+        expect(isPalindrome(testScenario)).toBe(true)
+    })
 })
