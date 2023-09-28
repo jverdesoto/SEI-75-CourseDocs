@@ -30,7 +30,16 @@ function mumble(str) {
   return newStr;
 }
 
+function reduceArray(arr, callback, val) {
+  let acc = val;
+  for (let i = 0; i < arr.length; i++) {
+    acc = callback(acc, arr[i], i);
+  }
+  return acc;
+}
+
 module.exports = {
   hammingDistance,
   fromPairs,
+  reduceArray,
 };
