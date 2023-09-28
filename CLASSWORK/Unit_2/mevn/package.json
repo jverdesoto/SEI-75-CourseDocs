@@ -1,0 +1,18 @@
+{
+  "name": "mevn",
+  "version": "1.0.0",
+  "description": "Mongo Express Vuejs Node Enviroment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error : no test specified\" && exit 1"
+  },
+  "author": "Ashkan Rp",
+  "license": "ISC",
+  "dependencies": {
+    "@vue/cli": "^5.0.8",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "type": "module"
+}
