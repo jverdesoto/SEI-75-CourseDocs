@@ -91,3 +91,14 @@ function isPairs(arr) {
 // });
 
 console.log(isPairs(arr));
+
+function mumble(str) {
+  let result = '';
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    result += char.repeat(i + 1);
+  }
+  return result.split('').join('-');
+}
+
+console.log(mumble('abc'))

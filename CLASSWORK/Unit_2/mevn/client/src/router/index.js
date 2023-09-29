@@ -4,6 +4,8 @@ import SingleDogView from '../components/SingleDogView'
 import AllDogs from '../components/Dog'
 import CatFact from '../components/Cat'
 import CatNode from '../components/Cats'
+import FindUser from '../components/user'
+import MakeCats from '../components/MakeCat'
 
 const routes = [
     {
@@ -30,7 +32,18 @@ const routes = [
         name: 'Dog',
         path: '/dogs/:id',
         component: SingleDogView
-    }
+    },
+    {
+        name: 'FindUser',
+        path: '/user/:user',
+        component: FindUser
+    },
+    {
+        name: 'MakeCats',
+        path: '/make-cat',
+        component: MakeCats
+    },
+
 ]
 
 const router = createRouter({
