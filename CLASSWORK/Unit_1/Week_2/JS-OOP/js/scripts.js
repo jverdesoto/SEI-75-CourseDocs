@@ -1,7 +1,7 @@
 // Object-oriented Javascript
 /*
     - OOP: Using OBJECTS to represent real world things.
-    - Objects hace own properties and functions (methids)
+    - Objects have own properties and functions (methods)
     - Objects contain data and methods to represent info about what you're trying to model
     ex: 
     function Ship() {
