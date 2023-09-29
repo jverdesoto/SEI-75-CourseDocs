@@ -11,13 +11,11 @@ fromPairs([ ['name', 'Sam"], ['age', 24], ['name', 'Sally'] ]) //=> { name: "Sal
 -----------------------------------------------------------------*/
 
 module.exports = function fromPairs(array){
+    let object = {};
     array.forEach(element => {
-        let key = element[0].replace('\'','');
-        // console.log(key);
-        object[key] = element[1];
-        
+        object[element[0]] = element[1]; 
     });
-    return object;//JSON.stringify(object);
+    return JSON.parse(JSON.stringify(object));
 }
 
 // console.log(fromPairs([ ['a', 1], ['b', 2], ['c', 3] ])); //=> { a: 1, b: 2, c: 3 }

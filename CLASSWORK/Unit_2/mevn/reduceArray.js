@@ -22,3 +22,21 @@ reduceArray( ['Yes', 'No', 'Yes', 'Maybe'], function(acc, v) {
 }, {} );
 //=> {"Yes": 2, "No": 1, "Maybe": 1}
 -----------------------------------------------------------------*/
+
+module.exports = function reduceArray(array,callback,accumulator){
+  for(let i=0; i < array.length; i++){
+    accumulator = callback(accumulator, array[i], i)
+  }
+  // console.log('result : ' + accumulator);
+  return accumulator;
+}
+
+// reduceArray( [1, 2, 3], function(acc, n) {
+//   return acc + n;
+// }, 0);
+
+
+
+// let arr = [1, 2, 3];
+
+// let result = arr.reduce((a, b) => {return a+b;}, 0);
