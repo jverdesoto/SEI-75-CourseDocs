@@ -43,16 +43,26 @@ app.get('/dogs/:id', (request, response) => {
     response.json(dog)
 })
 
-app.get('/cat-facts', async (request, response) => {
-    const API_URL = "https://cat-fact.herokuapp.com/facts"
+//!one way of fetching cat data (because for some reason I was trying to call the response outside of the fetch)
+// app.get('/cat-facts', async (request, response) => {
+//     const API_URL = "https://cat-fact.herokuapp.com/facts"
 
-    let catFacts = null
-    await fetch(API_URL)
-        .then(response => response.json())
-        .then(result => {
-            catFacts = result
-        })
-    response.json(catFacts)
+//     // let catFacts = null
+//     await fetch(API_URL)
+//         .then(response => response.json())
+//         .then(result => {
+//             catFacts = result
+//         })
+//     response.json(catFacts)
+// })
+
+//!other simpler way of fetching
+app.get('/cat-facts', (request, response) =>{
+    fetch('https://cat-fact.herokuapp.com/facts')
+    .then(response => response.json())
+    .then (result => {
+        response.json(result)
+    })
 })
 
 
