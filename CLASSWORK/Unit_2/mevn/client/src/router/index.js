@@ -3,6 +3,7 @@ import DogsView from '../components/DogsView'
 import SingleDogView from '../components/SingleDogView'
 import AllDogs from '../components/Dog'
 import CatFact from '../components/CatFact'
+import kittyCats from '../components/kittyCats'
 
 const routes = [
     {
@@ -24,12 +25,17 @@ const routes = [
         name: 'Cat',
         path: '/cat-facts',
         component: CatFact
+    },
+    {
+        name: 'Cats',
+        path: '/kitty-cats',
+        component: kittyCats
     }
 ]
 
 const router = createRouter({
-	history: createWebHistory(),
-	routes
+    history: createWebHistory(),
+    routes
 })
 
 export default router

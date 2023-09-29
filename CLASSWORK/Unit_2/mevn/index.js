@@ -1,18 +1,38 @@
+import 'dotenv/config';
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import dogs from "./data/dogs.js";
+import mongoose from "mongoose";
 
 
 const app = express()
 
+const token = process.env.GITHUB_TOKEN;
+const ROOT_URL = 'https://api.github.com';
+const options = {
+    headers: {
+        Authorization: `token ${token}`
+    }
+}
+
+
 app.use(cors())
 app.use(bodyParser.json())
 
+mongoose.connect(process.env.DATABASE_URL)
+const Cat = mongoose.model('Cat', { name: String, age: Number })
+
 app.get('/', (req, res) => {
-    res.json({
-        message: 'Hello MEVN env!'
-    })
+
+    const kitty = new Cat({ name: 'White Claw', age: 12 })
+
+    kitty.save()
+        .then(() => {
+            res.json({
+                message: 'Kitty has been saved'
+            })
+        })
 })
 
 const port = process.env.PORT || 4000
@@ -42,3 +62,34 @@ app.get('/cat-facts', (req, res) => {
             res.json(data)
         })
 })
+
+app.get('/user/:login', (req, res) => {
+    const user = req.params.login
+    fetch(`https://api.github.com/users/${user}`)
+        .then(response => response.json())
+        .then(data => {
+            res.json(data)
+        })
+})
+
+app.get('/repo/:user/:reponame', (req, res) => {
+    const user = req.params.login
+    const reponame = req.params.login.repos_url
+    fetch(`https://api.github.com/users/${user}/${reponame}`)
+        .then(response => response.json())
+        .then(data => {
+            res.json(data)
+        })
+})
+
+app.get('/cats', async (req, res) => {
+    try {
+      const cats = await Cat.find({}).exec();
+      res.json(cats);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
+  
