@@ -1,17 +1,39 @@
+import 'dotenv/config'
 import express, { response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import dogs from "./data/dogs.js";
+import mongoose from "mongoose"
 
 const app = express()
 
 app.use(cors())
 app.use(bodyParser.json())
+const Cat = mongoose.model('Cat', { name: String, age: Number });
+mongoose.connect(process.env.DATABASE_URL)
 
 app.get('/', (req, res) => {
-    res.json({
-        message: 'Hello MEVN env!'
-    })
+
+    const kitty = new Cat({ name: 'Tom', age: 18 });
+     kitty.save()
+        .then(() => {
+            res.json({
+                message: "Kitty Save"
+            });
+        })
+})
+
+app.post('/cats', (req,res)=>{
+    console.log(req.body);
+    const catData = req.body.catFormData
+    console.log(catData);
+    res.json(catData)
+
+})
+   
+app.get('/cats', async(req, res) =>{
+const cats= await Cat.find({});
+res.json(cats)
 })
 
 const port = process.env.PORT || 4000

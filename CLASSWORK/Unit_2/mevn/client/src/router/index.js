@@ -4,6 +4,7 @@ import SingleDogView from '../components/SingleDogView'
 import AllDogs from '../components/Dog'
 import CatFact from '../components/Cat'
 import CatBack from '../components/NodeCat'
+import CatPets from '../components/CatName'
 
 const routes = [
     {
@@ -30,6 +31,11 @@ const routes = [
         name: 'NodeCatFacts',
         path: '/cat-back',
         component: CatBack
+    },
+    {
+        name: 'CatName-db',
+        path: '/cat-pet',
+        component: CatPets
     }
 ]
 
