@@ -3,6 +3,7 @@ import dogsView from '../components/dogsView'
 import singleDogView from '../components/singleDogView'
 import AllDogs from '../components/dog'
 import catFacts from '../components/catFacts'
+import catsList from '../components/catsList'
 
 const routes = [
     {
@@ -25,6 +26,11 @@ const routes = [
         name: 'CatFacts',
         path: '/cat-facts',
         component: catFacts
+    },
+    {
+        name: 'CatsList',
+        path: '/cats',
+        component: catsList
     }
 ]
 

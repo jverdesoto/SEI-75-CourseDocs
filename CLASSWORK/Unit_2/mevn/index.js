@@ -2,7 +2,11 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
+import { Octokit } from "octokit";
 import dogs from "./data/dogs.js";
+import mongoose from "mongoose";
+import 'dotenv/config'
+
 
 //start your app
 const app = express()
@@ -11,12 +15,43 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+//connect to the database
+mongoose.connect(process.env.DATABASE_URL);
+
+//create a new model (create a class to store the data)
+const Cat = mongoose.model('Cat', {
+    name: String,
+    age: Number
+})
+
 //link it to the root page
 app.get('/', (req, res) => {
-    res.json({
-        message: 'Hello MEVN env!'
+    
+    //create a new entry to the cats database
+    const kitty = new Cat({
+        name: 'Meg',
+        age: 18
     })
+
+    //save the data bit - go read about mongoose and what you can do with it
+    kitty.save()
+        .then(() => {
+            res.json({
+                message: 'Kitty has been saved'
+            })
+        })
 })
+
+app.post('/cats', (request, response) =>{
+    console.log(request.body)
+    console.log(request.method)
+    const catData = request.body
+    console.log(catData)
+    response.json(catData)
+    
+})
+
+
 
 //because there are two servers running at once, tell it which one you want 
 const port = process.env.PORT || 4000
@@ -57,12 +92,38 @@ app.get('/dogs/:id', (request, response) => {
 // })
 
 //!other simpler way of fetching
-app.get('/cat-facts', (request, response) =>{
+app.get('/cat-facts', (request, response) => {
     fetch('https://cat-fact.herokuapp.com/facts')
-    .then(response => response.json())
-    .then (result => {
-        response.json(result)
-    })
+        .then(response => response.json())
+        .then(result => {
+            response.json(result)
+        })
 })
 
 
+//* CONNECTING TO GITHUB API EXERCISE
+const octokit = new Octokit({
+    auth: process.env.GITHUB_TOKEN
+})
+
+
+app.get('/user/:user', async (request, response) => {
+    const user = request.params.user
+    const data = await octokit.request(`GET /users/${user}`, {
+        owner: user
+    })
+    response.json(data)
+})
+
+app.get('/repos/:user/:reponame', async (request, response) => {
+    const user = request.params.user
+    const reponame = request.params.reponame
+
+    const data = await octokit.request(`GET /repos/${user}/${reponame}`)
+    response.json(data)
+})
+
+app.get('/cats', async(request, response) =>{
+ const allCats = await Cat.find({})
+ response.json(allCats)
+})

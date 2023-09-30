@@ -1,8 +1,9 @@
 <template>
     <main>
+        <div class="single-dog-container">
         <h2>Cute Doggo number {{ dog.id }}</h2>
         <h1>{{ dog.name }}</h1>
-        <div class="container">
+       
             <img :src="dog.img" alt="a dog" />
             <p>Hi, I'm {{ dog.name }}, I am {{ dog.age }} years old and I'm a {{ dog.breed }}</p>
         </div>
@@ -41,24 +42,25 @@ export default {
 </script>
 
 <style>
-main {
+.single-dog-container {
     display: flex;
     flex-direction: column;
-    background-color: #78D6C6;
-
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-}
-
-img {
+    margin: 0 auto;
+    height: 80vh;
+    width: 50vw;
+    background-color: rgb(124, 230, 195);
     border-radius: 20px;
 }
 
-p {
-    padding: 2vmin;
+.single-dog-container > img{
+    max-width: 40%;
+    border-radius: 10px;
+}
+
+.single-dog-container > p {
+    padding: 10px;
+    margin-top: 5%;
 }
 </style>

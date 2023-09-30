@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style>
- .container {
+.container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -56,5 +56,5 @@ export default {
 
  img{
     max-width: 40%;
- }
+ } 
 </style>
