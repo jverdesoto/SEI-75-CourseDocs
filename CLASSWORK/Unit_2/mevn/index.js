@@ -1,26 +1,65 @@
+import 'dotenv/config'
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import dogsDB from "./data/dogs.js"
 import fetch from 'node-fetch';
+import mongoose from "mongoose";
 
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get('/',(req,res)=>{
-    res.json({
-        message: 'Hello MEVN env !!'
-    })
-});
-
-
 const port = process.env.PORT || 4000;
 
 app.listen(port, ()=>{
     console.log(`listening on port: ${port}`);
 })
+
+app.get('/',async (req,res)=>{
+    mongoose.connect(`${process.env.DATABAE_URL}`);
+    const Cat = mongoose.model('Cat', { name: String , age: Number });
+    // const kitty = new Cat({ name: 'Zildjian', age:10 });
+    // kitty.save()
+    // .then(() => {
+    //     res.json({
+    //         message: 'Kitty has been saved'
+    //     })
+    // })
+
+    // const lulu = new Cat({ name: 'lulu', age:4 });
+    // await lulu.save()
+    // .then(() => {
+    //     res.json({
+    //         message: 'lulu has been saved'
+    //     })
+    // })
+
+    // const nala = new Cat({ name: 'nala', age:3 });
+    // await nala.save()
+    // .then(() => {
+    //     res.json({
+    //         message: 'nala has been saved'
+    //     })
+    // })
+
+    const filter = {};
+    await Cat.find(filter)
+    .then(() => {
+        console.log(JSON.stringify(res.body));
+            res.json({
+                message: `All Cats : ${JSON.stringify(res)}`
+            })
+        })
+});
+
+// TODO create ende point to raed data from mongo DB
+
+// get saved cats list
+// app.get('/',async (req,res)=>{
+
+// });
 
 app.get('/dogs',(req,res)=>{
     res.json(dogsDB.dogs);
@@ -84,4 +123,3 @@ function asyncAdd(a, b, delay){
 // }).then((function(sum){
 //     console.log(sum);
 // }));
-
