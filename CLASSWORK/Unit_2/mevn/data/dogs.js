@@ -4,7 +4,7 @@ const dogs = [
         name: 'Fido',
         age: 3,
         breed: 'German Shepherd',
-        img: 'https://place-puppy.com/200x150'
+        img: 'http://place-puppy.com/200x150'
     },
     {
         id: 2,

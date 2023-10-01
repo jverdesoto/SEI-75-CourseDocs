@@ -13,7 +13,7 @@ data: () => ({
        
         mounted() {
             // fetch('https://cat-fact.herokuapp.com/facts')
-            fetch('https://localhost:4000/cat-facts')
+            fetch('http://localhost:4000/cat-facts')
             .then(response => response.json())
             .then(result => {
                 this.facts = result
