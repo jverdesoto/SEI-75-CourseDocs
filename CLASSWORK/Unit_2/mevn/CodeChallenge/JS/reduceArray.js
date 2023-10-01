@@ -22,3 +22,5 @@ reduceArray( ['Yes', 'No', 'Yes', 'Maybe'], function(acc, v) {
 }, {} );
 //=> {"Yes": 2, "No": 1, "Maybe": 1}
 -----------------------------------------------------------------*/
+
+function reduceArray(arr) { } 

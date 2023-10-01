@@ -5,6 +5,7 @@ import AllDogs from '../components/Dog'
 import CatFact from '../components/Cat'
 import CatBack from '../components/NodeCat'
 import CatPets from '../components/CatName'
+import GitUser from '../components/GitUser.vue';
 
 const routes = [
     {
@@ -36,12 +37,22 @@ const routes = [
         name: 'CatName-db',
         path: '/cat-pet',
         component: CatPets
+    },
+    {
+        name: 'GitUser',
+        path: '/user/:user',
+        component: GitUser
     }
+    // {
+    //     name: 'Github-user-repo',
+    //     path: 'repo/:user/:reponame',
+    //     component: User
+    // }
 ]
 
 const router = createRouter({
 	history: createWebHistory(),
-	routes
+	routes,
 })
 
-export default router
+export default router;
