@@ -15,18 +15,11 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-//connect to the database
-mongoose.connect(process.env.DATABASE_URL);
 
-//create a new model (create a class to store the data)
-const Cat = mongoose.model('Cat', {
-    name: String,
-    age: Number
-})
 
 //link it to the root page
 app.get('/', (req, res) => {
-    
+
     //create a new entry to the cats database
     const kitty = new Cat({
         name: 'Meg',
@@ -42,13 +35,13 @@ app.get('/', (req, res) => {
         })
 })
 
-app.post('/cats', (request, response) =>{
-    console.log(request.body)
-    console.log(request.method)
+app.post('/cats', async(request, response) => {
     const catData = request.body
-    console.log(catData)
-    response.json(catData)
-    
+    const newCat = new Cat(catData)
+    console.log(JSON.stringify(newCat))
+    await newCat.save()
+    response.json(newCat) //this responds to the client with a newly created cat
+
 })
 
 
@@ -103,27 +96,46 @@ app.get('/cat-facts', (request, response) => {
 
 //* CONNECTING TO GITHUB API EXERCISE
 const octokit = new Octokit({
-    auth: process.env.GITHUB_TOKEN
+    auth: process.env.GITHUB_TOKEN,
+    headers: {
+        'X-GitHub-Api-Version': '2022-11-28'
+    }
 })
 
 
 app.get('/user/:user', async (request, response) => {
     const user = request.params.user
-    const data = await octokit.request(`GET /users/${user}`, {
-        owner: user
-    })
-    response.json(data)
+    try {
+        const data = await octokit.request(`GET /users/${user}`)
+        response.json(data)
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 app.get('/repos/:user/:reponame', async (request, response) => {
     const user = request.params.user
     const reponame = request.params.reponame
-
-    const data = await octokit.request(`GET /repos/${user}/${reponame}`)
+    try{
+    const data = await octokit.request(`GET /repos/${user}/${reponame}`, {
+        owner: user
+    })
     response.json(data)
+} catch (error){
+    console.warn(`there was an error: ${error}`)
+}
 })
 
-app.get('/cats', async(request, response) =>{
- const allCats = await Cat.find({})
- response.json(allCats)
+//connect to the database
+mongoose.connect(process.env.DATABASE_URL);
+
+//create a new model (create a class to store the data)
+const Cat = mongoose.model('Cat', {
+    name: String,
+    age: Number
+})
+
+app.get('/cats', async (request, response) => {
+    const allCats = await Cat.find({})
+    response.json(allCats)
 })

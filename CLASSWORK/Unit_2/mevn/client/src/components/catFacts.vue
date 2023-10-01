@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="cat-facts-container">
     <button v-on:click="randomCatFact">give me a cat fact!</button>
     <p id="catFactParagraph" ref="catFactParagraph"></p>
 </div>
@@ -45,12 +45,12 @@ export default {
 </script>
 
 <style>
-container{
+.cat-facts-container{
     display: flex;
     justify-content: center;
 }
 
-button {
+.cat-facts-container > button {
     width: 300px;
     height: 200px;
     text-align: center;

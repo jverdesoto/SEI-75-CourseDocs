@@ -1,6 +1,6 @@
 <template>
         <h1>Dogs</h1>
-        <div class="container">
+        <div class="dogs-container">
         <div v-for="dog in dogs" :key="dog.id">
             <h3>{{ dog.name }}</h3>
             <img :src="dog.img" alt="a dog" />
@@ -38,23 +38,23 @@ export default {
 </script>
 
 <style>
-.container {
+.dogs-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 20px;
  }
 
- .container > h1{
+ .dogs-container > h1{
     align-self: center;
  }
 
- .container > div{
+ .dogs-container > div{
     padding: 10px;
     background-color: #FAF3F0;
  }
 
- img{
+ .dogs-container > img{
     max-width: 40%;
  } 
 </style>
