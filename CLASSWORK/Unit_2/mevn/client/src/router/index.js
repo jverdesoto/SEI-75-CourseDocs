@@ -5,6 +5,8 @@ import AllDogs from '../components/Dog'
 import CatFact from '../components/CatFact'
 import CatFactDouble from '../components/CatFactDouble'
 import CatButton from '../components/CatButton'
+import CatForm from '../components/CatForm'
+import GitHubProfile from '../components/GitHubProfile'
 
 const routes = [
     {
@@ -41,6 +43,16 @@ const routes = [
         name: 'Cat Facts Double Fetch Edition',
         path: '/cat-facts-double',
         component: CatFactDouble
+    },
+    {
+        name: 'Cat Form',
+        path: '/cat-form',
+        component: CatForm
+    },
+    {
+        name: 'Git Hub Profile',
+        path: '/git-hub-profile/:username',
+        component: GitHubProfile
     }
 ]
 

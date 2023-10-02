@@ -37,7 +37,7 @@
             // Fetch = JS method that will get a URL and respond with something
             // Because it takes time to make the request and get the requested data
             fetch(`${API_URL}/${route.params.id}`)
-            // Then makes the function synchronous - 
+            // .then makes the function synchronous - 
             // it waits for the promise to be fulfilled (in this case fetch) before running the code
             // Gets data and puts it into a JSON format
             .then(response => response.json())
