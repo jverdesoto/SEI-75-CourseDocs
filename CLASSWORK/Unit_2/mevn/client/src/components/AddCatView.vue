@@ -40,7 +40,8 @@ export default {
             {
                 console.log(res.status)
                 if(res.status === 200)
-                    window.location.href = '/cats';
+                    res.redirected('/cats');
+                    // window.location.href = '/cats';
             })
         }
     }
@@ -69,34 +70,3 @@ export default {
     gap: 2px;
 }
 </style>
-
-<!-- <template>
-    <h1>Add Cat Form</h1>
-        <input type="text" name="name" placeholder="Cat Name"><input>
-        <input type="text" name="age" placeholder="Cat Age"/>
-        <button><router-link :to="'/saveCat'" >Save</router-link></button>
-</template>
-
-<script>
-   const API_URL = 'http://localhost:4000/'
-
-    export default {
-        name: 'AddCatView',
-        data: () => ({
-            error: '',
-            cats: []
-        }),
-
-        mounted() {
-            fetch(API_URL)
-            .then(response => response.json())
-            .then(result => {
-                this.cats = result
-            })
-        },
-        methods: {
-            submitCat(){
-
-            }
-        }
-    } -->
