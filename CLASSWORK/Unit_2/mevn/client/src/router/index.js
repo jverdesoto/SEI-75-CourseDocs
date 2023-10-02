@@ -43,8 +43,6 @@ const routes = [
         path: '/add/cat/',
         component: AddCatView
     }
-
-
 ]
 
 const router = createRouter({
