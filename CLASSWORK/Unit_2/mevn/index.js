@@ -13,7 +13,104 @@ app.use(cors())
 app.use(bodyParser.json())
 
 mongoose.connect(process.env.DATABASE_URL)
+const Schema = mongoose.Schema
 const Cat = mongoose.model('Cat', { name: String, age: Number })
+
+// ! Library Application
+
+const bookSchema = new Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    pubDate: {
+        type: Date,
+        required: true
+    },
+    coverURL: String
+}, {
+    timestamps: true
+})
+
+const authorSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    books: [bookSchema],
+}, {
+    timestamps: true
+})
+
+const Author = mongoose.model('Author', authorSchema)
+
+app.get('/library/author', async (req, res) => {
+    const authors = await Author.find().select('name')
+    res.json(authors)
+})
+
+app.get('/library/author/:name', async (req, res) => {
+    const name = req.params.name
+    const author = await Author.find({name: `${name}`})
+    res.json(author)
+})
+
+app.get('/library/title', async (req, res) => {
+    const books = await Author.find().select('books')
+    res.json(books)
+})
+
+app.get('/library/title/:title', async (req, res) => {
+    const title = req.params.title
+    const book = await Author.find()
+    res.json(book)
+})
+
+app.post('/library/add-book', async (req, res) => {
+    // Get form content
+    const document = req.body
+    
+    // Check if author already exists
+    const author = await Author.findOne({ name: `${document.author}` })
+
+    if (!author) {
+        const newAuthor = new Author({
+            name: `${document.author}`,
+            books: [{
+                title: `${document.title}`,
+                pubDate: `${document.pubDate}`,
+                coverURL: `${document.coverURL}`
+            }]
+        })
+        await newAuthor.save()
+        .then(() => {
+            console.log(`New entry was added`)
+            res.sendStatus(200)
+        })
+        .catch(error => {
+            console.error(error)
+            res.sendStatus(error)
+        })
+    } else {
+        // Add the book
+        author.books.push({
+            title: `${document.title}`,
+            pubDate: `${document.pubDate}`,
+            coverURL: `${document.coverURL}`
+        })
+        await author.save()
+        .then(() => {
+            console.log(`New entry was added`)
+            res.sendStatus(200)
+        })
+        .catch(error => {
+            console.error(error)
+            res.sendStatus(error)
+        })
+    }
+})
+
+// ! Other Apps
 
 app.get('/', (req, res) => {
     // const kitty = new Cat({ name: 'Troy', age: 10 })

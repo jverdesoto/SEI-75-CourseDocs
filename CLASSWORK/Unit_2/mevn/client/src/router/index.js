@@ -7,6 +7,12 @@ import CatFactDouble from '../components/CatFactDouble'
 import CatButton from '../components/CatButton'
 import CatForm from '../components/CatForm'
 import GitHubProfile from '../components/GitHubProfile'
+import LibraryHome from '../components/LibraryHome'
+import AllBooks from '../components/AllBooks'
+import AllAuthors from '../components/AllAuthors'
+import SingleBookView from '../components/SingleBookView'
+import SingleAuthorView from '../components/SingleAuthorView'
+import AddBook from '../components/AddBook'
 
 const routes = [
     {
@@ -53,7 +59,39 @@ const routes = [
         name: 'Git Hub Profile',
         path: '/git-hub-profile/:username',
         component: GitHubProfile
+    },
+    // ! Library application
+    {
+        name: 'Library Home',
+        path: '/library',
+        component: LibraryHome
+    },
+    {
+        name: 'Add New Book',
+        path: '/library/addbook',
+        component: AddBook
+    },
+    {
+        name: 'All Authors',
+        path: '/library/author',
+        component: AllAuthors
+    },
+    {
+        name: 'All Books',
+        path: '/library/title',
+        component: AllBooks
+    },
+    {
+        name: 'Single Author View',
+        path: '/library/author/:name',
+        component: SingleAuthorView
+    },
+    {
+        name: 'Single Book View',
+        path: '/library/title/:title',
+        component: SingleBookView
     }
+
 ]
 
 const router = createRouter({
