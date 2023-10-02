@@ -11,7 +11,7 @@
             <label for="catAge" class="inputArea">Age of your cat:</label>
             <input type="text" v-model="catFormData.age" name="catAge" id="catAge" placeholder="your cat's age here"
                 class="inputArea">
-            <button @click="handleClick(e)">Register my cat!</button>
+            <button @click="addCat(e)">Register my cat!</button>
         </div>
     </div>
 
@@ -47,13 +47,16 @@ export default {
             })
     },
     methods: {
-        handleClick() {
-            // this.catFormData.name = this.nameInput;
-            // this.catFormData.age = this.ageInput
-
+        addCat() {
             fetch(DATA_URL, {
                 method: 'POST',
-                body: JSON.stringify(this.catFormData)
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: this.catFormData.name,
+                    age: this.catFormData.age
+                })
             })
             .then(response => response.json())
             .then(result =>{

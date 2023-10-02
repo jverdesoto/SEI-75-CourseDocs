@@ -7,6 +7,9 @@ import catsList from '../components/catsList'
 import gitHubUser from '../components/gitHubUser'
 import gitHubRepos from '../components/gitHubRepos'
 import bootstrapTesting from '../components/bootstrapTesting'
+import addNewBook from '../components/library/addNewBook'
+import allBooks from '../components/library/allBooks'
+import allAuthors from '../components/library/allAuthors'
 
 const routes = [
     {
@@ -49,6 +52,21 @@ const routes = [
         name: 'bootstrapTesting',
         path: '/bootstrapTesting',
         component: bootstrapTesting
+    }, 
+    {
+        name: 'addNewBook',
+        path: '/library/addnewbook',
+        component: addNewBook
+    }, 
+    {
+        name: 'allBooks',
+        path: '/library/books',
+        component: allBooks
+    },
+    {
+        name: 'allAuthors',
+        path: '/library/authors',
+        component: allAuthors
     }
 ]
 

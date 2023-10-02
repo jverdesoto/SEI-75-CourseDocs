@@ -4,7 +4,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { Octokit } from "octokit";
 import dogs from "./data/dogs.js";
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import 'dotenv/config'
 
 
@@ -17,32 +17,7 @@ app.use(bodyParser.json())
 
 
 
-//link it to the root page
-app.get('/', (req, res) => {
 
-    //create a new entry to the cats database
-    const kitty = new Cat({
-        name: 'Meg',
-        age: 18
-    })
-
-    //save the data bit - go read about mongoose and what you can do with it
-    kitty.save()
-        .then(() => {
-            res.json({
-                message: 'Kitty has been saved'
-            })
-        })
-})
-
-app.post('/cats', async(request, response) => {
-    const catData = request.body
-    const newCat = new Cat(catData)
-    console.log(JSON.stringify(newCat))
-    await newCat.save()
-    response.json(newCat) //this responds to the client with a newly created cat
-
-})
 
 
 
@@ -116,26 +91,139 @@ app.get('/user/:user', async (request, response) => {
 app.get('/repos/:user/:reponame', async (request, response) => {
     const user = request.params.user
     const reponame = request.params.reponame
-    try{
-    const data = await octokit.request(`GET /repos/${user}/${reponame}`, {
-        owner: user
-    })
-    response.json(data)
-} catch (error){
-    console.warn(`there was an error: ${error}`)
-}
+    try {
+        const data = await octokit.request(`GET /repos/${user}/${reponame}`, {
+            owner: user
+        })
+        response.json(data)
+    } catch (error) {
+        console.warn(`there was an error: ${error}`)
+    }
 })
 
+
+//*CAT DATABASE EXERCISE AND EXAMPLES
 //connect to the database
 mongoose.connect(process.env.DATABASE_URL);
 
-//create a new model (create a class to store the data)
-const Cat = mongoose.model('Cat', {
+//create schemas (blueprint of the info we are passing)
+const catSchema = {
     name: String,
     age: Number
+}
+//create a new model (create a class to store the data based on the schemas)
+const Cat = mongoose.model('Cat', catSchema)
+
+
+//link it to the root page just because
+app.get('/', (req, res) => {
+    //create a new entry to the cats database
+    const kitty = new Cat({
+        name: 'Meg',
+        age: 18
+    })
+    //save the data bit
+    kitty.save()
+        .then(() => {
+            res.json({
+                message: 'Kitty has been saved'
+            })
+        })
 })
 
 app.get('/cats', async (request, response) => {
     const allCats = await Cat.find({})
     response.json(allCats)
+})
+
+app.post('/cats', async (request, response) => {
+    try {
+        const catData = request.body
+        const newCat = new Cat(catData)
+        await newCat.save()
+        response.json(newCat) //this responds to the client with a newly created cat
+    }
+    catch (error) {
+        console.log(error)
+        response.sendStatus(error)
+    }
+})
+
+//? LIBRARY EXERCISE
+//we are already connected to the database
+
+//creating a schema for our book information
+const authorSchema = {
+    name: String
+}
+
+const bookSchema = {
+    title: String,
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Author'
+    },
+    publishingDate: Number
+}
+
+//create the actual model
+const Author = mongoose.model('Author', authorSchema)
+const Book = mongoose.model('Book', bookSchema)
+
+
+//create the main library database endpoints
+app.get('/library/books', async (request, response) => {
+    try {
+        const allBooks = await Book.find({})
+        response.json(allBooks)
+    } catch {
+        console.log('could not get the data!')
+    }
+})
+
+app.get('/library/authors', async (request, response) => {
+    try {
+        const allAuthors = await Author.find({})
+        response.json(allAuthors)
+    }
+    catch (error) {
+        console.log('could not get the data to show you!')
+        console.log(error)
+    }
+})
+
+
+//add a new book functionality
+app.post('/library/addnewbook', async (request, response) => {
+    try {
+        //do we have this author already?
+        let author = await Author.findOne({
+            name: request.body.author.name
+        })
+
+        if (!author) {
+            author = new Author(request.body.author)
+        }
+        await author.save()
+
+        //do we have this book already?
+        let newBook = await Book.findOne({
+            title: request.body.title   //could I find it by id instead, to avoid syntax?
+        })
+
+        if (!newBook) {
+            newBook = new Book({
+                author: author._id,
+                title: request.body.title,
+                publishingDate: request.body.publishingDate
+            })
+        } else { console.log('already got that one!') }
+
+        await newBook.save()
+
+        response.json(newBook)
+
+    } catch (error) {
+        console.log(error)
+    }
 })
