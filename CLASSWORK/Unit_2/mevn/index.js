@@ -17,9 +17,10 @@ app.listen(port, ()=>{
     console.log(`listening on port: ${port}`);
 })
 
+const Cat = mongoose.model('Cat', { name: String , age: Number });
+
 app.get('/',async (req,res)=>{
     mongoose.connect(`${process.env.DATABAE_URL}`);
-    const Cat = mongoose.model('Cat', { name: String , age: Number });
     // const kitty = new Cat({ name: 'Zildjian', age:10 });
     // kitty.save()
     // .then(() => {
@@ -44,22 +45,29 @@ app.get('/',async (req,res)=>{
     //     })
     // })
 
-    const filter = {};
-    await Cat.find(filter)
-    .then(() => {
-        console.log(JSON.stringify(res.body));
-            res.json({
-                message: `All Cats : ${JSON.stringify(res)}`
-            })
-        })
 });
 
-// TODO create ende point to raed data from mongo DB
+
+// saved cats list
+app.post('/saveCat',async (req,res)=>{
+    mongoose.connect(`${process.env.DATABAE_URL}`);
+    const nala = new Cat({ name: 'nala', age:3 });
+    await nala.save()
+    .then(() => {
+        res.json({
+            // message: `${catName}has been saved`
+        })
+    })
+});
 
 // get saved cats list
-// app.get('/',async (req,res)=>{
-
-// });
+app.get('/cats',async (req,res)=>{
+    mongoose.connect(`${process.env.DATABAE_URL}`);
+    const filter = {};
+    let cats = await Cat.find(filter)
+    console.log(JSON.stringify(res.body));
+    return res.json(cats);
+});
 
 app.get('/dogs',(req,res)=>{
     res.json(dogsDB.dogs);
