@@ -2,7 +2,7 @@
     <h1>Add Cat Form</h1>
     <p><input type="text" name="name" v-model="cat.name" placeholder="Cat Name"></p>
     <p><input type="text" name="age" v-model="cat.age" placeholder="Cat Age"></p>
-    <p><button v-on:click="addCat"><router-link :to="'/saveCat'" >Save</router-link> </button></p>
+    <p><button v-on:click="addCat"> Save </button></p>
     <!-- <router-link :to="'/saveCat'" >Save</router-link> -->
 </template>
 
@@ -36,7 +36,12 @@ export default {
                 },
                 body: JSON.stringify(this.cat)
             })
-            .then(res => console.log(res.status))
+            .then(res => 
+            {
+                console.log(res.status)
+                if(res.status === 200)
+                    window.location.href = '/cats';
+            })
         }
     }
 }
