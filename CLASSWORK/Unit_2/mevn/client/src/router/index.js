@@ -2,6 +2,10 @@ import { createWebHistory, createRouter } from 'vue-router'
 import DogsView from '../components/DogsView'
 import SingleDogView from '../components/SingleDogView'
 import AllDogs from '../components/Dog'
+import CatAddNew from '../components/CatAddNew'
+import LibraryHome from '../components/Library'
+import SearchByAuthor from '../components/SearchByAuthor'
+import SearchByTitle from '../components/SearchByTitle'
 
 const routes = [
     {
@@ -19,11 +23,31 @@ const routes = [
         path: '/dogs/:id',
         component: SingleDogView
     },
+    // {
+    //     name: 'CatFacts',
+    //     path: '/catfacts',
+    //     component: CatFactsView
+    // },
     {
-        name: 'CatFacts',
-        path: '/catfacts',
-        component: CatFactsView
-    }
+        name: 'AddCat',
+        path: '/cat/new',
+        component: CatAddNew
+    },
+    {
+        name: 'Library',
+        path: '/library',
+        component: LibraryHome
+    },
+    {
+        name: 'SearchByAuthor',
+        path: '/library/search-by-author',
+        component: SearchByAuthor
+    },
+    {
+    name: 'SearchByTitle',
+    path: '/library/search-by-title',
+    component: SearchByTitle
+    },
 ]
 
 const router = createRouter({
