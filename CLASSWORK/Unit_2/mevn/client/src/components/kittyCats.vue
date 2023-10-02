@@ -2,10 +2,9 @@
     <h1>Cat Farm</h1>
     <h3>Drop a new cat here</h3>
 <div class="input-group">
-    <span class="input-group-text">Cat name and age</span>
-    <input type="text" aria-label="Cat name" class="form-control">
-    <input type="number" aria-label="Cat age" class="form-control">
-    <button @click="submitData()">Submit</button>
+    <input type="text" v-model="cat.name" placeholder="Cat name" class="form-control">
+    <input type="number" v-model="cat.age" placeholder="Cat age" class="form-control">
+    <button @click="addKitty">Submit</button>
   </div>
 
 </template>
@@ -17,9 +16,10 @@
         name: 'kittyCats',
         data: () => ({
             error: '',
-            kittyCats: [],
-            Name: '',
-            Age: 0
+            cat: {
+                name: '',
+                age: ''
+            }
         }),
 
         mounted() {
@@ -30,16 +30,28 @@
             })
         },
         methods: {
-            submitData() {
-                const newCat = {
-                    name: this.Name,
-                    age: this.Age
-                }
+            addKitty: function() {
+                alert(`New cat ${this.cat.name} - ${this.cat.age}`);
+                fetch(`http://localhost:4000/kitty-cats`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: this.cat.name,
+                        age: this.cat.age
+                    })
+                })
+                .then(res => console.log(res.status))
+            }
+
             }
         }
-    }
 </script>
 
 <style>
+.input-group { 
+    margin: 0 10px;
+}
 
 </style>

@@ -1,35 +1,23 @@
 import { createWebHistory, createRouter } from 'vue-router'
-import DogsView from '../components/DogsView'
-import SingleDogView from '../components/SingleDogView'
-import AllDogs from '../components/Dog'
-import CatFact from '../components/CatFact'
-import kittyCats from '../components/kittyCats'
+import booksLibrary from '../components/Library.vue'
+import newBooks from '../components/Library-newBooks.vue'
+import authorLibrary from '../components/Library-author.vue'
 
 const routes = [
     {
-        name: 'Home',
-        path: '/',
-        component: DogsView
+        name: 'Library',
+        path: '/library',
+        component: booksLibrary
     },
     {
-        name: 'Dogs',
-        path: '/dogs',
-        component: AllDogs
+        name: 'Library-newBook',
+        path: '/library/newBooks',
+        component: newBooks
     },
     {
-        name: 'Dog',
-        path: '/dogs/:id',
-        component: SingleDogView
-    },
-    {
-        name: 'Cat',
-        path: '/cat-facts',
-        component: CatFact
-    },
-    {
-        name: 'Cats',
-        path: '/kitty-cats',
-        component: kittyCats
+        name: 'Autor Shortlist',
+        path: '/library/author',
+        component: authorLibrary
     }
 ]
 
