@@ -1,16 +1,13 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <DogsView />
+  <main>
+    <router-view :key="$route.path" />
+  </main>
 </template>
 
 <script>
-import DogsView from './components/DogsView.vue';
 
 export default {
-  name: 'App',
-  components: {
-    DogsView
-}
+  name: 'App'
 }
 </script>
 

@@ -3,7 +3,8 @@
         <div v-for="dog in dogs" :key="dog._id">
             <img :src="dog.img" alt="A dog">
             <h3>{{ dog.name }}</h3>
-            <p>My dog's age is: {{ dog.age }}</p>
+            <p>Hello, My dog's age is: {{ dog.age }}</p>
+            <p><router-link :to="'/dogs/' + dog.id" >View Dog</router-link></p>
         </div>
     </div>
 </template>
@@ -31,7 +32,7 @@
 
 <style>
     h3 {
-        font-size: 12px;
+        font-size: 48px;
     }
     img {
         max-width: 200px;
