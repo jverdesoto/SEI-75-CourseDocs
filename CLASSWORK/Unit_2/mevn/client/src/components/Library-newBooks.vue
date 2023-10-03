@@ -1,8 +1,8 @@
 <template>
     <header>
-        <a href="/library"><button class="Main">Main Page</button></a>
+        <router-link to="/library"><button class="Main">Main Page</button></router-link>
     </header>
-    <h2>Donate a Book</h2>
+    <h1>Donate a Book</h1>
     <div class="bookDetails">
         <p><input type="text" v-model="book.title" placeholder="Title"></p>
         <p><input type="text" v-model="book.author" placeholder="Author"></p>
@@ -27,8 +27,8 @@ export default {
 
     methods: {
         addBook: function () {
-            if (!this.book.title || !this.book.author || !this.book.date) {
-                this.error = 'Please fill in all fields.';
+            if (!this.book.title || !this.book.author || !this.book.date || isNaN(this.book.date)) {
+                alert (this.error = 'Please fill in all fields with valid data.');
                 return;
             }
 
@@ -38,9 +38,9 @@ export default {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    Title: this.book.title,
-                    Author: this.book.author,
-                    Date: this.book.date
+                    title: this.book.title,
+                    author: this.book.author,
+                    date: this.book.date
                 })
             })
                 .then(res => console.log(res.status))
@@ -54,7 +54,20 @@ export default {
 
 <style>
 p {
-    margin: 5px;
+  margin: 10px 0;
+}
+
+.bookDetails {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .Main {
@@ -71,5 +84,15 @@ p {
 
 .Main:hover {
     background-color: #898b8d56;
+}
+
+button {
+  background-color: #65686ba6;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 </style>

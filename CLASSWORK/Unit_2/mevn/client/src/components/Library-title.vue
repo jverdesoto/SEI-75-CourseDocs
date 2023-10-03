@@ -5,13 +5,13 @@
     </header>
 
     <body>
-        <h1>List of Authors</h1>
-        <div class="Books-list" v-for="author in authors" :key="author._id">
+        <h1>List of Available Books</h1>
+        <div class="Books-list" v-for="book in books" :key="book._id">
             <h4>
-                <div @click="toggleDetails(author)">{{ author.author }}</div>
+                <div @click="toggleDetails(book)">{{ book.title }}</div>
             </h4>
-            <div class="details" v-if="author.showDetails">
-                {{ author.title }} - {{ author.date }}</div>
+            <div class="details" v-if="book.showDetails">
+                {{ book.author }} - {{ book.date }}</div>
 
         </div>
     </body>
@@ -22,7 +22,7 @@
 const API_URL = 'http://localhost:4000/library'
 
 export default {
-    name: 'authorLibrary',
+    name: 'bookTitles',
     data: () => ({
         error: '',
         books: {},
@@ -34,7 +34,7 @@ export default {
         fetch(API_URL)
             .then(response => response.json())
             .then(result => {
-                this.authors = result
+                this.books = result
             })
     },
 
