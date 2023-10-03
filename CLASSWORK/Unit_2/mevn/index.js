@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import express from "express";
+import express, { response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import dogs from "./data/dogs.js";
@@ -12,6 +12,8 @@ app.use(bodyParser.json())
 
 mongoose.connect(process.env.DATABASE_URL);
 const Cat = mongoose.model('Cat', { name: String, age:Number });
+// const catSchema = { name: String, age:Number }
+// const Cat = mongoose.model('Cat', catSchema)
 
 app.get('/', (req, res) => {
 
@@ -61,9 +63,41 @@ app.get('/CatFacts', (req, myCatFactsPage) => {
         })
     })
 
-app.get('/cats', async (req, res)=> {
-    const cats= await Cat.find({});
-    res.json(cats)
+    app.get('/cats', async (catRequest, catsServerResponse) => {
+        // Use the Cat model to find all cats in the MongoDB database
+        const cats = await Cat.find({});
+    
+        // Send the found cat data as a JSON response to the client
+        catsServerResponse.json(cats);
+    });
+
+   app.post('/cats/add', (clientRequest, catsServerResponse) => {
+    // Extract the cat data from the client's request body.
+    const newCatData = clientRequest.body
+
+    
+
+    // Create a new 'Cat' model instance with the cat's name and age.
+    const newCat = new Cat({ name: newCatData.name, age: parseInt(newCatData.age) })
+
+    // Save the 'newCat' instance to the MongoDB database.
+    newCat.save()
+        .then(() => {
+            
+            // Log a message indicating that a new cat was added successfully.
+            console.log(`New cat named ${newCatData.name} and age ${newCatData.age} was added to the database`);
+            
+            // Send an HTTP response with status code 200 (OK) to the client.
+            catsServerResponse.sendStatus(200)
+        })
+        .catch(error => {
+            // If there is an error during the save operation, log the error to the console.
+            console.error(error)
+
+            // Send an HTTP response with the same status code as the error to the client.
+            catsServerResponse.sendStatus(error)
+            
+        })
 })
 
 // app.get('/dogs/:id', function(req, res) {
@@ -110,15 +144,29 @@ app.get('/cats', async (req, res)=> {
             })
     })
     
-
-    app.get('/user/:user/repo/:reponame', (req,repoResponse) => {
+    app.get('/user/:user/repo/:reponame', function(req, repoResponse) {
         const username = req.params.user;
         const reponame = req.params.reponame;
         const repoUrl = `${ROOT_URL}/repos/${username}/${reponame}?access_token=${token}`;
-
+    
         fetch(repoUrl)
-            .then(urlRepoResponse => urlRepoResponse.json())
-            .then(urlRepoResponseJson => {
-                repoResponse.json(urlRepoResponseJson)
+            .then(function(urlRepoResponse) {
+                return urlRepoResponse.json();
             })
-    })
+            .then(function(urlRepoResponseJson) {
+                repoResponse.json(urlRepoResponseJson);
+            });
+    });
+
+    // app.get('/user/:user/repo/:reponame', (req,repoResponse) => {
+    //     const username = req.params.user;
+    //     const reponame = req.params.reponame;
+    //     const repoUrl = `${ROOT_URL}/repos/${username}/${reponame}?access_token=${token}`;
+
+    //     fetch(repoUrl)
+    //         .then(urlRepoResponse => urlRepoResponse.json())
+    //         .then(urlRepoResponseJson => {
+    //             repoResponse.json(urlRepoResponseJson)
+    //         })
+    // })
+
