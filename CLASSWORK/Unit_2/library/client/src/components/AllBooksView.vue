@@ -1,0 +1,60 @@
+<template>
+     <h1>All books</h1>
+    <div class="listView">
+        <div class="card" v-for="book in books" :key="book._id">
+            <div class="row">
+                <div>Title: </div>
+                <div>{{ book.title }} </div>
+            </div>
+            <div class="row">
+                <div>Description: </div>
+                <div>{{ book.description }} </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+   const API_URL = 'http://localhost:4000'
+
+    export default {
+        name: 'AllBooksView',
+        data: () => ({
+            error: '',
+            books: []
+        }),
+
+        mounted() {
+            fetch(`${API_URL}/books`)
+            .then(response => response.json())
+            .then(result => {
+                this.books = result
+            })
+        },
+        methods: {}
+    }
+</script>
+
+<style>
+.listView{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+
+.card{
+    border: 1px solid green;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px;
+}
+
+.row{
+    background-color: transparent;
+    display: flex;
+    gap: 2px;
+}
+</style>
