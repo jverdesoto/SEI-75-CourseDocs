@@ -83,12 +83,12 @@ const routes = [
     },
     {
         name: 'Single Author View',
-        path: '/library/author/:name',
+        path: '/library/author/:id',
         component: SingleAuthorView
     },
     {
         name: 'Single Book View',
-        path: '/library/title/:title',
+        path: '/library/title/:id',
         component: SingleBookView
     }
 

@@ -1,9 +1,9 @@
 <template>
     <h2>Author List</h2>
-    <p>{{ authors }}</p>
-    <!-- <ul>
-      <li v-for="author in authors">{{ author }}</li>
-    </ul> -->
+    <router-link to="/library">Go back</router-link>
+    <ul>
+      <li v-for="author in authors" :key="author._id"><router-link :to="'/library/author/' + author._id">{{ author.name }}</router-link></li>
+    </ul>
 </template>
 
 <script>
@@ -18,10 +18,7 @@ export default {
   mounted() {
     fetch(API_URL)
     .then(response => response.json())
-    .then(data => console.log(data))
-    .then(data => {
-      this.authors = data
-    })
+    .then(data => this.authors = data)
   }
 }
 </script>

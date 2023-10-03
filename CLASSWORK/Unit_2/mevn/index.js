@@ -12,7 +12,8 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-mongoose.connect(process.env.DATABASE_URL)
+// mongoose.connect(process.env.DATABASE_URL)
+mongoose.connect(process.env.LIBRARY_DATABASE_URL)
 const Schema = mongoose.Schema
 const Cat = mongoose.model('Cat', { name: String, age: Number })
 
@@ -45,24 +46,33 @@ const authorSchema = new Schema({
 const Author = mongoose.model('Author', authorSchema)
 
 app.get('/library/author', async (req, res) => {
-    const authors = await Author.find().select('name')
+    const authors = await Author.find().select('name').lean()
     res.json(authors)
 })
 
-app.get('/library/author/:name', async (req, res) => {
-    const name = req.params.name
-    const author = await Author.find({name: `${name}`})
+app.get('/library/author/:id', async (req, res) => {
+    const id = req.params.id
+    const author = await Author.findOne({_id: `${id}`}).select(['name', 'books.title', 'books._id']).lean()
     res.json(author)
 })
 
 app.get('/library/title', async (req, res) => {
-    const books = await Author.find().select('books')
-    res.json(books)
+    const books = await Author.find({}).select(['books.title', 'books._id']).lean()
+    const booksArr = []
+    for (let i = 0; i < books.length; i++) {
+        for (let b = 0; b < books[i].books.length; b++) {
+            booksArr.push(books[i].books[b])
+        }
+    }
+    res.json(booksArr)
 })
 
-app.get('/library/title/:title', async (req, res) => {
-    const title = req.params.title
-    const book = await Author.find()
+app.get('/library/title/:id', async (req, res) => {
+    const id = req.params.id
+    const doc = await Author.findOne({ 'books._id': `${id}` })
+    let book = doc.books.id(id).toObject()
+    book.author = doc.name
+    book.authorId = doc._id
     res.json(book)
 })
 
@@ -108,6 +118,21 @@ app.post('/library/add-book', async (req, res) => {
             res.sendStatus(error)
         })
     }
+})
+
+app.post('/library/update/:id', async (req, res) => {
+    const update = req.body
+    const id = req.params.id
+    console.log(update)
+    await Author.findByIdAndUpdate(id, update)
+    .then(result => {
+        console.log(result)
+        res.sendStatus(200)
+    })
+    .catch(error => {
+        console.error(error)
+        res.sendStatus(error)
+    })
 })
 
 // ! Other Apps
