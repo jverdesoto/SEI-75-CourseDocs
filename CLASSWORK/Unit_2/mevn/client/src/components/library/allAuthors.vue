@@ -2,7 +2,7 @@
     <div class="all-authors-container" v-if="authors">
         <h1>Authors in our Collection</h1>
         <div v-for="author in authors" :key="author._id">
-            <p>{{ author.name }}</p>
+           <router-link :to="'/library/authors/' + author._id"> <p>{{ author.name }}</p></router-link>
         </div>
     </div>
 </template>

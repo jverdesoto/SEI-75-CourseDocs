@@ -1,5 +1,5 @@
 //all the things you need to import, including database stuff
-import express from "express";
+import express, { request } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { Octokit } from "octokit";
@@ -104,7 +104,7 @@ app.get('/repos/:user/:reponame', async (request, response) => {
 
 //*CAT DATABASE EXERCISE AND EXAMPLES
 //connect to the database
-mongoose.connect(process.env.DATABASE_URL);
+const DATABASE_URL = mongoose.connect(process.env.LIBRARY_URL);
 
 //create schemas (blueprint of the info we are passing)
 const catSchema = {
@@ -154,7 +154,7 @@ app.post('/cats', async (request, response) => {
 
 //creating a schema for our book information
 const authorSchema = {
-    name: String
+    name: String,
 }
 
 const bookSchema = {
@@ -174,7 +174,7 @@ const Book = mongoose.model('Book', bookSchema)
 //create the main library database endpoints
 app.get('/library/books', async (request, response) => {
     try {
-        const allBooks = await Book.find({})
+        const allBooks = await Book.find({}).populate('author')
         response.json(allBooks)
     } catch {
         console.log('could not get the data!')
@@ -220,10 +220,49 @@ app.post('/library/addnewbook', async (request, response) => {
         } else { console.log('already got that one!') }
 
         await newBook.save()
-
+        console.log(newBook)
         response.json(newBook)
 
     } catch (error) {
         console.log(error)
+    }
+})
+
+//single author page
+app.get('/library/authors/:id', async (request, response) => {
+    const { id } = request.params
+    try {
+        const author = await Author.findById(id)
+
+        if (!author) {
+            return response.status(404).json({ error: 'Author not found' })
+        }
+        const booksByAuthor = await Book.find({ author: author.id }).select('title publishingDate')
+        console.log(author, booksByAuthor)
+
+        response.json({ author, booksByAuthor })
+
+    } catch (error) {
+        console.log('could not get that author to the backend', error)
+        response.status(500).json({ error: 'problems with the backend mate' })
+    }
+})
+
+//single book page
+app.get('/library/books/:id', async (request, response) => {
+    const { id } = request.params
+    try {
+        const book = await Book.findOne({
+            _id: id
+        }).populate('author')
+        if (!book) {
+            return response.status(404).json({ error: 'Book not found' })
+        }
+        console.log(book)
+        response.json(book)
+    }
+    catch (error) {
+        response.status(500)
+        console.log('problems in the backend', error)
     }
 })
