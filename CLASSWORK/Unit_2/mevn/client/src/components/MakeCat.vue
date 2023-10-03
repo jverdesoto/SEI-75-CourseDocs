@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <h1>Make your own cat</h1>
     <input type="text" name="name" placeholder="name">
     <input type="text" name="age" placeholder="age">
@@ -35,4 +35,4 @@ export default {
     }
 }
 
-</script>
+</script> -->

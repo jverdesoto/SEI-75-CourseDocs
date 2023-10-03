@@ -1,54 +1,83 @@
 import { createWebHistory, createRouter } from 'vue-router'
-import DogsView from '../components/DogsView'
-import SingleDogView from '../components/SingleDogView'
-import AllDogs from '../components/Dog'
-import CatFact from '../components/Cat'
-import CatNode from '../components/Cats'
-import FindUser from '../components/user'
-import MakeCats from '../components/MakeCat'
+// import SingleDogView from '../components/SingleDogView'
+// import AllDogs from '../components/Dog'
+// import CatFact from '../components/Cat'
+import Library from '../components/Library/Library'
+import AddBook from '../components/Library/AddBook'
+import AllBooks from '../components/Library/AllBooks'
+import AllAuthors from '../components/Library/AllAuthors'
+import Author from '../components/Library/Author'
+import Book from '../components/Library/Book'
 
 const routes = [
     {
         name: 'Home',
         path: '/',
-        component: DogsView
+        component: Library
     },
     {
-        name: 'Cats',
-        path: '/cat-facts',
-        component: CatFact
+        name: 'AddNewBook',
+        path: '/AddBook',
+        component: AddBook
     },
     {
-        name: 'Cat',
-        path: '/cat-front',
-        component: CatNode
+        name: 'AllBooks',
+        path: '/AllBooks',
+        component: AllBooks
     },
     {
-        name: 'Dogs',
-        path: '/dogs',
-        component: AllDogs
+        name: 'AllAuthors',
+        path: '/AllAuthors',
+        component: AllAuthors
     },
     {
-        name: 'Dog',
-        path: '/dogs/:id',
-        component: SingleDogView
+        name: 'Author',
+        path: '/AllAuthors/:id',
+        component: Author
     },
     {
-        name: 'FindUser',
-        path: '/user/:user',
-        component: FindUser
+        name: 'Book',
+        path: '/AllBooks/:id',
+        component: Book
     },
-    {
-        name: 'MakeCats',
-        path: '/make-cat',
-        component: MakeCats
-    },
-
+    // {
+    //     name: 'Dogs',
+    //     path: '/dogs',
+    //     component: AllDogs
+    // },
+    // {
+    //     name: 'Dog',
+    //     path: '/dogs/:id',
+    //     component: SingleDogView
+    // },
+    // {
+    //     name: 'Cats',
+    //     path: '/cat-facts',
+    //     component: CatFact
+    // },
+    // {
+    //     name: 'NodeCatFacts',
+    //     path: '/cat-back',
+    //     component: CatBack
+    // },
+    // {
+    //     name: 'CatName-db',
+    //     path: '/cat-pet',
+    //     component: CatPets
+    // },
+    // {
+    //     name: 'GitUser',
+    //     path: '/user/:user',
+    //     component: GitUser
+    // }
+    // {
+    //     name: 'Github-user-repo',
+    //     path: 'repo/:user/:reponame',
+    //     component: User
+    // }
 ]
-
 const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes,
 })
-
-export default router
+export default router;
