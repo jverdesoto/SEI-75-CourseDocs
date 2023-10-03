@@ -26,28 +26,23 @@ app.get('/',async (req,res)=>{
     res.redirect('/books');
 });
 
+/**   Books requests  */
+
 // get all boks from database
 app.get('/books',async (req,res)=>{
     booksController.getBooks(req,res);
 });
 
+
+// saved book
+app.post('/books/add',async (req,res)=>{ 
+    console.log(`noode book Object = ${JSON.stringify(req.body)}`)
+    booksController.saveBook(req, res);
+});
+
+/**   Author requests  */
+
 // get all boks from database
 app.get('/authors',async (req,res)=>{
     authorsController.getAuthors(req,res);
 });
-
-// saved book
-// app.post('/books/add',async (req,res)=>{ 
-//     console.log(`noode book Object = ${JSON.stringify(req.body)}`)
-//     // console.log(`created book Object = ${JSON.stringify(book)}`)
-//     const bookOject = req.body;
-//     await bookOject.save()
-//     .then((bookOject) => {
-//         res.sendStatus(200);
-//         console.log(JSON.stringify(bookOject));
-//     })
-//     .catch((error) => {
-//          console.log(error);
-//          res.sendStatus(500);
-//      });
-// });

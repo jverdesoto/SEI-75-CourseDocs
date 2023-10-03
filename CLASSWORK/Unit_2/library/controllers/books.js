@@ -23,22 +23,18 @@ async function getBooks(req,res){
 
 
 async function saveBook(req, res){
-    app.post('/books/add',async (req,res)=>{
-    
-        console.log(req.body)
-        let reqName = req.body.name;
-        let reqAge = req.body.age;
-        console.log(`name = ${reqName} : ${reqAge}`)
-        
-        const catObj = new Cat({ name: reqName, age: parseInt(reqAge) });
-        await catObj.save()
-        .then((cat) => {
-            res.sendStatus(200);
-            console.log(JSON.stringify(cat));
-        })
-        .catch((error) => {
-            console.log(error);
-            res.sendStatus(500);
-        });
+    console.log(`created book Object = ${JSON.stringify(req.body)}`)
+    const data = JSON.parse(req.body);
+    const bookOject = new Book('book',data);
+
+    await bookOject.save()
+    .then((bookOject) => {
+        res.sendStatus(200);
+        console.log(JSON.stringify(bookOject));
+    })
+    .catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
     });
+
 }

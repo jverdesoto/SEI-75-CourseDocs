@@ -12,9 +12,6 @@ const bookSchema = new Schema({
         },
         min: 1927
     },
-  
-    // cast: [String],
-    // nowShowing: { type: Boolean, default: true},
     author: {}
 });
 
