@@ -1,8 +1,14 @@
 <template>
     <div class="single-book-container" v-if="book">
-      <h1>{{ book.title }}</h1>
-      <p> Author: {{ book?.author?.name }}</p>
-      <p> Publishing year: {{ book.publishingDate }}</p>
+        <h1>{{ book.title }}</h1>
+        <h3> Author: <router-link :to="'/library/authors/' + book?.author?._id" class="router-link">{{ book?.author?.name }}</router-link></h3>
+        <div class="button-container">
+            <button @click="deleteBook">Delete this editBook</button>
+            <button @click="goToEdit">Edit this entry</button>
+        </div>
+    </div>
+    <div v-else>
+        <p>no book to display</p>
     </div>
 </template>
 
@@ -15,17 +21,14 @@ export default {
     data: () => ({
         error: 'no book to display',
         book: {},
-        // author:{}
     }),
     mounted() {
-        const route = useRoute()
         try {
+            const route = useRoute()
             fetch(`${API_URL}/${route.params.id}`)
                 .then(response => response.json())
                 .then(result => {
                     this.book = result
-                    // this.author = result.author
-                    console.log(this.book)
                 })
         }
         catch (error) {
@@ -33,7 +36,47 @@ export default {
         }
     },
     methods: {
-
+        async deleteBook() {
+            try {
+                await fetch(`${API_URL}/${this.book._id}`, { method: 'DELETE' })
+                this.status = "delete successful"
+                console.log('delete successful')
+                this.$router.replace({
+                    name: 'allBooks'
+                })
+            } catch (error) {
+                console.log('problems deleting the front', error)
+            }
+        },
+        goToEdit() {
+            this.$router.push({
+                path: 'editBook/' + this.book._id
+            })
+        }
     }
 }
 </script>
+<style scoped>
+.single-book-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    gap: 5px;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+    margin: 1%;
+}
+
+.router-link {
+    text-decoration: none;
+    color: inherit
+}
+.router-link:hover {
+    color:orange;
+}
+</style>

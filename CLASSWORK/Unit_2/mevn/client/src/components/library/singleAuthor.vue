@@ -1,12 +1,12 @@
 <template>
     <div class="single-author-container">
-        <div v-if="author">
+        <!-- <div v-if="author"> -->
             <h1>{{ author.name }}</h1>
-            <h3>Books by this author in our collection:</h3>
+            <p>Books by this author in our collection:</p>
             <div v-for="book in booksByAuthor" :key="book._id">
-            <p>{{ book.title }}</p>
+            <h4>{{ book.title }}</h4>
             </div>
-        </div>
+        <!-- </div> -->
     </div>
 </template>
 
@@ -41,3 +41,13 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.single-author-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+</style>

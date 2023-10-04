@@ -1,8 +1,9 @@
 <template>
     <div class="all-authors-container" v-if="authors">
         <h1>Authors in our Collection</h1>
-        <div v-for="author in authors" :key="author._id">
-           <router-link :to="'/library/authors/' + author._id"> <p>{{ author.name }}</p></router-link>
+        <p>(click each for more details)</p>
+        <div v-for="author in authors" :key="author._id" class="author-name">
+            <h3><router-link :to="'/library/authors/' + author._id" class="router-link">{{ author.name }}</router-link></h3>
         </div>
     </div>
 </template>
@@ -29,3 +30,22 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.all-authors-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.router-link {
+    text-decoration: none;
+    color: inherit
+}
+
+.router-link:hover {
+    color: orange;
+}
+</style>

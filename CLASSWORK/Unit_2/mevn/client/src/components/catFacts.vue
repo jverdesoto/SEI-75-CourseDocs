@@ -44,7 +44,7 @@ export default {
 }
 </script>
 
-<style>
+<!-- <style>
 .cat-facts-container{
     display: flex;
     justify-content: center;
@@ -55,4 +55,4 @@ export default {
     height: 200px;
     text-align: center;
 }
-</style>
+</style> -->

@@ -66,7 +66,7 @@ export default {
     }
 }
 </script>
-<style>
+<!-- <style scoped>
 .cat-registration-container {
     display: flex;
     flex-direction: column;
@@ -137,4 +137,4 @@ table th {
     background-color: #f2f2f2;
     font-weight: bold;
 }
-</style>
+</style> -->

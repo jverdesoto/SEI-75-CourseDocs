@@ -37,7 +37,7 @@ export default {
 }
 </script>
 
-<style>
+<!-- <style scoped>
 .dogs-container {
     display: flex;
     flex-direction: column;
@@ -57,4 +57,4 @@ export default {
  .dogs-container > img{
     max-width: 40%;
  } 
-</style>
+</style> -->

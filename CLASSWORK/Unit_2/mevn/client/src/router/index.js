@@ -13,6 +13,7 @@ import allAuthors from '../components/library/allAuthors'
 import singleAuthor from '../components/library/singleAuthor'
 import singleBook from '../components/library/singleBook'
 import landingPage from '../components/library/landingPage'
+import editBook from '../components/library/editBook'
 
 const routes = [
     {
@@ -85,6 +86,11 @@ const routes = [
         name: 'landingPage',
         path: '/library',
         component: landingPage
+    }, 
+    {
+        name: 'editBook',
+        path: '/library/books/editbook/:id',
+        component: editBook
     }
 ]
 

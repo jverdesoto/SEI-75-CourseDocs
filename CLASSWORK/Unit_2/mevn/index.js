@@ -258,11 +258,57 @@ app.get('/library/books/:id', async (request, response) => {
         if (!book) {
             return response.status(404).json({ error: 'Book not found' })
         }
-        console.log(book)
         response.json(book)
     }
     catch (error) {
         response.status(500)
         console.log('problems in the backend', error)
+    }
+})
+
+app.delete('/library/books/:id', async (request, response) => {
+    const { id } = request.params
+    try {
+        const book = await Book.deleteOne({
+            _id: id
+        })
+        //what do I send as a response after deleting?
+        response.sendStatus(204)
+    }
+    catch (error) {
+        response.sendStatus(500)
+        console.log('problems in the delete backend', error)
+    }
+})
+
+app.put('/library/books/:id', async (req, res) => {
+
+    const id = req.params.id
+    try {
+        const book = await Book.updateOne(
+            { //which id I am targeting
+                "_id": id
+            },
+            { //the values that I am updating
+                title: req.body.title,
+                publishingDate: parseInt(req.body.publishingDate)
+            })
+        res.json({ message: "book updated" })
+    } catch (error) {
+        res.status(500)
+        console.log('problems editing in the backend', error)
+    }
+})
+
+//search bar NOT WORKING
+app.get('/library/books/search', async (request, response) => {
+    try {
+        const query = request.query.query
+        const queryBook = await Book.find({
+            title: {$regex: new RegExp(query, 'i')}
+        })
+        response.json(queryBook)
+    } catch (error) {
+        console.log('not searching right backend', error)
     }
 })

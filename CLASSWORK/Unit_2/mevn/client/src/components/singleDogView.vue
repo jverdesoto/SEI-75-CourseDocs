@@ -41,7 +41,7 @@ export default {
 }
 </script>
 
-<style>
+<!-- <style scoped>
 .single-dog-container {
     display: flex;
     flex-direction: column;
@@ -63,4 +63,4 @@ export default {
     padding: 10px;
     margin-top: 5%;
 }
-</style>
+</style> -->
