@@ -1,6 +1,6 @@
 import { createWebHistory, createRouter } from 'vue-router'
 import HomeView from '../components/HomeView'
-import AddBookView from '../components/AddBookView'
+import AddOrUpdateBookView from '../components/AddOrUpdateBookView'
 import AllBooksView from '../components/AllBooksView'
 import AllAuthorsView from '../components/AllAuthorsView'
 import SingleAuthorView from '../components/SingleAuthorView'
@@ -25,7 +25,7 @@ const routes = [
     {
         name: 'Add Or Edit Book',
         path: '/books/addOrUpdate/:id',
-        component: AddBookView
+        component: AddOrUpdateBookView
     },
     {
         name: 'All Authors',
