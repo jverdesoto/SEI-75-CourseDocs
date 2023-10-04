@@ -86,8 +86,6 @@ async function deleteBook(req, res){
         console.log(error);
         res.sendStatus(500);
     });
-    // console.log(JSON.stringify(book));
-    // return res.json(book);
 }
 
 // update an existing  book  title and published date
@@ -95,12 +93,18 @@ async function updateBook(req, res){
     console.log(`Book Id : ` + req.params.id);
     const filter = {_id: `${req.params.id}`};
     console.log(`A Book`);
-    let book = await Book.updateOne(filter, {
+
+    Book.updateOne(filter, {
         title: req.body.title,
         publishedDate: req.body.publishedDate
-    })
-    console.log(JSON.stringify(book));
-    return res.json(book);
+    }).then(()=>{
+        console.log('Update Book')
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log('Update Book Error')
+        console.log(error);
+        res.sendStatus(500);
+    });
 }
 
 

@@ -6,7 +6,7 @@
             <h3>Published Date:  {{new Date(book.publishedDate).toLocaleDateString()}} </h3>
             <p>Written By <router-link :to="'/authors/' + author._id" >  {{ author.name }} </router-link></p>
             <p><button v-on:click="deleteBook"> Detele </button></p>
-            <p><button><router-link :to="'/books/addOrUpdate' + book._id" > Update </router-link></button></p>
+            <p><button><router-link :to="'/books/addOrUpdate/' + book._id" > Update </router-link></button></p>
       </div>
 </template>
 
