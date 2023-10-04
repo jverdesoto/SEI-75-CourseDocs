@@ -1,10 +1,9 @@
 import 'dotenv/config'
 import mongoose, { Schema } from "mongoose";
-// import authorSchema from './authorModel.js'
 
 const bookSchema = new Schema({
-    title:{type: String},
-    description:{type: String, required: true},
+    title:{type: String, required: true},
+    description:{type: String},
     publishedDate: {
         type: Date,
         default: function(){
@@ -12,11 +11,12 @@ const bookSchema = new Schema({
         },
         min: 1927
     },
-    author: {}
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Author'
+    }
 });
 
 const Book = mongoose.model('books', bookSchema);
 export default Book;
-
-
-

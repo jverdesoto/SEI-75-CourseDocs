@@ -2,9 +2,9 @@
     <h1>All Authors</h1>
    <div class="listView">
        <div class="card" v-for="author in authors" :key="author._id">
-           <div class="row">
-               <div>{{ author.name }} </div>
-           </div>
+               <h2>{{ author.name }} </h2>
+               <h2>{{ author._id }} </h2>
+               <p><router-link :to="'/authors/' + author._id" > Details </router-link></p>
        </div>
    </div>
 </template>

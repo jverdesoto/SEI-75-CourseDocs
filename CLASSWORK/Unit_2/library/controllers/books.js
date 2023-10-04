@@ -10,7 +10,8 @@ mongoose.connect(`${process.env.DATABAE_URL}`);
 
 export default {
     saveBook,
-    getBooks
+    getBooks,
+    getAuthorBooks
 }
 
 async function getBooks(req,res){
@@ -22,19 +23,29 @@ async function getBooks(req,res){
 }
 
 
+// get all books for an author
+async function getAuthorBooks(req,res){
+    const filter = {"author": req.params.id};
+    console.log(`Get Author Books`);
+    let books = await Book.find(filter)
+    console.log(JSON.stringify(books));
+    return res.json(books);
+}
+
+
 async function saveBook(req, res){
     console.log(`created book Object = ${JSON.stringify(req.body)}`)
-    const data = JSON.parse(req.body);
-    const bookOject = new Book('book',data);
+    // const data = JSON.parse(req.body);
+    // const bookOject = new Book('book',data);
 
-    await bookOject.save()
-    .then((bookOject) => {
-        res.sendStatus(200);
-        console.log(JSON.stringify(bookOject));
-    })
-    .catch((error) => {
-        console.log(error);
-        res.sendStatus(500);
-    });
+    // await bookOject.save()
+    // .then((bookOject) => {
+    //     res.sendStatus(200);
+    //     console.log(JSON.stringify(bookOject));
+    // })
+    // .catch((error) => {
+    //     console.log(error);
+    //     res.sendStatus(500);
+    // });
 
 }

@@ -9,7 +9,8 @@ import Author from '../models/authorModel.js';
 mongoose.connect(`${process.env.DATABAE_URL}`);
 
 export default {
-    getAuthors
+    getAuthors,
+    getAuthorById
 }
 
 async function getAuthors(req,res){
@@ -20,24 +21,11 @@ async function getAuthors(req,res){
     return res.json(authors);
 }
 
-
-// async function saveBook(req, res){
-//     app.post('/books/add',async (req,res)=>{
-    
-//         console.log(req.body)
-//         let reqName = req.body.name;
-//         let reqAge = req.body.age;
-//         console.log(`name = ${reqName} : ${reqAge}`)
-        
-//         const catObj = new Cat({ name: reqName, age: parseInt(reqAge) });
-//         await catObj.save()
-//         .then((cat) => {
-//             res.sendStatus(200);
-//             console.log(JSON.stringify(cat));
-//         })
-//         .catch((error) => {
-//             console.log(error);
-//             res.sendStatus(500);
-//         });
-//     });
-// }
+async function getAuthorById(req,res){
+    console.log(`Author Id : ` + req.params.id);
+    const filter = {_id: `${req.params.id}`};
+    console.log(`An Authors`);
+    let author = await Author.findOne(filter)
+    console.log(JSON.stringify(author));
+    return res.json(author);
+}
