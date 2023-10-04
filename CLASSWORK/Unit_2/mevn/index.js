@@ -18,7 +18,10 @@ const Author = mongoose.model('Author', AuthorSchema);
 
 const BookSchema = new mongoose.Schema({
   title: String,
-  author: String,
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Author'
+  },
   date: Number
 });
 BookSchema.index({ title: 1, author: 1 });
@@ -33,7 +36,8 @@ app.listen(port, () => {
 
 app.get('/library', async (req, res) => {
   try {
-    const data = await Book.find({}).exec();
+    const data = await Book.find({}).populate('author').exec();
+    
     res.json(data);
   } catch (err) {
     console.error(err);
@@ -41,15 +45,38 @@ app.get('/library', async (req, res) => {
   }
 });
 
-app.get('/library/authors/:author', async (req, res) => {
-  const authors = await Author.find({}).exec();
-    res.json(authors);
+app.get('/library/authors', async (req, res) => {
+  const authors = await Author.find();
+  const booksByAuthor = await Promise.all(authors.map(async (author) => {
+    const books = await Book.find({ author: author._id });
+    return { ...author.toJSON(), books };
+  }));
+
+  res.json(booksByAuthor)
+});
+app.get('/library/:id', async (req, res) => {
+  const book = await Book.findById(req.params.id).populate('author').exec()
+  res.json(book)
 });
 
-app.get('/library/titles/:title', async (req, res) => {
-  const title = req.params.title
-    const data = await Book.find({ title }).exec();
-    res.json(data);
+app.delete('/library/:id', async (req, res) => {
+  Book.deleteOne({'_id': req.params.id})
+  .then(() => {
+    res.json({message: 'Deleted'})
+  })
+  .catch(error => {
+    res.sendStatus(500)
+  })
+});
+
+app.put('/library/:id', async (req, res) => {
+  Book.updateOne({'_id': req.params.id}, { title: req.body.title, date: parseInt(req.body.date)})
+  .then(() => {
+    res.sendStatus(200)
+  })
+  .catch(erros => {
+    res.sendStatus(500)
+  })
 });
 
 app.post('/library', async (req, res) => {
@@ -64,12 +91,12 @@ app.post('/library', async (req, res) => {
 
       if (!authorDocument) {
         const newAuthor = new Author({ name: author });
-        await newAuthor.save();
+        authorDocument = await newAuthor.save();
       }
 
       const newBook = new Book({
         title: bookData.title,
-        author: author, 
+        author: authorDocument._id, 
         date: parsedDate,
       });
 

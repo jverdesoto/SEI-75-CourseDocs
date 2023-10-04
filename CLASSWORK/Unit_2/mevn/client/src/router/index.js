@@ -3,6 +3,10 @@ import booksLibrary from '../components/Library.vue'
 import newBooks from '../components/Library-newBooks.vue'
 import authorLibrary from '../components/Library-author.vue'
 import bookTitles from '../components/Library-title.vue'
+import editBook from '../components/EditBook.vue'
+import bookDetails from '../components/bookDetails.vue'
+// import AuthorBooks from '../components/AuthorBooks.vue'
+
 
 const routes = [
     {
@@ -11,19 +15,36 @@ const routes = [
         component: booksLibrary
     },
     {
+        name: 'LibraryBook',
+        path: '/library/book/:id',
+        component: bookDetails,
+        props: true
+    },
+    {
         name: 'Library-newBook',
         path: '/library/newBooks',
         component: newBooks
     },
     {
-        name: 'Autor Shortlist',
-        path: '/library/author',
-        component: authorLibrary
+        name: 'Authors',
+        path: '/library/authors',
+        component: authorLibrary,
     },
+            // {
+            // name: 'Author Books',
+            // path: '/library/authors/:author',
+            // component: AuthorBooks
+            // },
+    
     {
         name: 'Title Shortlist',
-        path: '/library/title',
+        path: '/library/titles',
         component: bookTitles
+    },
+    {
+        name: 'EditBook',
+        path: '/library/editBook',
+        component: editBook
     }
 ]
 

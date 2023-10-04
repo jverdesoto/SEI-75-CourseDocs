@@ -6,14 +6,14 @@
 
     <body>
         <h1>List of Available Books</h1>
-        <div class="Books-list" v-for="book in books" :key="book._id">
-            <h4>
-                <div @click="toggleDetails(book)">{{ book.title }}</div>
-            </h4>
-            <div class="details" v-if="book.showDetails">
-                {{ book.author }} - {{ book.date }}</div>
-
-        </div>
+    <div class="Books-list" v-for="book in books" :key="book._id">
+      <h4>
+        <div @click="toggleDetails(book)">{{ book.title }}</div>
+      </h4>
+      <div class="details" v-if="book.showDetails">
+        <p><router-link :to="'/library/book/' + book._id">{{ book.author.name }}</router-link></p>
+      </div>
+    </div>
     </body>
 </template>
 
@@ -26,7 +26,7 @@ export default {
     data: () => ({
         error: '',
         books: {},
-        authors: {}
+        authors: []
 
     }),
 
@@ -35,6 +35,9 @@ export default {
             .then(response => response.json())
             .then(result => {
                 this.books = result
+                this.books.forEach((book) => {
+                    book.showDetails = false;
+                });
             })
     },
 

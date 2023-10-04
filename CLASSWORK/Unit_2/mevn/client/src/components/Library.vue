@@ -5,8 +5,8 @@
         <!-- <button class="search" type="button">Search Books</button> -->
         <router-link to="library/newBooks"><button class="donate" type="button">Donate Books</button></router-link>
     </nav>
-    <router-link to="library/author"><button type="button">Search book by author</button></router-link>
-    <router-link to="library/title"><button type="button">Search book by title</button></router-link>
+    <router-link to="library/authors"><button type="button">Search book by author</button></router-link>
+    <router-link to="library/titles"><button type="button">Search book by title</button></router-link>
 </template>
 
 <script>

@@ -2,66 +2,61 @@
     <header>
         <router-link to="/library"><button class="Main">Main Page</button></router-link>
     </header>
-    <h1>Donate a Book</h1>
+    <h1>Replace Book</h1>
     <div class="bookDetails">
-        <p><input type="text" v-model="book.title" placeholder="Title"></p>
-        <p><input type="text" v-model="book.author" placeholder="Author"></p>
-        <p><input type="text" v-model="book.date" placeholder="Year of Publishing"></p>
+        <p><input type="text" v-model="book.title" placeholder="Title">{{ book.title }}</p>
+        <p><input placeholder="Author">{{ book.author }}</p>
+        <p><input type="text" v-model="book.date" placeholder="Year of Publishing">{{ book.date }}</p>
     </div>
-    <button @click="addBook">Donate</button>
+    <button @click="editBook">Change</button>
 </template>
 
 <script>
 const API_URL = 'http://localhost:4000/library'
-
+import { useRoute } from 'vue-router';
 export default {
-    name: 'newBooks',
+    name: 'editBook',
     data: () => ({
         error: '',
         book: {
+            id: '',
             title: '',
             author: '',
             date: ''
         }
     }),
 
-    methods: {
-        addBook: function () {
-            if (!this.book.title || !this.book.author || !this.book.date || isNaN(this.book.date)) {
-                alert(this.error = 'Please fill in all fields with valid data.');
-                return;
-            }
+    mounted() {
+        const route = useRoute()
+        fetch(`${API_URL}/book/${route.params.id}`)
+            .then(result => result.json())
+            .then(data => {
+                this.book.id = route.params.id
+                this.book.title = data.title
+                this.book.author = data.author ? data.author.name : ''
+                this.book.date = data.date
+            })
+    },
 
-            fetch(API_URL, {
-                method: "POST",
+    methods: {
+        editBook() {
+            fetch(`${API_URL}/book/${this.book.id}`, {
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     title: this.book.title,
-                    author: this.book.author,
                     date: this.book.date
                 })
             })
-                .then(res => console.log(res.status))
-            alert((`New book: ${this.book.title} from ${this.book.author} released in ${this.book.date} was added to the library`));
-        },
 
-        deleteBook: function () {
-            fetch(`${API_URL}/${this.book._id}`, {
-                method: "DELETE"
-            })
                 .then(() => {
-                    this.$router.replace({ name: 'Authors' })
+                    this.$router.replace({ name: 'bookDetails', params: { id: this.book.id } });
                 })
-        },
-
-        editBook: function () {
-
         }
     }
 }
-
 
 </script>
 
@@ -75,7 +70,7 @@ p {
     margin: 0 auto;
 }
 
-input[type="text"] {
+input {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;

@@ -8,11 +8,13 @@
         <h1>List of Authors</h1>
         <div class="Books-list" v-for="author in authors" :key="author._id">
             <h4>
-                <div @click="toggleDetails(author)">{{ author.author }}</div>
+                <div @click="toggleDetails(author)">{{ author.name }}</div>
             </h4>
             <div class="details" v-if="author.showDetails">
-                {{ author.title }} - {{ author.date }}</div>
-
+                <span v-for="book in author.books" :key="book._id">
+                        <p><router-link :to="'/library/book/' + book._id">{{ book.title }}</router-link></p>
+                </span>
+            </div>
         </div>
     </body>
 </template>
@@ -26,21 +28,24 @@ export default {
     data: () => ({
         error: '',
         books: {},
-        authors: {}
+        authors: []
 
     }),
 
     mounted() {
-        fetch(API_URL)
+        fetch(`${API_URL}/authors`)
             .then(response => response.json())
             .then(result => {
                 this.authors = result
+                this.authors.forEach(author => {
+                    author.showDetails = false
+                });
             })
     },
 
     methods: {
-        toggleDetails(book) {
-            book.showDetails = !book.showDetails;
+        toggleDetails(author) {
+            author.showDetails = !author.showDetails;
         }
     },
 }
@@ -74,5 +79,4 @@ h4 {
     margin-top: 10px;
     font-size: 14px;
     color: #666;
-}
-</style>
+}</style>
