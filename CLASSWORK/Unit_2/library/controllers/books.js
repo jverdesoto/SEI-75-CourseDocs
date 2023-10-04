@@ -45,32 +45,36 @@ async function getBookById(req,res){
 async function saveBook(req, res){
     // TODO fix this issue
     // expected id '651b32ad56a4c7ac494212b5'
-    // const authorObj = await authorsController.getAuthorByName(req,res);
-    // console.log(`authorObj id for book = ${JSON.parse(authorObj).stringify()}`)
-    // if(authorObj === null) 
-    // {
-    //     // TODO save the author
-    // }
-    // /{"title":"the secret","description":"ihdeiudheidbe","publishedDate":"04/10/2023","authorName":"JAke"}
-    const newBook = new Book({
-        title: req.body.title,
-        description: req.body.description,
-        publishedDate: req.body.publishedDate,
-        author: '651b32ad56a4c7ac494212b5'//'authorObj._id'
-    })
+    let authorObj = await authorsController.getAuthorByName(req.body.authorName)
+    if(authorObj === null) 
+    {
+        authorObj = authorsController.saveAuthor(req.body.authorName)
+    }
 
-    console.log(`new book Object = ${JSON.stringify(newBook)}`)
-    
-    await newBook.save()
-    .then((newBook) => {
-        res.sendStatus(200);
-        console.log(JSON.stringify(newBook));
-    })
-    .catch((error) => {
-        console.log(error);
-        res.sendStatus(500);
-    });
+    if(authorObj !== null)
+    {
+        // console.log(`authorObj id for book = ${authorObj._id}`)
+        
+        //{"title":"the secret","description":"ihdeiudheidbe","publishedDate":"04/10/2023","authorName":"JAke"}
+        const newBook = new Book({
+            title: req.body.title,
+            description: req.body.description,
+            publishedDate: req.body.publishedDate,
+            author: authorObj._id
+        })
 
+        console.log(`new book Object = ${JSON.stringify(newBook)}`)
+        
+        await newBook.save()
+        .then((newBook) => {
+            res.sendStatus(200);
+            console.log(JSON.stringify(newBook));
+        })
+        .catch((error) => {
+            console.log(error);
+            res.sendStatus(500);
+        });
+    }
 }
 
 // delete book from database

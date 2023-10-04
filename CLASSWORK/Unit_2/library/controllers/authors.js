@@ -11,7 +11,8 @@ mongoose.connect(`${process.env.DATABAE_URL}`);
 export default {
     getAuthors,
     getAuthorById,
-    getAuthorByName
+    getAuthorByName,
+    saveAuthor
 }
 
 async function getAuthors(req,res){
@@ -31,11 +32,24 @@ async function getAuthorById(req,res){
     return res.json(author);
 }
 
-async function getAuthorByName(req,res){
-    // console.log(`Author Name : ` + req.body.authorName);
-    const filter = {"name": `${req.body.authorName}`};
-    console.log(`An Authors`);
+async function getAuthorByName(authorName){
+    console.log(`authorObj id for book = ${authorName}`)
+    const filter = {"name": `${authorName}`};
     let author = await Author.findOne(filter)
-    console.log(JSON.stringify(author));
-    return res.json(author);
+    return author;
+}
+
+// save author
+async function saveAuthor(authorName){
+    const newAuthor = new Author({
+        name: authorName
+    })
+
+    let saveResult = null;
+    try{
+        saveResult =  await newAuthor.save();
+    }catch{
+        saveResult = null;
+    }
+    return saveResult;
 }
