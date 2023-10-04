@@ -1,10 +1,34 @@
 <template>
-    <h1>ADD A NEW BOOK</h1>
-    <input type="text" v-model="book.bookTitle" name ="bookTitle" placeholder="Book Title">
-    <input type="text"  v-model="book.publishingDate" name ="publishingDate" placeholder="Date Published">
-    <input type="text"  v-model="book.authorName" name ="authorName" placeholder="Author Name">
-    <button v-on:click="newBook">Add New Book</button>
-</template>
+    <div class="form-container">
+      <div class="form-content">
+        <h1>ADD A NEW BOOK</h1>
+        <form @submit.prevent="newBook" class="book-form">
+          <input
+            type="text"
+            v-model="book.bookTitle"
+            name="bookTitle"
+            placeholder="Book Title"
+            class="form-input"
+          />
+          <input
+            type="text"
+            v-model="book.publishingDate"
+            name="publishingDate"
+            placeholder="Date Published"
+            class="form-input"
+          />
+          <input
+            type="text"
+            v-model="book.authorName"
+            name="authorName"
+            placeholder="Author Name"
+            class="form-input"
+          />
+          <button type="submit" class="submit-button">Add New Book</button>
+        </form>
+      </div>
+    </div>
+  </template>
 
 <script>
 
@@ -56,3 +80,43 @@ export default {
 }
 
 </script>
+
+<style>
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.form-content {
+  text-align: center;
+}
+
+.book-form {
+  text-align: center;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.submit-button {
+  background-color: #5e9e77;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #4d8c6b;
+}
+</style>
