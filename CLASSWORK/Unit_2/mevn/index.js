@@ -1,4 +1,4 @@
-// Importing node modules
+// ! Importing node modules
 import express from "express"
 import cors from "cors"
 import bodyParser from "body-parser"
@@ -7,17 +7,20 @@ import { Octokit, App } from "octokit"
 import mongoose from "mongoose"
 import 'dotenv/config'
 
+// ! Initialise express
 const app = express()
 
 app.use(cors())
 app.use(bodyParser.json())
 
 // mongoose.connect(process.env.DATABASE_URL)
-mongoose.connect(process.env.LIBRARY_DATABASE_URL)
+
 const Schema = mongoose.Schema
 const Cat = mongoose.model('Cat', { name: String, age: Number })
 
 // ! Library Application
+// ? Mongoose Connection, Schemas and Models
+mongoose.connect(process.env.LIBRARY_DATABASE_URL)
 
 const bookSchema = new Schema({
     title: {
@@ -45,19 +48,29 @@ const authorSchema = new Schema({
 
 const Author = mongoose.model('Author', authorSchema)
 
+// ? Get all authors
 app.get('/library/author', async (req, res) => {
-    const authors = await Author.find().select('name').lean()
+    const authors = await Author.find()
+    .select('name')
+    .sort('name')
+    .lean()
     res.json(authors)
 })
 
+// ? Get a specific author & their books
 app.get('/library/author/:id', async (req, res) => {
     const id = req.params.id
-    const author = await Author.findOne({_id: `${id}`}).select(['name', 'books.title', 'books._id']).lean()
+    const author = await Author.findOne({_id: `${id}`})
+    .select(['name', 'books.title', 'books._id'])
+    .lean()
     res.json(author)
 })
 
+// ? Get all books
 app.get('/library/title', async (req, res) => {
-    const books = await Author.find({}).select(['books.title', 'books._id']).lean()
+    const books = await Author.find()
+    .select(['books.title', 'books._id'])
+    .lean()
     const booksArr = []
     for (let i = 0; i < books.length; i++) {
         for (let b = 0; b < books[i].books.length; b++) {
@@ -67,6 +80,7 @@ app.get('/library/title', async (req, res) => {
     res.json(booksArr)
 })
 
+// ? Get a specific book
 app.get('/library/title/:id', async (req, res) => {
     const id = req.params.id
     const doc = await Author.findOne({ 'books._id': `${id}` })
@@ -76,6 +90,7 @@ app.get('/library/title/:id', async (req, res) => {
     res.json(book)
 })
 
+// ? Add new book
 app.post('/library/add-book', async (req, res) => {
     // Get form content
     const document = req.body
@@ -120,13 +135,51 @@ app.post('/library/add-book', async (req, res) => {
     }
 })
 
-app.post('/library/update/:id', async (req, res) => {
-    const update = req.body
+// ? Update Book
+app.put('/library/update/:id', async (req, res) => {
+    const update = { 
+        '$set': {
+            'name': req.body.author,
+            'books.$.title': req.body.title,
+            'books.$.pubDate': req.body.pubDate,
+            'books.$.coverURL': req.body.coverURL
+        }
+    }
     const id = req.params.id
-    console.log(update)
-    await Author.findByIdAndUpdate(id, update)
+    const filter = { 'books._id': id }
+    await Author.findOneAndUpdate(filter, update)
     .then(result => {
         console.log(result)
+        res.sendStatus(200)
+    })
+    .catch(error => {
+        console.error(error)
+        res.sendStatus(error)
+    })
+})
+
+// ? Delete Book
+app.delete('/library/update/title/delete', async (req, res) => {
+    const id = req.body._id
+    const doc = await Author.findOne({ 'books._id': id })
+    doc.books.id(id).deleteOne()
+    await doc.save()
+    .then(result => {
+        console.log('The book was deleted')
+        res.sendStatus(200)
+    })
+    .catch(error => {
+        console.error(error)
+        res.sendStatus(error)
+    })
+})
+
+// ? Delete Author
+app.delete('/library/author/delete', async (req, res) => {
+    const id = req.body._id
+    await Author.findByIdAndDelete(id)
+    .then(result => {
+        console.log('The author and all books were deleted')
         res.sendStatus(200)
     })
     .catch(error => {

@@ -4,6 +4,7 @@
     <p>{{ book.pubDate }}</p>
     <p><router-link :to="'/library/author/' + book.authorId">{{ book.author }}</router-link></p>
     <p><button @click="updateToggle = true">Update Entry</button></p>
+    <p><button @click="deleteBook">Delete</button></p>
     <div v-if="updateToggle">
       <p><label for="title">Update Title:</label></p>
       <p><input type="text" v-model="book.title" id="title" :placeholder="book.title"></p>
@@ -20,6 +21,7 @@
 <script>
 const API_URL = "http://localhost:4000/library/title"
 const UPDATE_URL = "http://localhost:4000/library/update"
+const DELETE_URL = "http://localhost:4000/library/update/title/delete"
 
 export default {
 name: 'SingleBookView',
@@ -38,7 +40,7 @@ mounted() {
 methods: {
   update() {
     fetch(`${UPDATE_URL}/${this.book._id}`, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
             "Content-Type": "application/json"
         },
@@ -48,6 +50,18 @@ methods: {
             pubDate: this.book.pubDate,
             coverURL: this.book.coverURL
         })
+    })
+    .then(result => console.log(result))
+  },
+  deleteBook() {
+    fetch(DELETE_URL, {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        _id: this.book._id
+      })
     })
     .then(result => console.log(result))
   }
