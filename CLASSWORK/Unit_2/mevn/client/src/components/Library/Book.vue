@@ -7,7 +7,7 @@
         <p><router-link :to="'/AllAuthors/' + books?.author?._id" ><h1>{{ books?.author?.name }}</h1></router-link></p>
     </div>
     <p><button @click="deleteBook">Delete Book</button></p>
-    <p><router-link :to="`/AddBook/${id}`"><button>Edit Book</button></router-link></p>
+    <p><router-link :to="`/book/edit/${id}`"><button>Edit Book</button></router-link></p>
     <!-- <h1>{{ books.title }}</h1>
     <h1>{{ books.date }}</h1>
     <h1>{{ books.author }}</h1> -->

@@ -42,8 +42,8 @@ const routes = [
         component: Book
     },
     {
-        name: 'UpdateBook',
-        path: '/AddBook/:id',
+        name: 'EditBook',
+        path: '/book/edit/:id',
         component: EditBook
     },
     // {
