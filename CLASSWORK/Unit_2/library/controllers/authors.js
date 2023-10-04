@@ -10,7 +10,8 @@ mongoose.connect(`${process.env.DATABAE_URL}`);
 
 export default {
     getAuthors,
-    getAuthorById
+    getAuthorById,
+    getAuthorByName
 }
 
 async function getAuthors(req,res){
@@ -24,6 +25,15 @@ async function getAuthors(req,res){
 async function getAuthorById(req,res){
     console.log(`Author Id : ` + req.params.id);
     const filter = {_id: `${req.params.id}`};
+    console.log(`An Authors`);
+    let author = await Author.findOne(filter)
+    console.log(JSON.stringify(author));
+    return res.json(author);
+}
+
+async function getAuthorByName(req,res){
+    // console.log(`Author Name : ` + req.body.authorName);
+    const filter = {"name": `${req.body.authorName}`};
     console.log(`An Authors`);
     let author = await Author.findOne(filter)
     console.log(JSON.stringify(author));

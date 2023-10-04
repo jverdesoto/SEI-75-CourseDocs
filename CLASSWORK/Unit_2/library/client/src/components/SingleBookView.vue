@@ -5,6 +5,8 @@
             <h3> {{book.description}} </h3>
             <h3>Published Date:  {{new Date(book.publishedDate).toLocaleDateString()}} </h3>
             <p>Written By <router-link :to="'/authors/' + author._id" >  {{ author.name }} </router-link></p>
+            <p><button v-on:click="deleteBook"> Detele </button></p>
+            <p><button><router-link :to="'/books/addOrUpdate' + book._id" > Update </router-link></button></p>
       </div>
 </template>
 
@@ -36,7 +38,18 @@
                 })  
            })
        },
-       methods: {}
+       methods: {
+            deleteBook: function (){
+                fetch(`${API_URL}/books/${this.book._id}`,{
+                  method: "DELETE",
+                  headers:{
+                      "Content-Type" : "application/json"
+                  }
+              }).then(() => {
+                    this.$router.replace({name: 'All Books'});
+                })
+            }
+       }
    }
 </script>
 

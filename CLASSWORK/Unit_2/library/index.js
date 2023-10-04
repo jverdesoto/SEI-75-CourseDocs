@@ -44,6 +44,15 @@ app.post('/books/add',async (req,res)=>{
     booksController.saveBook(req, res);
 });
 
+// delete book from database
+app.delete('/books/:id',async (req,res)=>{
+    booksController.deleteBook(req,res);
+});
+
+// delete book from database
+app.put('/books/:id',async (req,res)=>{
+    booksController.updateBook(req,res);
+});
 /**   Author requests  */
 
 // get all boks from database

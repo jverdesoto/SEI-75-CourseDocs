@@ -18,14 +18,14 @@ const routes = [
         component: AllBooksView
     },
     {
-        name: 'Add Book',
-        path: '/books/add',
-        component: AddBookView
-    },
-    {
-        name: 'Add Book',
+        name: 'A Book',
         path: '/books/:id',
         component: SingleBookView
+    },
+    {
+        name: 'Add Or Edit Book',
+        path: '/books/addOrUpdate/:id',
+        component: AddBookView
     },
     {
         name: 'All Authors',
