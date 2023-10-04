@@ -30,7 +30,7 @@ export default {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        name:  this.book.title,
+                        title:  this.book.title,
                         publishingDate: this.book.publishingDate,
                         author: this.author.name
                     })

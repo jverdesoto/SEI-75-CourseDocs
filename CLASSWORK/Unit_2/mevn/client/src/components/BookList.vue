@@ -3,7 +3,7 @@
     <section id = 'bookList'> 
         <ul>
             <div v-for="book in books" :key="book._id">
-                <li> {{ book.title }} </li>
+                <li> <RouterLink :to="'/library/book/' + book._id">{{ book.title }}</RouterLink> </li>
             </div>
         </ul>
     </section>
@@ -24,6 +24,7 @@ export default { //exports the entire vue object to be used
             fetch(API_URL)
             .then(response => response.json())
             .then(result => {
+                console.log(result)
                 this.books = result // this basically populated the exporting data array with the value from the api 
             })
         },

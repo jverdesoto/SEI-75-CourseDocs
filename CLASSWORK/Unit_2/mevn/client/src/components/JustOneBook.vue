@@ -1,7 +1,10 @@
-<!-- <template> 
+<template> 
     <h1> {{books.title}} </h1>
+    <h2>Written by {{ author }}</h2>
+    <h2>Published on  {{ books.publishingDate }}</h2>
+    <p><router-link :to="`/library/book/edit/${books._id}`">Edit Book</router-link></p>
+    <button @click="deleteBook">Delete Book</button>
 </template>
-
 
 <script>
 import { useRoute } from 'vue-router'
@@ -21,10 +24,19 @@ export default { //exports the entire vue object to be used
         fetch(`${API_URL}/${route.params.id}`)
         .then(response => response.json())
         .then(result => {
-            this.books = result.bookData
-            this.author = result.booksAuthor // this basically populated the exporting data array with the value from the api 
+            this.books = result
+            this.author = result.author.name;
         })
     },
-    methods: {}
+    methods: {
+        deleteBook() {
+            fetch(`${API_URL}/${this.books._id}`, {
+                method: 'DELETE'
+            })
+            .then (() => {
+                this.$router.push({name: 'libraryBookList'})
+            })
+        }
+    }
 }
-</script> -->
+</script>

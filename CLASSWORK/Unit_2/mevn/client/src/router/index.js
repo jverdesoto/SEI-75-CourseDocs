@@ -10,6 +10,7 @@ import BookList from '../components/BookList'
 import AuthorList from '../components/AuthorList'
 import JustOneAuthor from '../components/JustOneAuthor'
 import JustOneBook from '../components/JustOneBook'
+import EditBook from '../components/EditBook'
 
 const routes = [
     {
@@ -56,6 +57,11 @@ const routes = [
         name: 'libraryBookAdd',
         path: '/library/book/add',
         component: LibraryForm
+    },
+    {
+        name: 'librayEditBook',
+        path: '/library/book/edit/:id',
+        component: EditBook
     },
     {
         name: 'libraryOneAuthorView',
