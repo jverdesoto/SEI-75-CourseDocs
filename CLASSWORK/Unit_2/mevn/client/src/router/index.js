@@ -8,6 +8,7 @@ import AllBooks from '../components/Library/AllBooks'
 import AllAuthors from '../components/Library/AllAuthors'
 import Author from '../components/Library/Author'
 import Book from '../components/Library/Book'
+import EditBook from '../components/Library/EditBook'
 
 const routes = [
     {
@@ -39,6 +40,11 @@ const routes = [
         name: 'Book',
         path: '/AllBooks/:id',
         component: Book
+    },
+    {
+        name: 'UpdateBook',
+        path: '/AddBook/:id',
+        component: EditBook
     },
     // {
     //     name: 'Dogs',
