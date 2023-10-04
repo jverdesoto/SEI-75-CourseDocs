@@ -7,9 +7,8 @@ const bookSchema = new Schema({
     publishedDate: {
         type: Date,
         default: function(){
-            return new Date().getFullYear();
-        },
-        min: 1927
+            return new Date();
+        }
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,

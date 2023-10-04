@@ -31,10 +31,12 @@
 
 <style>
 .listView{
-   display: flex;
+   /* display: flex;
    justify-content: center;
-   flex-wrap: wrap;
-   gap: 2px;
+   flex-wrap: wrap; */
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .card{

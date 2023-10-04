@@ -1,13 +1,11 @@
 <template>
     <h1>Authors Details</h1>
-   <div class="listView">
        <div class="card" v-bind="author" :key="author._id">
-               <div>{{ author.name }} </div>
-                <div class="row" v-for="book in books" :key="book._id">
-                    <h2>{{ book.title }}</h2>
-                </div>
+            <h2>{{ author.name }}</h2>       
+            <div class="row" v-for="book in books" :key="book._id">
+                <h3> <router-link :to="'/books/' + book._id" >  {{ book.title }} </router-link></h3>
+            </div>
        </div>
-   </div>
 </template>
 
 <script>

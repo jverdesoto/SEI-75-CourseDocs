@@ -33,11 +33,10 @@ app.get('/books',async (req,res)=>{
     booksController.getBooks(req,res);
 });
 
-// get an authors books `${API_URL}/authors/${route.params.id}/books
-app.get('/authors/:id/books',async (req,res)=>{
-    booksController.getAuthorBooks(req, res);
+// get a book details
+app.get('/books/:id',async (req,res)=>{
+    booksController.getBookById(req,res);
 });
-
 
 // saved book
 app.post('/books/add',async (req,res)=>{ 
@@ -56,6 +55,12 @@ app.get('/authors',async (req,res)=>{
 app.get('/authors/:id',async (req,res)=>{
     authorsController.getAuthorById(req,res);
 });
+
+// get an author's books
+app.get('/authors/:id/books',async (req,res)=>{
+    booksController.getAuthorBooks(req, res);
+});
+
 
 
 

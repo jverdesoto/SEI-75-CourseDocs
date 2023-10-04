@@ -4,6 +4,7 @@ import AddBookView from '../components/AddBookView'
 import AllBooksView from '../components/AllBooksView'
 import AllAuthorsView from '../components/AllAuthorsView'
 import SingleAuthorView from '../components/SingleAuthorView'
+import SingleBookView from '../components/SingleBookView'
 
 const routes = [
     {
@@ -20,6 +21,11 @@ const routes = [
         name: 'Add Book',
         path: '/books/add',
         component: AddBookView
+    },
+    {
+        name: 'Add Book',
+        path: '/books/:id',
+        component: SingleBookView
     },
     {
         name: 'All Authors',

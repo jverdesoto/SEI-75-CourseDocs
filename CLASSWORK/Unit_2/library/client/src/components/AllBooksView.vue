@@ -2,14 +2,7 @@
      <h1>All books</h1>
     <div class="listView">
         <div class="card" v-for="book in books" :key="book._id">
-            <div class="row">
-                <div>Title: </div>
-                <div>{{ book.title }} </div>
-            </div>
-            <div class="row">
-                <div>Description: </div>
-                <div>{{ book.description }} </div>
-            </div>
+            <h2><router-link :to="'/books/' + book._id" >  {{ book.title }} </router-link></h2>
         </div>
     </div>
 </template>
@@ -37,9 +30,11 @@
 
 <style>
 .listView{
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: wrap; */
+    display: flex;
+    flex-direction: column;
     gap: 2px;
 }
 
