@@ -6,6 +6,8 @@ import CatAddNew from '../components/CatAddNew'
 import LibraryHome from '../components/Library'
 import SearchByAuthor from '../components/SearchByAuthor'
 import SearchByTitle from '../components/SearchByTitle'
+import SingleAuthor from '../components/SingleAuthor'
+import SingleBook from '../components/SingleBook'
 
 const routes = [
     {
@@ -48,6 +50,16 @@ const routes = [
     path: '/library/search-by-title',
     component: SearchByTitle
     },
+    {
+        name: 'SingleAuthor',
+        path: '/library/search-by-author/:id',
+        component: SingleAuthor
+    },
+    {
+        name: 'SingleBook',
+        path: '/library/search-by-title/:id',
+        component: SingleBook
+    }
 ]
 
 const router = createRouter({

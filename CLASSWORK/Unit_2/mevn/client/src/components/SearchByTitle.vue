@@ -1,21 +1,35 @@
 <template>
     <h1 id = "searchBy">Search by title</h1>
-    <ul>
-        <p id="searchByTitle"><router-link :to="'/library/search-by-title:title'">Title</router-link></p>
-        <p id="searchByTitle"><router-link :to="'/library/search-by-title:title'">Title</router-link></p>
-        <p id="searchByTitle"><router-link :to="'/library/search-by-title:title'">Title</router-link></p>
-        <p id="searchByTitle"><router-link :to="'/library/search-by-title:title'">Title</router-link></p>
-        <p id="searchByTitle"><router-link :to="'/library/search-by-title:title'">Title</router-link></p>
-        <p id="searchByTitle"><router-link :to="'/library/search-by-title:title'">Title</router-link></p>
-        <!-- Takes you to a page with info about said book -->
-    </ul>
+    <div class="scroll">
+        <ul v-for="b in book" :key="b._id">
+            <li><router-link :to="'/library/search-by-title/'+b._id">{{ b.title }}</router-link></li>
+        </ul>
+    </div>
 </template>
 
 <script>
-     export default {
+    import { useRoute } from 'vue-router'
+    const API_URL2 = "http://localhost:4000/books"
+    export default {
         name: 'SearchByTitle',
-        error: ''
-    }
+        data: () => ({
+        error: '',
+        book: []
+        }),
 
-     // Need to pull data from the books db to fill the p's
+        mounted() {
+            const route = useRoute()
+            console.warn(route.params.id)
+            fetch(`${API_URL2}`)
+            .then(response => response.json())
+            .then(result => {
+                this.book = result
+            })
+            .catch(error => {
+            this.error = 'Error fetching book data';
+            console.error(error);
+            });
+        },
+        methods: {}
+    }
 </script>
