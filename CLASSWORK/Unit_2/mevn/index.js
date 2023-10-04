@@ -3,7 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import dogs from "./data/dogs.js";
 import { Octokit } from "octokit"
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import 'dotenv/config'
 
 
@@ -16,7 +16,7 @@ app.use(cors())
 app.use(bodyParser.json())
 
 mongoose.connect(`${process.env.DATABASE_URL}`);
-const Cat = mongoose.model('Cat', {name: String, age: Number })
+
 
 app.get('/', (req, res) => {
     const Kitty = new Cat({name: 'Beans', age: 8} )
@@ -83,7 +83,115 @@ app.get('/repo/:user/:reponame', async(req, res) => {
     res.json(result.data)
 })
 
-app.get('/cats', async(req,res) => {
-    const cats = await Cat.find({})
-    res.json(cats)
+app.post('/cats/add', (req,res) => {
+    const cat = req.body // this is getting what is in the body of the request
+    const kitty = new Cat ({
+        name: cat.name,
+        age: parseInt(cat.age)
+    })
+    kitty.save()
+    .then(() => {
+        res.sendStatus(200)
+    })
+    .catch (error => {
+        console.log(error)
+        res.sendStatus(error)
+    })
+})
+
+
+
+// * Library Project
+
+//Models and Schemas
+
+const Cat = mongoose.model('Cat', {
+    name: String, 
+    age: Number 
+})
+
+const authorSchema = new mongoose.Schema({
+    name: {
+        type: String
+    }
+})
+
+const Author = mongoose.model('Author', authorSchema)
+
+const bookSchema = new mongoose.Schema({
+    title: {
+        type: String
+    },
+    publishingDate: {
+        type: Date
+    },
+    author: authorSchema
+})
+
+const Book = mongoose.model('Book', bookSchema)
+
+// Routes
+
+app.get('/library/book', async (req, res) => {
+    const book = await Book.find({})
+    res.json(book)
+})
+
+// app.get('/library/book/:bookId', async (req,res) => {
+//     const bookId = req.params.bookId
+//     const bookData = await Book.findById(bookId)
+//     const booksAuthor = await Author.find({author: bookData})
+//     return res.json({booksAuthor, bookData})
+// })
+
+app.post('/library/book/add', async (req, res) => {
+    const author = await Author.findOne({name: req.body.author})
+    console.log(author)
+    if (author) {
+        const newBook = new Book ({          
+                title: req.body.name,
+                publishingDate: req.body.publishingDate,
+                author: author
+        }) 
+        newBook.save()
+        .then(() => {
+            res.sendStatus
+                (200)
+            })
+        .catch (error => {
+            console.log(error)
+            res.sendStatus(error)
+        })      
+    }
+    else {
+        const newAuthor = new Author ({name: req.body.author})
+        console.log(newAuthor)
+        newAuthor.save()
+        const newBook = new Book ({
+            title: req.body.name,
+            publishingDate: req.body.publishingDate,
+            author: newAuthor 
+    })
+        newBook.save()  
+        .then(() => {
+            res.sendStatus
+                (200)
+            })
+        .catch (error => {
+            console.log(error)
+            res.sendStatus(error)
+        })
+    }
+})
+
+app.get('/library/author', async (req, res) => {
+    const author = await Author.find({})
+    return res.json(author)
+})
+
+app.get('/library/author/:authorId', async (req,res) => {
+    const authorId = req.params.authorId
+    const authorData = await Author.findById(authorId)
+    const authorsBooks = await Book.find({author: authorData})
+    return res.json({authorsBooks, authorData})
 })

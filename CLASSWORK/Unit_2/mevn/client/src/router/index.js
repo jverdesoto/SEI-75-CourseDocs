@@ -4,6 +4,12 @@ import SingleDogView from '../components/SingleDogView'
 import AllDogs from '../components/Dog'
 import CatFactButton from '../components/CatFactButton'
 import CatSubmitter from '../components/CatSubmitter'
+import LibraryHome from '../components/LibraryHome'
+import LibraryForm from '../components/LibraryForm'
+import BookList from '../components/BookList'
+import AuthorList from '../components/AuthorList'
+import JustOneAuthor from '../components/JustOneAuthor'
+import JustOneBook from '../components/JustOneBook'
 
 const routes = [
     {
@@ -13,7 +19,7 @@ const routes = [
     },
     {
         name: 'Dogs',
-        path: '/dogs/',
+        path: '/dogs',
         component: AllDogs
     },
     {
@@ -28,8 +34,38 @@ const routes = [
     },
     {
         name: 'Cats',
-        path: '/cats',
+        path: '/cats/new',
         component: CatSubmitter
+    },
+    {
+        name: 'Library',
+        path: '/library',
+        component: LibraryHome
+    },
+    {
+        name: 'libraryAuthorList',
+        path: '/library/author',
+        component: AuthorList
+    },
+    {
+        name: 'libraryBookList',
+        path: '/library/book',
+        component: BookList
+    },
+    {
+        name: 'libraryBookAdd',
+        path: '/library/book/add',
+        component: LibraryForm
+    },
+    {
+        name: 'libraryOneAuthorView',
+        path: '/library/author/:id',
+        component: JustOneAuthor
+    },
+    {
+        name: 'libraryOneBookView',
+        path: '/library/book/:id',
+        component: JustOneBook
     },
 ]
 
