@@ -71,14 +71,7 @@ const bookSchema = new mongoose.Schema({
 
 const Book = libraryConnection.model('Book', bookSchema, 'books');
 
-// User Schema
-const userSchema = new Schema({
-  name: String
-}, {
-  timestamps: true
-});
 
-module.exports = mongoose.model('User', userSchema);
 // Load environment variables
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 const app = express();
@@ -98,8 +91,6 @@ const upload = multer({ storage: storage });
 // Middlewares
 app.use(cors());
 app.use(bodyParser.json());
-var logger = require('morgan');
-var session = require('express-session');
 
 // Serve files from the uploads folder
 app.use('/uploads', express.static('uploads'));
