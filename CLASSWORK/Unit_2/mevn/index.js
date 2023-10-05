@@ -7,14 +7,12 @@ import mongoose, { Schema } from "mongoose";
 import 'dotenv/config'
 
 
-
-
 const app = express()
-const token = process.env.GITHUB_TOKEN
-
 app.use(cors())
 app.use(bodyParser.json())
 
+
+//* This connects Mongoose to the project
 mongoose.connect(`${process.env.DATABASE_URL}`);
 
 
@@ -135,21 +133,20 @@ const Book = mongoose.model('Book', bookSchema)
 app.get('/library/book', async (req, res) => {
     const book = await Book.find({})
     res.json(book)
+    console.log(book)
 })
 
-// app.get('/library/book/:bookId', async (req,res) => {
-//     const bookId = req.params.bookId
-//     const bookData = await Book.findById(bookId)
-//     const booksAuthor = await Author.find({author: bookData})
-//     return res.json({booksAuthor, bookData})
-// })
+app.get('/library/book/:bookId', async (req,res) => {
+    const bookId = req.params.bookId
+    const bookData = await Book.findById(bookId)
+    return res.json(bookData)
+})
 
 app.post('/library/book/add', async (req, res) => {
     const author = await Author.findOne({name: req.body.author})
-    console.log(author)
     if (author) {
         const newBook = new Book ({          
-                title: req.body.name,
+                title: req.body.title,
                 publishingDate: req.body.publishingDate,
                 author: author
         }) 
@@ -168,7 +165,7 @@ app.post('/library/book/add', async (req, res) => {
         console.log(newAuthor)
         newAuthor.save()
         const newBook = new Book ({
-            title: req.body.name,
+            title: req.body.title,
             publishingDate: req.body.publishingDate,
             author: newAuthor 
     })
@@ -184,6 +181,32 @@ app.post('/library/book/add', async (req, res) => {
     }
 })
 
+app.put('/library/book/:bookId', async (req, res) => {
+    try {
+        const bookId = req.params.bookId
+        const bookToUpdate = await Book.findById(bookId)
+        bookToUpdate.set(req.body)
+        await bookToUpdate.save() 
+        return res.status(202).json(bookToUpdate)
+    } catch (error) {
+        console.log(error.message, 'PANIC')
+    }
+})
+
+app.delete('/library/book/:bookId', async (req, res) => {
+    try {
+        const bookId = req.params.bookId
+        const bookToDelete = await Book.findById(bookId)
+        if (!bookToDelete) {
+            return res.status(404).json({error: 'No book to delete'})
+        }
+        await bookToDelete.deleteOne()
+        return res.status(200).json({message: 'Successfully Deleted'})
+    } catch (error) {
+        console.log(error.message, 'PANIC');
+    }
+})
+
 app.get('/library/author', async (req, res) => {
     const author = await Author.find({})
     return res.json(author)
@@ -194,4 +217,28 @@ app.get('/library/author/:authorId', async (req,res) => {
     const authorData = await Author.findById(authorId)
     const authorsBooks = await Book.find({author: authorData})
     return res.json({authorsBooks, authorData})
+})
+
+// * This is the Google Auth Code
+// login schema and model
+const loginSchema = new mongoose.Schema({
+    name: {
+        type: String
+    },
+    lastLogin: {
+        type: Date
+    },
+    timestamps: true
+})
+
+const User = mongoose.model('User', loginSchema)
+
+app.post('/login', async (req, res) => {
+    const user = await User.findOne({email: req.body.email})
+    if (user) {
+        const newUser = new User ({
+            userName: req.body.email
+            lastLogin: req.body.timestamps
+        })
+    }
 })

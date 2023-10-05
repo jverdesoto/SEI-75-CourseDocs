@@ -11,6 +11,7 @@ import AuthorList from '../components/AuthorList'
 import JustOneAuthor from '../components/JustOneAuthor'
 import JustOneBook from '../components/JustOneBook'
 import EditBook from '../components/EditBook'
+import LoginForm from '../auth/LoginForm'
 
 const routes = [
     {
@@ -72,6 +73,11 @@ const routes = [
         name: 'libraryOneBookView',
         path: '/library/book/:id',
         component: JustOneBook
+    },
+    {
+        name: 'LoginForm',
+        path: '/login',
+        component: LoginForm
     },
 ]
 
