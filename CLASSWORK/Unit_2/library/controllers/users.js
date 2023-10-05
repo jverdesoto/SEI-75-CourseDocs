@@ -12,12 +12,11 @@ export default {
 async function saveUser(userEmail,userName){
     // get user from database
     let status = 200;
-    console.log(`save user data : ${userEmail} and ${userName}`);
     // if the user exists, update user loggedin time
-    let userObject = getUser(userEmail);
+    let userObject = await getUser(userEmail);
     if(userObject!==null)
     {
-        status = updateUser(userName);
+        status = updateUser(userEmail,userName);
     }// else save new user
     else{
         try{
@@ -38,26 +37,28 @@ async function saveUser(userEmail,userName){
 }
 
 // update an existing  book  title and published date
-async function updateUser(userName){
-    console.log(`User Email : ` + userName);
-    const filter = {"email": `${userName}`};
-   
+async function updateUser(userEmail, userName){
+    const filter = {"email": `${userEmail}`};
+    const lastLoggedInTime = new Date().getTime();
+    console.log(`Updated lastLoggedin time : ${lastLoggedInTime}`);
     User.updateOne(filter, {
         name: userName,
-        lastLoginTime: new Date().getTime()
+        lastLoginTime: lastLoggedInTime
     }).then(()=>{
-        console.log('Update User')
         return 200;
     }).catch((error) => {
-        console.log('Update User Error')
-        console.log(error);
         return 500;
     });
 }
 
 
 async function getUser(userEmail){
-    console.log(`User email = ${userEmail}`)
+    // console.log(`User email = ${userEmail}`)
     const filter = {"email": `${userEmail}`};
-    return await User.findOne(filter)
+    let userObject = null;
+   
+    userObject = await User.findOne(filter)
+    // console.log(`User Object = ${JSON.stringify(userObject)}`)
+   
+    return userObject;
 }

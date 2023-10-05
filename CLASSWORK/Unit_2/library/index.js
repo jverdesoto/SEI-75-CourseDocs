@@ -35,6 +35,15 @@ app.get('/',async (req,res)=>{
     res.redirect('/books');
 });
 
+// saved loggedin user
+app.get('/login',async(req, res) => {
+    // console.log("Start saving user data");
+    const email = req.body.email
+    const name = req.body.given_name
+    await userController.saveUser(email, name);
+}) 
+
+
 /**   Books requests  */
 
 // get all boks from database
@@ -78,13 +87,6 @@ app.get('/authors/:id',async (req,res)=>{
 app.get('/authors/:id/books',async (req,res)=>{
     booksController.getAuthorBooks(req, res);
 });
-
-
-// saved loggedin user
-app.get('/login',async(req, res) => {
-    console.log("Start saving user data");
-    userController.saveUser(req.body.email, req.body.given_name);
-}) 
 
 
 

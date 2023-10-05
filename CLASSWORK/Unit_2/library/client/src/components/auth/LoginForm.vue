@@ -11,8 +11,6 @@
 
 <script>
 import { decodeCredential, googleLogout } from 'vue3-google-login'
-
-const API_URL = 'http://localhost:4000'
   
 export default {
     name: "LoginForm",
@@ -25,11 +23,13 @@ export default {
     methods: {
         callback: function (response) {
             this.isLoggedIn = true
-            const userData = decodeCredential(response.credential)
+            let userData = decodeCredential(response.credential)
+            // TODO delete this line
+            // userData = {email: "heba.arafat159@gmail.com", given_name:"Heba"}
             console.log(userData);
             this.userObject = userData;
             console.log(`Google User: ${JSON.stringify(this.userObject)}`);
-            fetch(`${API_URL}/login`,{
+            fetch(`http://localhost:4000/login`,{
                   method: "POST",
                   headers:{
                       "Content-Type" : "application/json"
