@@ -33,9 +33,8 @@ libraryConnection.on('error', (err) => {
   console.log('MongoDB connection error for library:', err);
 });
 
-//! SCHEMAS
 
-// Mongoose: Cats Schema and Model
+// Mongoose: Define Schema and Model
 const kittySchema = new mongoose.Schema({
   name: String,
   age: Number,
@@ -71,14 +70,6 @@ const bookSchema = new mongoose.Schema({
 
 const Book = libraryConnection.model('Book', bookSchema, 'books');
 
-// User Schema
-const userSchema = new Schema({
-  name: String
-}, {
-  timestamps: true
-});
-
-module.exports = mongoose.model('User', userSchema);
 // Load environment variables
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 const app = express();
@@ -98,8 +89,6 @@ const upload = multer({ storage: storage });
 // Middlewares
 app.use(cors());
 app.use(bodyParser.json());
-var logger = require('morgan');
-var session = require('express-session');
 
 // Serve files from the uploads folder
 app.use('/uploads', express.static('uploads'));
@@ -173,38 +162,42 @@ app.post('/kittens', upload.single('image'), async (req, res) => {
   res.json(newKitten);
 });
 
-//! LIBRARY 
-
-// Fetch all authors
+// author route
 app.get('/authors', async (req, res) => {
   try {
-    const authors = await Author.find().populate('books');
+    const authors = await Author.find();
+    console.log("Authors from DB:", authors);
     res.json(authors);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to fetch authors' });
+  } catch (error) {
+    console.log("Error fetching authors:", error);
+    res.status(500).json({ message: 'Internal Server Error', error: error.message });
   }
 });
 
-// Fetch all books
+
+// book routes
 app.get('/books', async (req, res) => {
+  console.log("Request Body:", req.body);
+  console.log("Request File:", req.file);
   try {
-    const books = await Book.find().populate('authorId');
-    console.log("Populated Books:", books);
+    const books = await Book.find().populate('authorId', 'name'); // populate the authorId field
+    console.log("Books from DB:", books);
     res.json(books);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to fetch books' });
+  } catch (error) {
+    console.log("Error fetching books:", error);
+    res.status(500).json({ message: 'Internal Server Error', error: error.message });
   }
 });
 
+// Add a new book and update/create the author's entry
 app.post('/books', upload.single('coverPicture'), async (req, res) => {
-  const { title, author, blurb, publicationDate } = req.body;
+  console.log("Received file:", req.file);
+  const { title, authorName, blurb, publicationDate } = req.body;
   const coverPicture = req.file ? req.file.path : "";
 
   try {
     // Try to find the author by their name
-    let authorToUpdate = await Author.findOne({ name: author });
+    let authorToUpdate = await Author.findOne({ name: authorName });
 
     let authorId;
 
@@ -214,7 +207,7 @@ app.post('/books', upload.single('coverPicture'), async (req, res) => {
     } else {
       // Create a new author if they don't exist
       const newAuthor = new Author({
-        name: author,
+        name: authorName,
         books: []  // empty array
       });
       await newAuthor.save();
@@ -222,11 +215,12 @@ app.post('/books', upload.single('coverPicture'), async (req, res) => {
     }
 
     // Create the new book
+    const isoDate = convertDateToISO(publicationDate);
     const newBook = new Book({
       title,
       authorId,
       blurb,
-      publicationDate: new Date(publicationDate),  // Explicitly convert to Date
+      publicationDate: new Date(isoDate),  // Explicitly convert to Date
       coverPicture
     });
     await newBook.save();
@@ -235,69 +229,59 @@ app.post('/books', upload.single('coverPicture'), async (req, res) => {
     await Author.findByIdAndUpdate(authorId, { $push: { books: newBook._id } });
 
     res.json(newBook);  // Respond with the new book
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to add book' });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to add book and/or update or create author", error: error.message });
   }
 });
 
-// Update a book
+
+
+// Add a new author
+app.post('/authors', upload.single('image'), async (req, res) => {
+  const { name, age, numberOfBooks, listOfBooks, description } = req.body;
+  const booksArray = listOfBooks.split(',').map(book => book.trim()); // comma separated string to array
+  const image = req.file ? req.file.path : "";
+  const newAuthor = new Author({ name, age, numberOfBooks, booksWritten: booksArray, description, image });
+  await newAuthor.save();
+  res.json(newAuthor);
+});
+
+// book/author search
+app.get('/search', async (req, res) => {
+  const searchTerm = req.query.q;
+  const authors = await Author.find({ name: new RegExp(searchTerm, 'i') }).populate('books');
+  const books = await Book.find({ title: new RegExp(searchTerm, 'i') }).populate('authorId');
+  res.json({ authors, books });
+});
+
+// edit book
 app.put('/books/:id', async (req, res) => {
+  console.log("Publication Date received in backend:", publicationDate);
+
   const bookId = req.params.id;
-  const updatedData = req.body;
+  const { title, authorId, blurb, publicationDate, coverPicture } = req.body;
 
   try {
-    const updatedBook = await Book.findByIdAndUpdate(bookId, updatedData, { new: true });
+    const updatedBook = await Book.findByIdAndUpdate(bookId, {
+      title,
+      authorId,
+      blurb,
+      publicationDate,
+      coverPicture
+    }, { new: true }); // This option returns the new version of the document
+
+    if (!updatedBook) {
+      return res.status(404).json({ message: 'Book not found' });
+    }
+
     res.json(updatedBook);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to update book' });
+  } catch (error) {
+    res.status(500).json({ message: 'Something went wrong', error: error.message });
   }
 });
 
 
-// Delete a book
-app.delete('/books/:id', async (req, res) => {
-  const bookId = req.params.id;
-
-  try {
-    await Book.findByIdAndDelete(bookId);
-    res.json({ message: 'Book deleted successfully' });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to delete book' });
-  }
-});
-
-// Update an author
-app.put('/authors/:id', async (req, res) => {
-  const authorId = req.params.id;
-  const updatedData = req.body;
-
-  try {
-    const updatedAuthor = await Author.findByIdAndUpdate(authorId, updatedData, { new: true });
-    res.json(updatedAuthor);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to update author' });
-  }
-});
-
-// Delete an author
-app.delete('/authors/:id', async (req, res) => {
-  const authorId = req.params.id;
-
-  try {
-    await Author.findByIdAndDelete(authorId);
-    res.json({ message: 'Author deleted successfully' });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to delete author' });
-  }
-});
-
-
-//! PORT
+//port
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
