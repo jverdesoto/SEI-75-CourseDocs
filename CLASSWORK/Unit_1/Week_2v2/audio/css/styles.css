@@ -1,0 +1,17 @@
+#audio-player {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+  }
+  
+  #progress {
+    width: 100%;
+  }
+  
+  #volume {
+    width: 50%;
+  }
+  #loop {
+     background-color: "";/* loop button default background colour  */
+  }
+    
