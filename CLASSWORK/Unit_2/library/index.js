@@ -6,7 +6,8 @@ import fetch from 'node-fetch';
 import mongoose from "mongoose";
 import booksController from './controllers/books.js'
 import authorsController from './controllers/authors.js'
-
+import cookieParser from 'cookie-parser';
+import session from "express-session"
 
 mongoose.connect(`${process.env.DATABAE_URL}`);
 
@@ -14,6 +15,13 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(cookieParser())
+
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true
+}));
 
 const port = process.env.PORT || 4000;
 
