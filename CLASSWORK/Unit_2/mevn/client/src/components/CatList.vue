@@ -27,6 +27,7 @@ export default {
   name: "CatList",
   data() {
     return {
+      error: "",
       nameParam: "",
       ageParam: "",
       catDb: "",
@@ -43,12 +44,12 @@ export default {
           this.catDb = result;
         });
     },
+
     handleSubmit() {
       const data = {
         name: this.nameParam,
         age: this.ageParam,
       };
-
       fetch(`${ROOT_URL}`, {
         method: "POST",
         headers: {
@@ -59,21 +60,14 @@ export default {
         this.getData();
       });
     },
+
     handleDelete(e) {
       console.log(e.target.id);
       fetch(`${ROOT_URL}/${e.target.id}`, {
         method: "DELETE",
-      })
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
-          }
-          return res.json();
-        })
-        .then((res) => console.log(res))
-        .catch((error) => {
-          console.error("Fetch error:", error);
-        });
+      }).then(() => {
+        console.log("deleted");
+      });
     },
   },
 };

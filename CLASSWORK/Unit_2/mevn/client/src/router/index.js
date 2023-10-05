@@ -6,6 +6,12 @@ import FactButton from "../components/FactButton";
 import FindUser from "../components/FindUser";
 import FindRepos from "../components/FindRepos";
 import CatList from "../components/CatList";
+import LibraryHome from "../components/library/LibraryHome";
+import Authors from "../components/library/Authors";
+import Titles from "../components/library/Titles";
+import AuthorsBooks from "../components/library/AuthorsBooks";
+import TitleDetails from "../components/library/TitleDetails";
+import UpdateTitle from "../components/library/UpdateTitle";
 
 const routes = [
   {
@@ -42,6 +48,36 @@ const routes = [
     name: "CatList",
     path: "/cats",
     component: CatList,
+  },
+  {
+    name: "LibraryHome",
+    path: "/library",
+    component: LibraryHome,
+  },
+  {
+    name: "Authors",
+    path: "/library/author",
+    component: Authors,
+  },
+  {
+    name: "Titles",
+    path: "/library/title",
+    component: Titles,
+  },
+  {
+    name: "AuthorsBooks",
+    path: "/library/author/:name",
+    component: AuthorsBooks,
+  },
+  {
+    name: "TitleDetails",
+    path: "/library/title/:title",
+    component: TitleDetails,
+  },
+  {
+    name: "UpdateTitle",
+    path: "/library/title/update/:title",
+    component: UpdateTitle,
   },
 ];
 
