@@ -8,6 +8,7 @@ import SearchByAuthor from '../components/SearchByAuthor'
 import SearchByTitle from '../components/SearchByTitle'
 import SingleAuthor from '../components/SingleAuthor'
 import SingleBook from '../components/SingleBook'
+import LoginForm from '../components/auth/login'
 
 const routes = [
     {
@@ -59,6 +60,11 @@ const routes = [
         name: 'SingleBook',
         path: '/library/search-by-title/:id',
         component: SingleBook
+    },
+    {
+        name: 'LoginForm',
+        path: '/login',
+        component: LoginForm
     }
 ]
 

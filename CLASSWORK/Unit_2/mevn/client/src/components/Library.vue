@@ -89,9 +89,14 @@ export default {
 
 <style>
 
+/* body {
+    background-color: beige;
+} */
+
 h1#library {
     font-size: 7.5vmin;
-}
+    font-family: 'Times New Roman';
+}    
 
 h1#authorOrBookName {
     font-size: 5vmin;
@@ -121,6 +126,7 @@ p#bookDetails {
 
 h1#searchBy {
     font-size: 5vmin;
+    font-family: 'Times New Roman';
 }
 
 li {
