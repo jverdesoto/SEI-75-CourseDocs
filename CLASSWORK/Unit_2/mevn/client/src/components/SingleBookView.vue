@@ -1,17 +1,17 @@
 <template>
-    <img :src="book.coverURL">
+    <img :src="book.coverURL" class="book-cover">
     <h2>{{ book.title }}</h2>
     <p>{{ book.pubDate }}</p>
     <p><router-link :to="'/library/author/' + book.authorId">{{ book.author }}</router-link></p>
-    <p><button @click="updateToggle = true">Update Entry</button></p>
-    <p><button @click="deleteBook">Delete</button></p>
+    <p><button @click="updateToggle = true">Update Book</button></p>
+    <p><button @click="deleteBook">Delete Book</button></p>
     <div v-if="updateToggle">
       <p><label for="title">Update Title:</label></p>
-      <p><input type="text" v-model="book.title" id="title" :placeholder="book.title"></p>
+      <p><input type="text" v-model="book.title" id="title"></p>
       <p><label for="author">Update Author:</label></p>
-      <p><input type="text" v-model="book.author" id="author" :placeholder="book.author"></p>
+      <p><input type="text" v-model="book.author" id="author"></p>
       <p><label for="pubdate">Update Publication date:</label></p>
-      <p><input type="date" v-model="book.pubDate" id="pubdate" :placeholder="book.pubDate"></p>
+      <p><input type="date" v-model="book.pubDate" id="pubdate"></p>
       <p><label for="cover">Update Front Cover URL:</label></p>
       <p><input type="url" v-model="book.coverURL" id="cover"></p>
       <p><button @click="update">Submit Book</button></p>
@@ -63,8 +63,14 @@ methods: {
         _id: this.book._id
       })
     })
-    .then(result => console.log(result))
+    .then(() => this.$router.replace({ name: 'All Books' }))
   }
 }
 }
 </script>
+
+<style>
+  .book-cover {
+    width: 300px;
+  }
+</style>

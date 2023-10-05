@@ -13,6 +13,7 @@ import AllAuthors from '../components/AllAuthors'
 import SingleBookView from '../components/SingleBookView'
 import SingleAuthorView from '../components/SingleAuthorView'
 import AddBook from '../components/AddBook'
+import LoginForm from '../components/auth/LoginForm'
 
 const routes = [
     {
@@ -90,6 +91,11 @@ const routes = [
         name: 'Single Book View',
         path: '/library/title/:id',
         component: SingleBookView
+    },
+    {
+        name: 'Login Form',
+        path: '/library/login',
+        component: LoginForm
     }
 
 ]

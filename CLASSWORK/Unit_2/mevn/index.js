@@ -46,7 +46,21 @@ const authorSchema = new Schema({
     timestamps: true
 })
 
+const userSchema = new Schema({
+    email: {
+        type: String,
+        required: true
+    },
+    lastLogin: {
+        type: Date,
+        required: true
+    }
+}, {
+    timestamps: true
+})
+
 const Author = mongoose.model('Author', authorSchema)
+const User = mongoose.model('User', userSchema)
 
 // ? Get all authors
 app.get('/library/author', async (req, res) => {
@@ -109,11 +123,9 @@ app.post('/library/add-book', async (req, res) => {
         })
         await newAuthor.save()
         .then(() => {
-            console.log(`New entry was added`)
             res.sendStatus(200)
         })
         .catch(error => {
-            console.error(error)
             res.sendStatus(error)
         })
     } else {
@@ -125,11 +137,9 @@ app.post('/library/add-book', async (req, res) => {
         })
         await author.save()
         .then(() => {
-            console.log(`New entry was added`)
             res.sendStatus(200)
         })
         .catch(error => {
-            console.error(error)
             res.sendStatus(error)
         })
     }
@@ -148,12 +158,10 @@ app.put('/library/update/:id', async (req, res) => {
     const id = req.params.id
     const filter = { 'books._id': id }
     await Author.findOneAndUpdate(filter, update)
-    .then(result => {
-        console.log(result)
+    .then(() => {
         res.sendStatus(200)
     })
     .catch(error => {
-        console.error(error)
         res.sendStatus(error)
     })
 })
@@ -164,12 +172,10 @@ app.delete('/library/update/title/delete', async (req, res) => {
     const doc = await Author.findOne({ 'books._id': id })
     doc.books.id(id).deleteOne()
     await doc.save()
-    .then(result => {
-        console.log('The book was deleted')
+    .then(() => {
         res.sendStatus(200)
     })
     .catch(error => {
-        console.error(error)
         res.sendStatus(error)
     })
 })
@@ -178,14 +184,41 @@ app.delete('/library/update/title/delete', async (req, res) => {
 app.delete('/library/author/delete', async (req, res) => {
     const id = req.body._id
     await Author.findByIdAndDelete(id)
-    .then(result => {
-        console.log('The author and all books were deleted')
+    .then(() => {
         res.sendStatus(200)
     })
     .catch(error => {
-        console.error(error)
         res.sendStatus(error)
     })
+})
+
+// ? User
+app.post('/library/login', async (req, res) => {
+    const reqUser = req.body
+    const user = await User.findOne({ email: reqUser.email })
+    const date = new Date
+    if (user) {
+        await user.updateOne({ lastLogin: date })
+        await user.save()
+        .then(() => {
+            res.sendStatus(200)
+        })
+        .catch(error => {
+            res.sendStatus(error)
+        })
+    } else {
+        const newUser = new User({
+            email: reqUser.email,
+            lastLogin: date
+        })
+        await newUser.save()
+        .then(() => {
+            res.sendStatus(200)
+        })
+        .catch(error => {
+            res.sendStatus(error)
+        })
+    }
 })
 
 // ! Other Apps

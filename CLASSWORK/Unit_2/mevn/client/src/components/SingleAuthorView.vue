@@ -3,7 +3,7 @@
     <ul>
       <li v-for="book in author.books" :key="book._id"><router-link :to="'/library/title/' + book._id">{{ book.title }}</router-link></li>
     </ul>
-    <p><button @click="deleteAuthor">Delete Author</button></p>
+    <p><button @click="deleteAuthor">Delete Author and all books</button></p>
     <router-link to="/library/author">Go back</router-link>
 </template>
 
@@ -33,7 +33,7 @@ export default {
           _id: this.author._id
         })
       })
-      .then(result => console.log(result))
+      .then(() => this.$router.replace({ name: 'All Authors' }))
     }
   }
 }
