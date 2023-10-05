@@ -8,6 +8,7 @@ import booksController from './controllers/books.js'
 import authorsController from './controllers/authors.js'
 import cookieParser from 'cookie-parser';
 import session from "express-session"
+import userController from './controllers/users.js'
 
 mongoose.connect(`${process.env.DATABAE_URL}`);
 
@@ -77,6 +78,13 @@ app.get('/authors/:id',async (req,res)=>{
 app.get('/authors/:id/books',async (req,res)=>{
     booksController.getAuthorBooks(req, res);
 });
+
+
+// saved loggedin user
+app.get('/login',async(req, res) => {
+    console.log("Start saving user data");
+    userController.saveUser(req.body.email, req.body.given_name);
+}) 
 
 
 

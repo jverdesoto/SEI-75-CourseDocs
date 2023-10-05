@@ -1,10 +1,20 @@
-import 'dotenv/config'
+import 'dotenv/config';
 import mongoose, { Schema } from "mongoose";
 
 const userSchema = new Schema({
-    name: String
+    name:{type: String, required: true},
+    email:{type: String, required: true},
+    lastLoginTime:
+    {
+      type: Number, 
+      required: true ,
+      default: function(){
+        return new Date().getTime();
+      }
+    } 
   }, {
-    timestamps: true
+    timestamp: true
   });
  
-module.exports = mongoose.model('User', userSchema);
+  const User = mongoose.model('User', userSchema);
+  export default User;
