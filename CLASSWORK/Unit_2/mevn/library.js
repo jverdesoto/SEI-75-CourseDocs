@@ -3,10 +3,18 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
+import session from "express-session";
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use(cookieParser())
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true
+}))
 
 mongoose.connect(process.env.DATABASE_LIBRARY);
 
@@ -19,11 +27,16 @@ const bookSchema = new mongoose.Schema({
   date: Number,
 });
 const authorSchema = new mongoose.Schema({
-  name: String,
-  books: [bookSchema],
+  name: String
 });
+const userSchema = new mongoose.Schema({
+    name: String,
+    email: String
+})
+
 const Books = mongoose.model("Book", bookSchema);
 const Authors = mongoose.model("Authors", authorSchema);
+const Users = mongoose.model('Users', userSchema)
 
 app.post("/AddBook", async (req, res) => {
   try {
@@ -51,6 +64,32 @@ app.post("/AddBook", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+app.post("/Login"), async (req, res) => {
+    try {
+      const data = req.body;
+      let user = await Users.findOne({ name: data.name });
+      if (!user) {
+        user = new Users({
+          name: data.name,
+          email: data.email
+        });
+        await user.save();
+      }
+      //  }
+      //  else{
+      // const book = new Book({
+      //   author: author._id,
+      //   title: data.title,
+      //   date: data.date
+      // });
+      // await book.save();
+      // return res.status(200).json(book);
+    } catch (err) {
+      console.log("ERROR MESSAGE HERE ->", err.message);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
 
 // app.post('/AddBook', async (req, res) => {
 

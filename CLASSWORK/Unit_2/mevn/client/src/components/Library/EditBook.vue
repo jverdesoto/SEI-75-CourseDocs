@@ -52,7 +52,7 @@ export default {
                 })
             })
                 .then(() => {
-                    this.$router.replace({ path: `/AllBooks` })
+                    this.$router.replace({ path: `/AllBooks/${this.book.id}` })
                 })
         }
     }

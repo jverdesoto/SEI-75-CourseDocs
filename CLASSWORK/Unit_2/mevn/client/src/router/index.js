@@ -9,6 +9,7 @@ import AllAuthors from '../components/Library/AllAuthors'
 import Author from '../components/Library/Author'
 import Book from '../components/Library/Book'
 import EditBook from '../components/Library/EditBook'
+import LoginForm from '../components/auth/Login'
 
 const routes = [
     {
@@ -45,6 +46,11 @@ const routes = [
         name: 'EditBook',
         path: '/book/edit/:id',
         component: EditBook
+    },
+    {
+        name: 'LoginForm',
+        path: '/login',
+        component: LoginForm
     },
     // {
     //     name: 'Dogs',
