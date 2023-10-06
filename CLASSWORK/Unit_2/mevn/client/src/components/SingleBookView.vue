@@ -3,7 +3,7 @@
     <h2>{{ book.title }}</h2>
     <p>{{ book.pubDate }}</p>
     <p><router-link :to="'/library/author/' + book.authorId">{{ book.author }}</router-link></p>
-    <p><button @click="updateToggle = true">Update Book</button></p>
+    <p><button class="btn btn-primary" @click="updateToggle = true">Update Book</button></p>
     <p><button @click="deleteBook">Delete Book</button></p>
     <div v-if="updateToggle">
       <p><label for="title">Update Title:</label></p>

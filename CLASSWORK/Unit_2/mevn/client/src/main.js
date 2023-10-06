@@ -2,17 +2,23 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import vue3GoogleLogin from 'vue3-google-login'
-import { globalCookiesConfig } from "vue3-cookies"
+import Vue3Cookies from "vue3-cookies"
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './assets/css/globalStyles.css'
 
-globalCookiesConfig({
-    expireTimes: "1d", // 24 hours
-    path: "/",
-    domain: "",
-    secure: true,
-    sameSite: "None",
-  })
+const app = createApp(App)
 
-createApp(App).use(router).use(vue3GoogleLogin, {clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID}).mount('#app')
+app.use(router)
+app.use(vue3GoogleLogin, {clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID})
+app.use(Vue3Cookies, {
+    expireTimes: "1d", // How long the cookie will remain in our system
+    path: '/', // Where the cookie will be saved (root)
+    domain: '',
+    secure: true, // Encrypted by default
+    sameSite: 'None'
+})
+
+app.mount('#app') // Targets the div with the id 'app' in index.html
 
 // import { createApp } from 'vue'
 // import App from './App.vue'

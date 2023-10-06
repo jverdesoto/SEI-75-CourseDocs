@@ -196,10 +196,10 @@ app.delete('/library/author/delete', async (req, res) => {
 app.post('/library/login', async (req, res) => {
     const reqUser = req.body
     const user = await User.findOne({ email: reqUser.email })
-    const date = new Date
+    const date = new Date()
     if (user) {
         await user.updateOne({ lastLogin: date })
-        await user.save()
+        user.save()
         .then(() => {
             res.sendStatus(200)
         })
@@ -211,7 +211,7 @@ app.post('/library/login', async (req, res) => {
             email: reqUser.email,
             lastLogin: date
         })
-        await newUser.save()
+        newUser.save()
         .then(() => {
             res.sendStatus(200)
         })

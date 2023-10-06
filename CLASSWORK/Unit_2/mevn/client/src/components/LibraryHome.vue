@@ -4,11 +4,18 @@
         <router-link to="/library/author"><div class="button">Authors</div></router-link>
         <router-link to="/library/title"><div class="button">Books</div></router-link>
         <router-link to="/library/addbook"><div class="button">Add Book</div></router-link>
+        <MyButton buttonText="This" />
+        <MyButton buttonText="That" />
     </div>
 </template>
 
 <script>
+import MyButton from './buildingBlocks/MyButton'
+
 export default {
-  name: 'LibraryHome'
+  name: 'LibraryHome',
+  components: {
+    MyButton
+  }
 }
 </script>

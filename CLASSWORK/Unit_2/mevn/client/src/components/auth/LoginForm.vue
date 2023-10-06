@@ -20,12 +20,20 @@ export default {
         isLoggedIn: false,
         userName: ''
     }),
+    mounted() { // Runs on page load if cookie already exists, similar to log in callback fn - only gets user data from cookie, rather than from response
+        if (this.$cookies.isKey('user_session')) { // isKey() method checks whether cookie already exists
+            this.isLoggedIn = true
+            const userData = decodeCredential(this.$cookies.get('user_session'))
+            this.userName = userData.given_name
+        }
+    },
     methods: {
         callback: function (response) {
             this.isLoggedIn = true
             const userData = decodeCredential(response.credential)
             console.log(userData);
             this.userName = userData.given_name
+            this.$cookies.set('user_session', response.credential)
             fetch('http://localhost:4000/library/login', {
                 method: 'POST',
                 headers: {
@@ -38,6 +46,7 @@ export default {
         },
         handleLogOut: function () {
             googleLogout()
+            this.$cookies.remove('user_session')
             this.isLoggedIn = false
         }
     }
