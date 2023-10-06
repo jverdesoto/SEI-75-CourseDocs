@@ -10,6 +10,11 @@ const app = createApp(App)
 
 app.use(router)
 app.use(vue3GoogleLogin, {clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID})
+// main.js
+console.log("Client ID from .env:", process.env.VUE_APP_GOOGLE_CLIENT_ID);
+
+// rest of your code
+
 app.use(Vue3Cookies, {
     expireTimes: "1d", // cookie time in system
     path: '/', // root - where cookie is saved

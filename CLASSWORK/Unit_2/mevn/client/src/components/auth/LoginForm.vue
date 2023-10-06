@@ -19,7 +19,6 @@ export default {
         isInit: false,
         isLoggedIn: false,
         userName: '',
-        clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID
     }),
     mounted() {
         if (this.$cookies.isKey('user_session')) {
