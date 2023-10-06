@@ -8,12 +8,68 @@ import { Octokit } from '@octokit/rest';
 import fetch from 'node-fetch';
 import mongoose from 'mongoose';
 import multer from 'multer';
+import session from 'express-session';
+import passport from './config/passport.js';
+import router from './client/src/router.js'
 
 
+// Load environment variables
+const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+const app = express();
+// Use the router as middleware
+app.use(router);
+
+// Catch-all route for client-side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
+//! GOOGLE AUTH
+
+// Session middleware
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true
+}));
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(function (req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
+
+
+
+// OAuth Routes
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] })
+);
+
+// callback route
+router.get('/oauth2callback', passport.authenticate(
+  'google',
+  {
+    successRedirect: '/library',
+    failureRedirect: '/oauth'
+  }
+));
+
+// OAuth logout route
+router.get('/logout', function (req, res) {
+  req.logout(function () {
+    res.redirect('/libray');
+  });
+});
+
+
+//! MONGODB
 // MongoDB create connections
 const catConnection = mongoose.createConnection(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 const libraryConnection = mongoose.createConnection(process.env.LIBRARY_DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });
-
+const userConnection = mongoose.createConnection(process.env.USER_DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Connection events for cats
 catConnection.on('connected', () => {
@@ -34,6 +90,16 @@ libraryConnection.on('error', (err) => {
 });
 
 //! SCHEMAS
+
+const userSchema = new mongoose.Schema({
+  googleId: String,
+  name: String,
+  email: String,
+});
+
+const User = userConnection.model('User', userSchema);
+
+export { User };
 
 // Mongoose: Cats Schema and Model
 const kittySchema = new mongoose.Schema({
@@ -72,9 +138,6 @@ const bookSchema = new mongoose.Schema({
 const Book = libraryConnection.model('Book', bookSchema, 'books');
 
 
-// Load environment variables
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
-const app = express();
 
 // Setup multer storage
 const storage = multer.diskStorage({
@@ -88,9 +151,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Middlewares
+// ! MIDDLEWARES
 app.use(cors());
 app.use(bodyParser.json());
+
 
 // Serve files from the uploads folder
 app.use('/uploads', express.static('uploads'));
