@@ -11,6 +11,7 @@ import BookList from '../components/library/BookList'
 import SingleBook from '../components/library/SingleBook'
 import SingleAuthor from '../components/library/SingleAuthor'
 import EditBook from '../components/library/EditBook'
+import LoginForm from '../components/auth/Login'
 
 const routes = [
     {
@@ -73,6 +74,12 @@ const routes = [
         path: '/library/book/edit/:id',
         component: EditBook
     },
+    {
+        name: 'LoginForm',
+        path: '/login',
+        component: LoginForm
+    },
+
 ]
 
 const router = createRouter({
