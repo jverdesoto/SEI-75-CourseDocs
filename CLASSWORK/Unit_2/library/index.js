@@ -36,11 +36,12 @@ app.get('/',async (req,res)=>{
 });
 
 // saved loggedin user
-app.get('/login',async(req, res) => {
+app.post('/user/login',async(req, res) => {
     // console.log("Start saving user data");
-    const email = req.body.email
-    const name = req.body.given_name
-    await userController.saveUser(email, name);
+    const email = req.body.email;
+    const name = "Heba"//req.body.given_name;
+    let status = await userController.saveUser(email, name);
+    res.sendStatus(status);
 }) 
 
 

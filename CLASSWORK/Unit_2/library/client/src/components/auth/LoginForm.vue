@@ -20,6 +20,13 @@ export default {
         userObject:{}
        
     }),
+    mounted(){
+        if(this.$cookies.isKey('user_session')){
+            this.isLoggedIn = true
+            const userData = decodeCredential(this.$cookies.get('user_session'))
+            this.userObject = userData; 
+        }
+    },
     methods: {
         callback: function (response) {
             this.isLoggedIn = true
@@ -29,7 +36,8 @@ export default {
             console.log(userData);
             this.userObject = userData;
             console.log(`Google User: ${JSON.stringify(this.userObject)}`);
-            fetch(`http://localhost:4000/login`,{
+            this.$cookies.set('user_session', response.credential);
+            fetch("http://localhost:4000/user/login",{
                   method: "POST",
                   headers:{
                       "Content-Type" : "application/json"
@@ -49,6 +57,7 @@ export default {
         },
         handleLogOut: function () {
             googleLogout()
+            this.$cookies.remove('user_session')
             this.isLoggedIn = false
         }
     }

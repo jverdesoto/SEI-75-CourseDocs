@@ -10,15 +10,9 @@ export default {
 }
 
 async function saveUser(userEmail,userName){
-    // get user from database
     let status = 200;
-    // if the user exists, update user loggedin time
-    let userObject = await getUser(userEmail);
-    if(userObject!==null)
-    {
-        status = updateUser(userEmail,userName);
-    }// else save new user
-    else{
+    if(await User.count({"email": userEmail}) === 0){
+        // save new user
         try{
             const newUser = new User({
                 name: userName,
@@ -32,6 +26,15 @@ async function saveUser(userEmail,userName){
         {
             status = 500;
         }
+    }else{
+        const lastLoggedInTime = new Date().getTime();
+        console.log(`Updated lastLoggedin time : ${lastLoggedInTime}`);
+    
+        await User.findOneAndUpdate({"email": userEmail},{
+            name: userName,
+            lastLoginTime: lastLoggedInTime
+        })
+        status = 200;
     }
     return status;
 }
