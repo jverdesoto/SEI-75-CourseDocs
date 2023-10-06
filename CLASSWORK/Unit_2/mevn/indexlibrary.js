@@ -29,6 +29,20 @@ const librarySchema = new mongoose.Schema({
   // Create a model for the "library" collection using the defined schema.
   const newLibraryBook = mongoose.model('newLibraryBook', librarySchema)
 
+const userSchema = new mongoose.Schema({
+    userEmail: {
+        type: String,
+        required: true
+    },
+    lastLogin: {
+        type: Date,
+        required: true
+    }
+})
+const User = mongoose.model('User', userSchema);
+
+
+
  // Define a route that creates and saves a sample book in the database.
 app.get('/', function(request, response) {
     
@@ -110,19 +124,31 @@ app.get('/books/titledetails/:id', async (req, bookServerResponse) => {
     }
 })
 
+// This is a route definition for handling a GET request to '/books/authorsearch'.
+// When a request is made to this URL, this route will be triggered.
 app.get('/books/authorsearch', async (req, allauthorServerResponse) => {
+    // Use the 'distinct' method to query a database collection named 'newLibraryBook'.
+    // This method retrieves all unique values from the 'author' field of the documents.
     const allauthors = await newLibraryBook.distinct('author');
-    allauthorServerResponse.json(allauthors)
-})
+  
+    // Send the unique author names as a JSON response to the client.
+    allauthorServerResponse.json(allauthors);
+  });
 
 
+// This is a route definition for handling a GET request to '/books/authordetails/:id'.
+// When a request is made to this URL, this route will be triggered.
 app.get('/books/authordetails/:id', async (req, authorServerResponse) => {
-    const authorid = req.params.id
-
-    const authorDetails = await newLibraryBook.find({author: authorid})
+    // Extract the 'id' parameter from the URL, which is provided as ':id' in the route.
+    const authorid = req.params.id;
+  
+    // Use the 'find' method to query a database collection called 'newLibraryBook'.
+    // Search for documents where the 'author' field matches the 'authorid' extracted from the URL.
+    const authorDetails = await newLibraryBook.find({ author: authorid });
+  
+    // Send the 'authorDetails' as a JSON response to the client.
     authorServerResponse.json(authorDetails);
-
-})
+  });
 
 //It defines an Express.js route for handling HTTP DELETE requests at the endpoint
 ///books/titledetails/:id, where :id is a parameter representing the _id of
@@ -145,7 +171,7 @@ app.delete('/books/titledetails/:id', async (req, deletebookServerResponse) => {
     })
 }) 
 
-add.put('/books/titledetails/:id', async (req, editbookServerResponse) => {
+app.put('/books/titledetails/:id', async (req, editbookServerResponse) => {
     //This line uses the updateOne method from the newLibraryBook object (presumably a MongoDB collection model) 
     //to update a document in the database. It takes two arguments:
         //The first argument is an object that specifies the query condition. It searches for a document with 
@@ -162,3 +188,17 @@ add.put('/books/titledetails/:id', async (req, editbookServerResponse) => {
         editbookServerResponse.sendStatus(500)
     })
 }) 
+
+app.post('/user/login', async(req, res) => {
+    const now = new Date()
+    if(await User.count({'userEmail': req.body.email}) === 0 ) {
+        const newUser = new User({ userEmail: req.body.email, lastLogin: now})
+        newUser.save()
+        .then(() => {
+            res.sendStatus(200)
+        })
+    } else {
+        User.findOneAndUpdate({'userEmail': req.body.email}, {lastLogin: now})
+        res.sendStatus(200)
+    }
+})

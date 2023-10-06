@@ -4,10 +4,13 @@
             <div class="book-card">
                 <h3>Title:{{ title.title }}</h3>
                 <router-link :to=" '/books/authordetails/' + title.author" class="author-link">
-                <p>Author: {{ title.author }}</p>
+                <p class="author-name">Author: {{ title.author }}</p>
                 </router-link>
                 <p>Publishing year: {{ title.publishingDate }}</p>
-                <button @click="deleteBook">Delete Book</button> <!-- Attach the deleteBook function to a button -->
+                <button @click="deleteBook" class="action-button delete-button">Delete Book</button> <!-- Attach the deleteBook function to a button -->
+                <router-link :to="'/books/edit/' + id" class="action-button edit-button">
+        Edit Book
+      </router-link>
 
             </div>
     </div>
@@ -20,7 +23,8 @@ export default  {
     name: 'TitleSingle',
     data: () => ({
         errors: '',
-        title:{}
+        title:{},
+        id: ''
     }),
     mounted() {
         const route = useRoute()
@@ -29,6 +33,7 @@ export default  {
         .then(response => response.json())
         .then(result => {
             this.title = result
+            this.id = route.params.id
         })
     },
     methods: {
@@ -47,7 +52,7 @@ export default  {
 }
 </script>
 
-<style>
+<style scoped>
 .page-title {
   text-align: center;
   padding: 20px;
@@ -61,14 +66,44 @@ export default  {
   margin: 20px;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  width: 400px;
-  text-align: center;
-  background-color: #f0f0f0; /* Background color for the card */
+  width: auto; /* Allow the card to expand to fit content */
+  text-align: center; /* Align content to the left */
+  max-width: 600px; /* Limit the maximum width for readability */
+  margin: 0 auto; /* Center the card horizontally */
 }
 
 .author-link {
   text-decoration: none;
-  color: #007BFF; /* Link color */
+  color: black;
+}
+
+.author-name:hover {
+  text-decoration: underline;
+}
+
+.action-button {
+  background-color: #998877;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 10px;
+  width: 150px; /* Set a fixed width for buttons */
+  font-size: 16px; /* Set font size for buttons */
+}
+
+.action-button:hover {
+  background-color: #778899;
+}
+
+.delete-button {
+  background-color: #997777; /* Red color for delete button */
+}
+
+edit-button {
+  text-decoration: none; /* Remove underline from the Edit Book link */
 }
 
 /* Additional styles for h3 and p elements if needed */

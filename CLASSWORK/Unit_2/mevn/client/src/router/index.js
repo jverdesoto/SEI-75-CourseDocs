@@ -5,6 +5,8 @@ import TitleList from '../components/titlesearch'
 import TitleSingle from '../components/titledetails'
 import AuthorSingle from '../components/authordetails'
 import AuthorList from '../components/authorsearch'
+import EditBook from '../components/editbook'
+import LoginForm from '../components/auth/login'
 
 const routes = [
 	{
@@ -16,6 +18,11 @@ const routes = [
 		name: 'Add a new book to the database',
 		path: '/books/add',
 		component: SubmitNewBook
+	},
+	{
+		name: 'EditBook',
+		path: '/books/edit/:id',
+		component: EditBook
 	},
 	{
 		name: 'titleList',
@@ -36,6 +43,11 @@ const routes = [
 		name: 'authorList',
 		path: '/books/authorsearch',
 		component: AuthorList
+	}, 
+	{
+		name: 'LoginForm',
+		path: '/login',
+		component: LoginForm
 	}
  ]
 
