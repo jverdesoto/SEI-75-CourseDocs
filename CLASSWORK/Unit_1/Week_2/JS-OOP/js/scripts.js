@@ -162,3 +162,5 @@ let worker = new Worker()
 
 console.log(employee.wage)
 console.log(employee.firstName)
+
+//sdf

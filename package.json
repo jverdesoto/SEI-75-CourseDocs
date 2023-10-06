@@ -1,0 +1,17 @@
+{
+  "name": "sei-75-coursedocs",
+  "version": "1.0.0",
+  "description": "Course files for the SEI course, Sept 2023, Cohort 75",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "express-session": "^1.17.3"
+  }
+}
