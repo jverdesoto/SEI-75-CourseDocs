@@ -37,6 +37,20 @@ const bookSchema = new mongoose.Schema({
 
 const Book = mongoose.model('Book', bookSchema)
 
+const userSchema = new mongoose.Schema({
+    userEmail: {
+        type: String,
+        required: true
+    },
+    lastLogin: {
+        type: Date,
+        required: true
+    }
+})
+
+const User = mongoose.model('User', userSchema)
+
+
 app.get('/', (req, res) => {
         res.json({
             message: 'Welcome to MEVN'
@@ -118,4 +132,18 @@ app.get('/author/:id', async (req, res) => {
     const books = await Book.find({"author": req.params.id})
     const result = { author, books }
     res.json(result)
+})
+
+app.post('/user/login', async (req, res) => {
+    const now = new Date()
+    if( await User.count({"userEmail": req.body.email}) === 0 ) {
+        const newUser = new User({userEmail: req.body.email, lastLogin: now})
+        newUser.save()
+        .then(() => {
+            res.sendStatus(200)
+        })
+    } else{
+        await User.findOneAndUpdate({"userEmail": req.body.email}, {lastLogin: now})
+        res.sendStatus(200)
+    }
 })

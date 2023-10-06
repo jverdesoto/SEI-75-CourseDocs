@@ -32,6 +32,18 @@ export default {
             console.log(userData);
             this.userName = userData.given_name
             this.$cookies.set('user_session', response.credential);
+            fetch('http://localhost:4000/user/login', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: userData.email
+                })
+            })
+            .then(() => {
+                console.log('session saved')
+            })
         },
         handleLogOut: function () {
             googleLogout()
@@ -41,3 +53,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+    .btn {
+        font-size: 24px;
+    }
+</style>
