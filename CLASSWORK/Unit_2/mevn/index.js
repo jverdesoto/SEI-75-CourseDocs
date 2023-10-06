@@ -41,6 +41,21 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.post('/user/login', async (req, res) => {
+  try {
+    const now = new Date()
+    if (await User.count({ 'userEmail': req.body.email }) === 0) {
+      const newUser = new User({ userEmail: req.body.email, lastLogin: now })
+      await newUser.save()
+      return res.status(200).json(newUser)
+    } else {
+      await User.findOneAndUpdate({ 'userEmail': req.body.email }, { lastLogin: now })
+      return res.status(200)
+    }
+  } catch (err) {
+    console.log(err.message)
+  }
+})
 
 
 // OAuth Routes
@@ -53,7 +68,7 @@ router.get('/oauth2callback', passport.authenticate(
   'google',
   {
     successRedirect: '/library',
-    failureRedirect: '/oauth'
+    failureRedirect: '/login'
   }
 ));
 
@@ -63,6 +78,19 @@ router.get('/logout', function (req, res) {
     res.redirect('/libray');
   });
 });
+
+fetch('http://localhost:4000/user/login', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: userData.email
+                })
+            })
+            .then(() => {
+                console.log('session saved')
+            })
 
 
 //! MONGODB
@@ -91,10 +119,17 @@ libraryConnection.on('error', (err) => {
 
 //! SCHEMAS
 
-const userSchema = new mongoose.Schema({
-  googleId: String,
-  name: String,
-  email: String,
+const userSchema = new Schema({
+  email: {
+      type: String,
+      required: true
+  },
+  lastLogin: {
+      type: Date,
+      required: true
+  }
+}, {
+  timestamps: true
 });
 
 const User = userConnection.model('User', userSchema);

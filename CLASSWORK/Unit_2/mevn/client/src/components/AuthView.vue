@@ -17,10 +17,17 @@ import { decodeCredential, googleLogout } from 'vue3-google-login'
 export default {
     name: "LoginForm",
     data: () => ({
-        isInit: false,
         isLoggedIn: false,
         userName: ''
     }),
+    mounted() {
+        if (this.$cookies.isKey('user_session')) {
+            this.isLoggedIn = true
+            const userData = decodeCredential(this.$cookies.get('user_session'))
+            this.userName = userData.given_name
+        }
+    },
+
     methods: {
         callback: function (response) {
             try {
@@ -28,14 +35,17 @@ export default {
                 const userData = decodeCredential(response.credential)
                 console.log(userData);
                 this.userName = userData.given_name
+                this.$cookies.set('user_session', response.credential)
             } catch (error) {
-                console.error(error); 
+                console.error(error);
             }
         },
         handleLogOut: function () {
             googleLogout()
             this.isLoggedIn = false
-        }
+            this.$cookies.remove('user_session')
+        },
+        
     }
 }
 </script>

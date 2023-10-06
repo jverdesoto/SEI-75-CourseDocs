@@ -21,7 +21,7 @@ const routes = [
     { path: '/library', component: LibraryView},
     { path: '/cat-facts', component: CatFacts},
     { path: '/search', component: SearchView},
-    { path: '/oauth', component: AuthView},
+    { path: '/login', component: AuthView},
 
 ];
 
