@@ -8,89 +8,50 @@ import { Octokit } from '@octokit/rest';
 import fetch from 'node-fetch';
 import mongoose from 'mongoose';
 import multer from 'multer';
-import session from 'express-session';
-import passport from './config/passport.js';
-import router from './client/src/router.js'
+
 
 
 // Load environment variables
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 const app = express();
-// Use the router as middleware
-app.use(router);
 
-// Catch-all route for client-side routing
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-});
 //! GOOGLE AUTH
-
-// Session middleware
-app.use(session({
-  secret: process.env.SECRET,
-  resave: false,
-  saveUninitialized: true
-}));
-
-// Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use(function (req, res, next) {
   res.locals.user = req.user;
   next();
 });
 
-app.post('/user/login', async (req, res) => {
-  try {
-    const now = new Date()
-    if (await User.count({ 'userEmail': req.body.email }) === 0) {
-      const newUser = new User({ userEmail: req.body.email, lastLogin: now })
-      await newUser.save()
-      return res.status(200).json(newUser)
-    } else {
-      await User.findOneAndUpdate({ 'userEmail': req.body.email }, { lastLogin: now })
-      return res.status(200)
-    }
-  } catch (err) {
-    console.log(err.message)
+// User
+app.post('/library/login', async (req, res) => {
+  const reqUser = req.body
+  const user = await User.findOne({ email: reqUser.email })
+  const date = new Date()
+  if (user) {
+      await user.updateOne({ lastLogin: date })
+      user.save()
+      .then(() => {
+          res.sendStatus(200)
+      })
+      .catch(error => {
+          res.sendStatus(error)
+      })
+  } else {
+      const newUser = new User({
+          email: reqUser.email,
+          lastLogin: date
+      })
+      newUser.save()
+      .then(() => {
+          res.sendStatus(200)
+      })
+      .catch(error => {
+          res.sendStatus(error)
+      })
   }
 })
 
 
-// OAuth Routes
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] })
-);
-
-// callback route
-router.get('/oauth2callback', passport.authenticate(
-  'google',
-  {
-    successRedirect: '/library',
-    failureRedirect: '/login'
-  }
-));
-
-// OAuth logout route
-router.get('/logout', function (req, res) {
-  req.logout(function () {
-    res.redirect('/libray');
-  });
-});
-
-fetch('http://localhost:4000/user/login', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: userData.email
-                })
-            })
-            .then(() => {
-                console.log('session saved')
-            })
 
 
 //! MONGODB
@@ -119,7 +80,7 @@ libraryConnection.on('error', (err) => {
 
 //! SCHEMAS
 
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
   email: {
       type: String,
       required: true
@@ -130,9 +91,9 @@ const userSchema = new Schema({
   }
 }, {
   timestamps: true
-});
+})
 
-const User = userConnection.model('User', userSchema);
+const User = userConnection.model('User', userSchema)
 
 export { User };
 
