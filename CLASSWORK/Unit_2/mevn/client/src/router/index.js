@@ -12,6 +12,7 @@ import Titles from "../components/library/Titles";
 import AuthorsBooks from "../components/library/AuthorsBooks";
 import TitleDetails from "../components/library/TitleDetails";
 import UpdateTitle from "../components/library/UpdateTitle";
+import LoginForm from "../components/auth/Login";
 
 const routes = [
   {
@@ -78,6 +79,11 @@ const routes = [
     name: "UpdateTitle",
     path: "/library/title/update/:title",
     component: UpdateTitle,
+  },
+  {
+    name: "LoginPage",
+    path: "/login",
+    component: LoginForm,
   },
 ];
 

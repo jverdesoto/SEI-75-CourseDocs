@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import mongoose from "mongoose";
+import mongoose, { now } from "mongoose";
 
 import { getAll, getDog } from "./data/dogs.js";
 import dotenv from "dotenv";
@@ -88,6 +88,16 @@ app.get("/cat-facts", (req, res) => {
 
 //! LIBRARY
 //? DB
+const userSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+  },
+  lastLogin: {
+    type: Date,
+    requred: true,
+  },
+});
 const titleSchema = new mongoose.Schema({
   title: String,
   author: String,
@@ -100,8 +110,27 @@ const authorSchema = new mongoose.Schema({
 });
 
 const Author = mongoose.model("Author", authorSchema);
+const User = mongoose.model("User", userSchema);
 
 //? ROUTES
+app.post("/login", async (req, res) => {
+  console.log("user login hit");
+  const now = new Date();
+  const userData = req.body;
+  if ((await User.count({ email: userData.email })) === 0) {
+    const newUser = new User({
+      email: userData.email,
+      lastLogin: now,
+    });
+    await newUser.save().then(() => {
+      res.sendStatus(200);
+    });
+  } else {
+    await User.findOneAndUpdate({ email: userData.email }, { lastLogin: now });
+    res.sendStatus(400);
+  }
+});
+
 app.post("/library", async (req, res) => {
   const { title, author, published } = req.body;
   addBook(title, author, published, Author);
