@@ -1,0 +1,15 @@
+:root {
+    font-size: 18px;
+}
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+// @import './scss/index.scss';
+// @import './scss/gallery.scss';
+@import './scss/contactCard.scss';
