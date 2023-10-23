@@ -5,11 +5,23 @@
         <p><input type="text" name="title" v-model="book.title" placeholder="title"></p>
         <p><input type="text" name="author" v-model="book.author" placeholder="author"></p>
         <p><input type="number" name="date" v-model="book.date" placeholder="publication year"></p>
-        <p><button v-on:click="addBook">Add new book</button></p>
+        <p><button @click="addBook">Add new book</button></p>
 
-        <router-link to="/library/titles" tag="button" class="nav-button book-list-button">Go to Book List</router-link>
-        <router-link to="/library/authors" tag="button" class="nav-button author-list-button">Go to Author List</router-link>
+        <router-link to="/library/titles">
+            <template v-slot:default="{ navigate, href }">
+                <button @click="navigate" :href="href" class="nav-button book-list-button">
+                    Go to Book List
+                </button>
+            </template>
+        </router-link>
 
+        <router-link to="/library/authors">
+            <template v-slot:default="{ navigate, href }">
+                <button @click="navigate" :href="href" class="nav-button author-list-button">
+                    Go to Author List
+                </button>
+            </template>
+        </router-link>
     </div>
 </template>
 

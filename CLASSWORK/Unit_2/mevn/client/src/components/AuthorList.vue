@@ -19,7 +19,7 @@
         authors: []
       };
     },
-    async created() {
+    async mounted() {
       const response = await axios.get('http://localhost:4000/authors');
       this.authors = response.data;
     }

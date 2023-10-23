@@ -11,6 +11,7 @@ import BookList from '../components/BookList'
 import BookDetail from '../components/BookDetail'
 import AuthorDetail from '../components/AuthorDetail'
 import BookUpdate from '../components/BookUpdate'
+import LoginForm from '../components/auth/login'
 
 const routes = [
     {
@@ -19,7 +20,7 @@ const routes = [
         component: DogsView
     },
     {
-        name: 'Dogs',
+        name: 'Dogs', 
         path: '/dogs',
         component: AllDogs
     },
@@ -72,6 +73,11 @@ const routes = [
         name: 'BookUpdate',
         path: '/library/edit/:title',
         component: BookUpdate
+    },
+    {
+        name: 'LoginForm',
+        path: '/login',
+        component: LoginForm
     },
     
     

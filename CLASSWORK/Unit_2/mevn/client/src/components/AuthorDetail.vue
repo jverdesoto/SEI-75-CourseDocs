@@ -21,7 +21,7 @@
         books: []
       };
     },
-    async created() {
+    async mounted() {
       try {
         const response = await axios.get(`http://localhost:4000/authors/${this.$route.params.author}`);
         this.authorName = response.data.authorName;

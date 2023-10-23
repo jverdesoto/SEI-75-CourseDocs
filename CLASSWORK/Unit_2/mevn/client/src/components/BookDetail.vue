@@ -3,7 +3,7 @@
       <h1>{{ book.title }}</h1>
       <p><strong>Author: </strong>  
       <router-link :to="`/library/authors/${book.author}`"> {{ book.author }}</router-link></p>      
-      <p><strong>Publishing Date:</strong> {{ book.date }}</p>
+      <p><strong>Publication Year:</strong> {{ book.date }}</p>
 
       <button @click="deleteBook" class="delete-button">Delete</button>
 
@@ -25,7 +25,7 @@
       };
     },
 
-    async created() {
+    async mounted() {
       try {
         const response = await axios.get(`http://localhost:4000/titles/${this.$route.params.title}`);
         this.book = response.data;

@@ -25,7 +25,7 @@
     return this.books.sort((a, b) => a.title.localeCompare(b.title));
   }
 },
-    async created() {
+    async mounted() {
       try {
         const response = await axios.get('http://localhost:4000/titles');
         this.books = response.data;

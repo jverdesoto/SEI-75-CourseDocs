@@ -3,14 +3,21 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import dogs from "./data/dogs.js";
 import { Octokit } from "octokit";
-import mongoose from "mongoose";
+import mongoose, { now } from "mongoose";
 import 'dotenv/config';
+// import session from 'express-session';
 
 
 const app = express()
 
 app.use(cors())
 app.use(bodyParser.json())
+// app.use(session({
+//     secret: process.env.SECRET,
+//     resave: false,
+//     saveUninitialized: true
+
+// }))
 
 mongoose.connect(`${process.env.DATABASE_URL}`)
 const Cat = mongoose.model('Cat', { name: String, age:Number });
@@ -20,7 +27,7 @@ app.get('/', (req, res) => {
     const kitty = new Cat({ name: 'Troy', age: 10 });
 
     kitty.save()
-    .then(() => {
+    .then(() => { 
         res.json({
             message: 'Kitty has been saved'
     })
@@ -115,6 +122,32 @@ const Author = mongoose.model('Author', {
     name: String
   });  
 
+  const userSchema = new mongoose.Schema({
+    userEmail: {
+        type: String,
+        required: true
+    },
+    lastLogin: {
+        type: Date,
+        require: true
+    }
+  })
+
+  const User = mongoose.model('User', userSchema)
+
+// Creating my User Model
+//  const Schema = mongoose.Schema;
+
+//  const userSchema = new Schema({
+//    name: String
+//  }, {
+//    timestamps: true
+//  });
+
+//  module.exports = mongoose.model('User', userSchema);
+
+
+
 app.get('/', (req, res) => {
 
     const Library = new Book({ title: 'Child 44', author: 'Tom Rob Smith', date: 20231007 });
@@ -173,16 +206,16 @@ app.get('/titles', async (req, res) => {
     res.json(books);
     });
     
-    app.get('/authors/:name', async (req, res) => {
-        try {
-            const books = await Book.find({ author: req.params.name });
-            res.json({ authorName: req.params.name, books });
-        } catch (error) {
-            console.error("Error fetching books:", error);
-            res.status(500).json({ error: "Internal Server Error" });
-        }
-    });
-    
+app.get('/authors/:name', async (req, res) => {
+    try {
+        const books = await Book.find({ author: req.params.name });
+        res.json({ authorName: req.params.name, books });
+    } catch (error) {
+        console.error("Error fetching books:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
     
 app.get('/titles/:title', async (req, res) => {
     
@@ -197,23 +230,35 @@ app.get('/titles/:title', async (req, res) => {
     res.json(book);
     });
 
-    app.delete('/titles/:title', async (req, res) => {
-        try {
-            await Book.deleteOne({"title": req.params.title})
-            res.status(200).send('Book deleted');
-        } catch (error) {
-            console.error(error);
-            res.status(500).send('Internal Server Error');
-        }
+app.delete('/titles/:title', async (req, res) => {
+    try {
+        await Book.deleteOne({"title": req.params.title})
+        res.status(200).send('Book deleted');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.put('/book/:id', async (req, res) => {
+    try {
+        await Book.updateOne({_id: req.params.id}, req.body);
+        res.status(200).send('Book updated');
+    } catch (error) {
+        console.error("Error updating the book:", error);
+        res.status(500).send('Internal Server Error');
+    }
     });
 
-    app.put('/book/:id', async (req, res) => {
-        try {
-          await Book.updateOne({_id: req.params.id}, req.body);
-          res.status(200).send('Book updated');
-        } catch (error) {
-          console.error("Error updating the book:", error);
-          res.status(500).send('Internal Server Error');
-        }
-      });
-
+app.post('/user/login', async (req, res) => {
+    if (await User.count({"userEmail": req.body.email}) ===0) {
+        const newUser = new User ({userEmail: req.body.email, lastLogin: now})
+        newUser.save()
+        .then(() => {
+            res.sendStatus(200)
+        })
+    } else{
+        User.findOneAndUpdate({"userEmail": req.body.email}, {lastLogin: now})
+        res.sendStatus(200)
+    }
+})
