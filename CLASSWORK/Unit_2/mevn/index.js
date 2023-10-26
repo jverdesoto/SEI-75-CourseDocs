@@ -107,52 +107,52 @@ app.get('/repos/:user/:reponame', async (request, response) => {
 const DATABASE_URL = mongoose.connect(process.env.LIBRARY_URL);
 
 //create schemas (blueprint of the info we are passing)
-const catSchema = {
-    name: String,
-    age: Number
-}
+// const catSchema = {
+//     name: String,
+//     age: Number
+// }
 //create a new model (create a class to store the data based on the schemas)
-const Cat = mongoose.model('Cat', catSchema)
+// const Cat = mongoose.model('Cat', catSchema)
 
 
 //link it to the root page just because
-app.get('/', (req, res) => {
-    //create a new entry to the cats database
-    const kitty = new Cat({
-        name: 'Meg',
-        age: 18
-    })
-    //save the data bit
-    kitty.save()
-        .then(() => {
-            res.json({
-                message: 'Kitty has been saved'
-            })
-        })
-})
+// app.get('/', (req, res) => {
+//     //create a new entry to the cats database
+//     const kitty = new Cat({
+//         name: 'Meg',
+//         age: 18
+//     })
+//     //save the data bit
+//     kitty.save()
+//         .then(() => {
+//             res.json({
+//                 message: 'Kitty has been saved'
+//             })
+//         })
+// })
 
-app.get('/cats', async (request, response) => {
-    const allCats = await Cat.find({})
-    response.json(allCats)
-})
+// app.get('/cats', async (request, response) => {
+//     const allCats = await Cat.find({})
+//     response.json(allCats)
+// })
 
-app.post('/cats', async (request, response) => {
-    try {
-        const catData = request.body
-        const newCat = new Cat(catData)
-        await newCat.save()
-        response.json(newCat) //this responds to the client with a newly created cat
-    }
-    catch (error) {
-        console.log(error)
-        response.sendStatus(error)
-    }
-})
+// app.post('/cats', async (request, response) => {
+//     try {
+//         const catData = request.body
+//         const newCat = new Cat(catData)
+//         await newCat.save()
+//         response.json(newCat) //this responds to the client with a newly created cat
+//     }
+//     catch (error) {
+//         console.log(error)
+//         response.sendStatus(error)
+//     }
+// })
 
 //? LIBRARY EXERCISE
 //we are already connected to the database
 
-//creating a schema for our book information
+//create the schemas
 const authorSchema = {
     name: String,
 }
@@ -166,9 +166,21 @@ const bookSchema = {
     publishingDate: Number
 }
 
+const userSchema = {
+    email: {
+        type: String,
+        required: true
+    },
+    lastLogIn: {
+        type: Date,
+        required: true
+    }
+}
+
 //create the actual model
 const Author = mongoose.model('Author', authorSchema)
 const Book = mongoose.model('Book', bookSchema)
+const User = mongoose.model('User', userSchema)
 
 
 //create the main library database endpoints
@@ -305,10 +317,57 @@ app.get('/library/books/search', async (request, response) => {
     try {
         const query = request.query.query
         const queryBook = await Book.find({
-            title: {$regex: new RegExp(query, 'i')}
+            title: { $regex: new RegExp(query, 'i') }
         })
         response.json(queryBook)
     } catch (error) {
         console.log('not searching right backend', error)
+    }
+})
+
+//create a User, a new collection, with that user email
+//User will have an email and a last login
+//if the user does not exist, create one
+//if it exists, update the last login
+
+//*google authentication and users
+
+app.get('/library/users', async (request, response) => {
+    try {
+        const allUsers = await User.find({})
+        response.json(allUsers)
+    }
+    catch (error) {
+        console.log('could not get the data to show you!')
+        console.log(error)
+    }
+})
+
+app.post('/library/user/login', async (request, response) => {
+    try {
+        const now = new Date()
+        let user = await User.findOne({
+            email: request.body.email
+        })
+        if (!user) {
+            user = new User({
+                "email": request.body.email,
+                "lastLogIn": now
+            })
+            await user.save()
+            console.log('user saved!')
+            response.sendStatus(200)
+        }
+        else {
+            await User.findOneAndUpdate({
+                "email": request.body.email
+            }, {
+                lastLogIn: now
+            })
+            response.sendStatus(200)
+        }
+
+    } catch (error) {
+        console.log('problems backend user authentication', error)
     }
 })

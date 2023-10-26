@@ -10,20 +10,20 @@
             </div>
         </div>
 
-        <!-- <div class="search-bar-container">
+        <div class="search-bar-container">
             <searchBar />
-        </div> -->
+        </div>
 
     </div>
 </template>
 <script>
-// import searchBar from '../../components/library/searchBar.vue'
+import searchBar from '../../components/library/searchBar.vue'
 
 export default {
     name: 'landingPage',
-    // components: {
-    //     searchBar
-    // }
+    components: {
+        searchBar
+    }
 }
 </script>
 

@@ -6,7 +6,6 @@ import catFacts from '../components/catFacts'
 import catsList from '../components/catsList'
 import gitHubUser from '../components/gitHubUser'
 import gitHubRepos from '../components/gitHubRepos'
-import bootstrapTesting from '../components/bootstrapTesting'
 import addNewBook from '../components/library/addNewBook'
 import allBooks from '../components/library/allBooks'
 import allAuthors from '../components/library/allAuthors'
@@ -14,6 +13,7 @@ import singleAuthor from '../components/library/singleAuthor'
 import singleBook from '../components/library/singleBook'
 import landingPage from '../components/library/landingPage'
 import editBook from '../components/library/editBook'
+import loginPage from '../components/authentication/loginPage'
 
 const routes = [
     {
@@ -51,12 +51,7 @@ const routes = [
         name: 'GitHubRepos',
         path: '/repos/:user/:reponame',
         component: gitHubRepos
-    }, 
-    {
-        name: 'bootstrapTesting',
-        path: '/bootstrapTesting',
-        component: bootstrapTesting
-    }, 
+    },  
     {
         name: 'addNewBook',
         path: '/library/addnewbook',
@@ -91,6 +86,11 @@ const routes = [
         name: 'editBook',
         path: '/library/books/editbook/:id',
         component: editBook
+    }, 
+    {
+        name: 'loginPage',
+        path: '/library/login',
+        component: loginPage
     }
 ]
 

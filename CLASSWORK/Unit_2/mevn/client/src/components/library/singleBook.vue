@@ -1,5 +1,5 @@
 <template>
-    <div class="single-book-container" v-if="book">
+    <div class="single-book-container">
         <h1>{{ book.title }}</h1>
         <h3> Author: <router-link :to="'/library/authors/' + book?.author?._id" class="router-link">{{ book?.author?.name }}</router-link></h3>
         <div class="button-container">
@@ -7,9 +7,7 @@
             <button @click="goToEdit">Edit this entry</button>
         </div>
     </div>
-    <div v-else>
-        <p>no book to display</p>
-    </div>
+   
 </template>
 
 <script>
@@ -21,6 +19,7 @@ export default {
     data: () => ({
         error: 'no book to display',
         book: {},
+        //need to change how the data is structured so it captures the authorId and it's name
     }),
     mounted() {
         try {
