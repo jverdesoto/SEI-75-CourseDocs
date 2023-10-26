@@ -54,6 +54,43 @@ function fromPairs(arr) {
     return keyValuePairs; // Return the object with key-value pairs
 }
 
+item.wardrobeItems
+
+function categoryItems(items) {
+	let categories = {}
+    for (let i = 0; i <items.length; i++) {
+        const item = items[i];
+        const category = item.category
+        if(categories.category) {
+
+        } else {
+
+        }
+    }
+}
+
+
+
+function categorizeItems(items) {
+    let categories = {
+        
+    };
+
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        const category = item.category;
+
+        if (categories.hasOwnProperty(category)) {
+            categories[category].push(item);
+        } else {
+            categories[category] = [item];
+        }
+    }
+
+    return categories;
+}
+
+
 
 //const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // function oddsAndEvens(array) {
