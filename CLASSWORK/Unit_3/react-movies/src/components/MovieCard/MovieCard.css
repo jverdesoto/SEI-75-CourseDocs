@@ -1,0 +1,43 @@
+.MovieCard {
+    position: relative;
+    width: 38vmin;
+    height: 45vmin;
+    background-size: cover;
+    transition: transform ease 0.2s, box-shadow ease 0.2s;
+    box-shadow: 3px 3px 6px #0a0003;
+}
+
+.MovieCard:hover {
+    transform: scale(1.05);
+}
+
+.MovieCard .info {
+    position: absolute;
+    bottom: -5vmin;
+    opacity: 0;
+    transition: transform ease 0.5s, opacity ease 1s 0.1s;
+    background-color: bisque;
+    width: 100%;
+    padding: 1vmin;
+}
+
+
+.MovieCard:hover .info {
+    opacity: 0.8;
+    transform: translateY(-5vmin);
+}
+
+.MovieCard .info h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    margin: 0;
+    font-size: 4vmin;
+    color: #0a0003;
+}
+
+.MovieCard .info h2 {
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 400;
+    font-size: 2.2vmin;
+    margin: 0;
+    color: #0a0003;
+}

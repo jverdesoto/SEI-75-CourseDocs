@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fira+Sans:wght@100;400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url(https://img.freepik.com/free-photo/movie-background-collage_23-2149876006.jpg?w=996&t=st=1698170215~exp=1698170815~hmac=afb3ce5e3e6773466458573c4aada4971d84e9ea9830ba3f166f24fbf8731d09);
+  background-size: cover;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 7vmin;
+}
+
+h2 {
+  font-weight: 100;
+  font-size: 3.5vmin;
+  margin-bottom: 6vmin;
+}
+
+a {
+  text-decoration: none;
+}
