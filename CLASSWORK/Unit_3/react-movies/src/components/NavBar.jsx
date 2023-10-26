@@ -1,20 +1,48 @@
 import { Link } from 'react-router-dom';
 
-export default function NavBar({ user }) {
+const NavBar = ({ user }) => {
+  const navStyle = {
+    background: ' #121212',
+    color: 'white', 
+    padding: '10px 0',
+  };
+
+  const ulStyle = {
+    listStyle: 'none',
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '20px',
+    padding: 0,
+  };
+
+  const linkStyle = {
+    textDecoration: 'none',
+    color: 'inherit',
+  };
+
+  const welcomeStyle = {
+    color: 'black',
+  };
+
   return (
     <div>
-      <nav>
-        <ul>
+      <nav style={navStyle}>
+        <ul style={ulStyle}>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" style={linkStyle}>
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/actors">Actors</Link>
+            <Link to="/actors" style={linkStyle}>
+              Actors
+            </Link>
           </li>
         </ul>
       </nav>
-      {user && <p>Welcome, {user}!</p>}
+      {user && <p style={welcomeStyle}>Welcome, {user}!</p>}
     </div>
   );
 };
 
+export default NavBar;

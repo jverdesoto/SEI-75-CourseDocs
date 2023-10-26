@@ -1,23 +1,33 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import LoginPage from './components/LoginPage';
-import MoviesListPage from './components/MoviesListPage';
-import MovieDetailPage from './components/MovieDetailPage';
-import ActorsListPage from './components/ActorsListPage';
+import { Routes, Route } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import MoviesListPage from './pages/MoviesListPage';
+import MovieDetailPage from './pages/MovieDetailPage';
+import ActorsListPage from './pages/ActorsListPage';
 import NavBar from './components/NavBar';
+import { movies } from '../src/data'
 
 function App() {
   const [user, setUser] = useState(null);
 
   return (
-    <Router>
-      {user && <NavBar user={user} />}
-      <Routes>
-        <Route path="/" element={user ? <MoviesListPage /> : <LoginPage setUser={setUser} />} />
-        <Route path="/movies/:movieName" element={<MovieDetailPage />} />
-        <Route path="/actors" element={<ActorsListPage />} />
-      </Routes>
-    </Router>
+    <main className='App'>
+      {user ? (
+        <>
+          <NavBar user={user} />
+          <Routes>
+            <Route path="/" element={<MoviesListPage movies={movies} />} />
+            <Route
+              path="/movies/:movieName"
+              element={<MovieDetailPage movies={movies} />}
+            />
+            <Route path="/actors" element={<ActorsListPage movies={movies} />} />
+          </Routes>
+        </>
+      ) : (
+        <LoginPage setUser={setUser} />
+      )}
+    </main>
   );
 }
 
