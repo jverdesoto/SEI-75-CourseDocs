@@ -1,0 +1,13 @@
+.App {
+  text-align: center;
+}
+
+body {
+  background: linear-gradient(
+    to right,
+    #6a0346,
+    #e5e3e3 25%,
+    #eee 75%,
+    #6a0346 100%
+  );
+}
