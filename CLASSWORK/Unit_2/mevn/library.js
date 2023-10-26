@@ -30,8 +30,14 @@ const authorSchema = new mongoose.Schema({
   name: String
 });
 const userSchema = new mongoose.Schema({
-    name: String,
-    email: String
+  userEmail: {
+    type: String,
+    required: true
+  },
+  lastLogin: {
+    type: Date,
+    required: true
+  }
 })
 
 const Books = mongoose.model("Book", bookSchema);
@@ -65,31 +71,19 @@ app.post("/AddBook", async (req, res) => {
   }
 });
 
-app.post("/Login"), async (req, res) => {
-    try {
-      const data = req.body;
-      let user = await Users.findOne({ name: data.name });
-      if (!user) {
-        user = new Users({
-          name: data.name,
-          email: data.email
-        });
-        await user.save();
-      }
-      //  }
-      //  else{
-      // const book = new Book({
-      //   author: author._id,
-      //   title: data.title,
-      //   date: data.date
-      // });
-      // await book.save();
-      // return res.status(200).json(book);
-    } catch (err) {
-      console.log("ERROR MESSAGE HERE ->", err.message);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
+app.post("/user/login", async (req, res) => {
+  const now = new Date()
+  if (await Users.count({"userEmail": req.body.email}) === 0) {
+    const newuser = new Users({userEmail: req.body.email, lastLogin: now})
+    newuser.save()
+    .then(() => {
+      res.sendStatus(200)
+    })
+  } else {
+    await Users.findOneAndUpdate({"userEmail": req.body.email}, {lastLogin: now})
+    res.sendStatus(200)
   }
+})
 
 // app.post('/AddBook', async (req, res) => {
 

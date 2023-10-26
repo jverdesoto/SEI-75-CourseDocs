@@ -1,0 +1,5 @@
+.actors-list {
+    display: flex; /* Set the container as flex */
+    flex-wrap: wrap; /* Allow items to wrap onto new lines */
+    justify-content: space-evenly; /* Adjust as needed for horizontal spacing */
+  }
