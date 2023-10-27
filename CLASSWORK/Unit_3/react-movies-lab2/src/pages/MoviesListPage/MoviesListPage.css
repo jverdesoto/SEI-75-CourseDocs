@@ -1,0 +1,12 @@
+.movies-list-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .posters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
