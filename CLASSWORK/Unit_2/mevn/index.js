@@ -175,8 +175,9 @@ app.delete('/books/list/:id', async (request, response) => {
 app.put('/books/list/:id', async (req, res) => {
 
   const id = req.params.id
+  console.log(id)
   try {
-      const book = await Book.updateOne(
+     await Book.updateOne(
           { 
               "_id": id
           },
@@ -193,7 +194,9 @@ app.put('/books/list/:id', async (req, res) => {
 
 app.post('/user/login', async (req, res) => {
   const now = new Date()
-  if (await User.count({'userEmail': req.body.email}) === 0) {
+  if (await User.count({
+    'userEmail': req.body.email
+  }) === 0) {
     const newUser = new User({userEmail: req.body.email, lastLogin:now})
     newUser.save()
     .then(() => {

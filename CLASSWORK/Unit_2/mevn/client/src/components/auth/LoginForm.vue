@@ -26,7 +26,9 @@ export default {
             this.isLoggedIn = true
             const userData = decodeCredential(this.$cookies.get('user_session'))
             this.userName = userData.given_name
-            }                   
+            } else { 
+                console.log('no user found')
+            }                  
     },
     methods: {
         callback: function (response) {
