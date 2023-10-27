@@ -95,7 +95,14 @@ function init() {
 }
 
 
+Object Ghosts = {[
+img =
 
+
+]
+}
+
+}
 
 
 
