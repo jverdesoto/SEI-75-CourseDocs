@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Add Feeding</h2>
+<form method="post" action="{% url 'add_feeding' finch.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Feeding</button>
+</form>
+{% endblock %}
